@@ -26,12 +26,12 @@ export class DocumentlistComponent {
     this.documentList.reload();
   }
 
-  showPreview(event) {
+  /* showPreview(event) {
     const entry = event.value.entry;
     if (entry && entry.isFile) {
       this.preview.showResource(entry.id);
     }
-  }
+  } */
 
   onGoBack(event: any) {
     this.showViewer = false;
