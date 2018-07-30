@@ -8,7 +8,7 @@ import { FileViewComponent } from './file-view/file-view.component';
 
 // ADF modules
 import { AdfModule } from './adf.module';
-
+import { ThemePickerModule } from './theme-picker/theme-picker';
 
 // App components
 import { AppComponent } from './app.component';
@@ -22,6 +22,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ThemePickerModule,
     RouterModule.forRoot(
       appRoutes // ,
       // { enableTracing: true } // <-- debugging purposes only

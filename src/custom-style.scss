@@ -5,8 +5,8 @@
 
 @include mat-core($alfresco-typography);
 
-$primary: mat-palette($alfresco-accent-orange);
-$accent:  mat-palette($alfresco-accent-purple);
+$primary: mat-palette($alfresco-bpm-green);
+$accent:  mat-palette($alfresco-accent-orange);
 $warn:    mat-palette($alfresco-warn);
 $theme:   mat-light-theme($primary, $accent, $warn);
 
