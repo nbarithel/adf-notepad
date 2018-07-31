@@ -1,5 +1,6 @@
 .app-docsAndViewer {
     display: flex;
+<<<<<<< HEAD
     height: 90vh;
     overflow: scroll;
 
@@ -12,4 +13,11 @@
         max-width: 50%;
         height: 100%;
     }
+=======
+    flex-grow: 1;
+
+    .adf-viewer {
+        flex-grow: 1;
+    }
+>>>>>>> 99ec705d41cfae08ce00b26324fc1aa539eb17c8
 }
