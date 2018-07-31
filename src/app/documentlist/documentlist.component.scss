@@ -1,0 +1,15 @@
+.app-docsAndViewer {
+    display: flex;
+    height: 90vh;
+    overflow: scroll;
+
+    .app-doc-viewer {
+        flex-grow: 1;
+    }
+
+    .app-doc-list {
+        flex-grow: 1;
+        max-width: 50%;
+        height: 100%;
+    }
+}

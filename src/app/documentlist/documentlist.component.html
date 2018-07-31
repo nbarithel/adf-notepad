@@ -18,9 +18,26 @@
 
 </adf-toolbar>
 
-<adf-document-list
-  #documentList
-  currentFolderId="-root-" > <!--   (preview)="showPreview($event)"  -->
-</adf-document-list>
+<div class="app-docsAndViewer">
+
+  <div class="app-doc-list">
+    <adf-upload-drag-area>
+      <adf-document-list
+        #documentList
+        currentFolderId="-root-"
+        (nodeClick)= "getNodeId($event)" class="adf-doc-list" >
+      </adf-document-list>
+    </adf-upload-drag-area>
+  </div>
+
+  <div class="app-doc-viewer">
+    <adf-viewer
+      [overlayMode]="false"
+      [showViewer]="true"
+      [nodeId]="nodeId">
+    </adf-viewer>
+  </div>
+
+</div>
 
 <adf-file-uploading-dialog></adf-file-uploading-dialog>
