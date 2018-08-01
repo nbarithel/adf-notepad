@@ -1,23 +1,20 @@
 .app-docsAndViewer {
     display: flex;
-<<<<<<< HEAD
-    height: 90vh;
-    overflow: scroll;
-
-    .app-doc-viewer {
-        flex-grow: 1;
-    }
-
-    .app-doc-list {
-        flex-grow: 1;
-        max-width: 50%;
-        height: 100%;
-    }
-=======
-    flex-grow: 1;
+    height: 88vh;
+    overflow: hidden;
 
     .adf-viewer {
         flex-grow: 1;
+        flex-shrink: 1;
     }
->>>>>>> 99ec705d41cfae08ce00b26324fc1aa539eb17c8
+
+    .app-doc-list {
+        overflow-y: scroll;
+        overflow-x: hidden;
+        display: block;
+        flex-grow: 1;
+        flex-shrink: 1;
+        max-width: 50%;
+        height: 100%;
+    }
 }

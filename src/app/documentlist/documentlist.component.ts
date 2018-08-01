@@ -11,6 +11,8 @@ import { MinimalNodeEntity } from 'alfresco-js-api';
 })
 export class DocumentlistComponent {
 
+  myStartFolder: string = '-my-';
+
   @Input()
   showViewer: boolean = false;
   nodeId: string = null;
@@ -22,8 +24,8 @@ export class DocumentlistComponent {
 
   }
 
-  uploadSuccess(event: any) {
-    this.notificationService.openSnackMessage('File uploaded');
+  success(event: any, action: string): void {
+    this.notificationService.openSnackMessage("File " + action);
     this.documentList.reload();
   }
 
@@ -33,13 +35,6 @@ export class DocumentlistComponent {
       this.nodeId = entry.id;
     }
   }
-
-  /* showPreview(event) {
-    const entry = event.value.entry;
-    if (entry && entry.isFile) {
-      this.preview.showResource(entry.id);
-    }
-  } */
 
   onGoBack(event: any) {
     this.showViewer = false;

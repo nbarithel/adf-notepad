@@ -10,33 +10,59 @@
 
   <div class="adf-toolbar--spacer"></div>
 
-  <adf-upload-button
-    [rootFolderId]="documentList.currentFolderId || '-root-'"
-    [adf-node-permission]="'create'"
-    (success)="uploadSuccess($event)">
-  </adf-upload-button>
-
 </adf-toolbar>
 
 <div class="app-docsAndViewer">
 
   <div class="app-doc-list">
-    <adf-upload-drag-area>
+    <adf-upload-drag-area
+      (success)="success($event,'uploaded')">
       <adf-document-list
         #documentList
-        currentFolderId="-root-"
-        (nodeClick)= "getNodeId($event)" class="adf-doc-list" >
+        [currentFolderId]="myStartFolder"
+        [contentActions]="true"
+        (nodeClick)= "getNodeId($event)">
+
+        <content-actions>
+
+          <content-action
+            icon="content_copy"
+            target="document"
+            title="Copier"
+            permission="update"
+            handler="copy"
+            (execute)="success($event,'Copied')">
+          </content-action>
+
+          <content-action
+            icon="subdirectory_arrow_left"
+            target="document"
+            title="Déplacer"
+            permission="update"
+            handler="move"
+            (execute)="success($event,'Moved')">
+          </content-action>
+
+          <content-action
+            icon="delete"
+            target="document"
+            title="Supprimer"
+            permission="update"
+            handler="delete"
+            (execute)="success($event,'Deleted')">
+          </content-action>
+
+        </content-actions>
+
       </adf-document-list>
     </adf-upload-drag-area>
   </div>
 
-  <div class="app-doc-viewer">
     <adf-viewer
       [overlayMode]="false"
       [showViewer]="true"
       [nodeId]="nodeId">
     </adf-viewer>
-  </div>
 
 </div>
 

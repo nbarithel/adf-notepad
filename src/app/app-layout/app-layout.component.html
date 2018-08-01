@@ -22,6 +22,15 @@
     <adf-sidenav-layout-navigation>
         <ng-template let-isMenuMinimized="isMenuMinimized">
             <mat-nav-list class="adf-sidenav-linklist">
+                <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">
+                    <adf-upload-button
+                        [tooltip]="'Importer'"
+                        [rootFolderId]="'-my-'"
+                        [adf-node-permission]="'create'"
+                        [multipleFiles]="true"
+                        [uploadFolders]="false">
+                    </adf-upload-button>
+                </div>
                 <a mat-list-item class="adf-sidenav-link" routerLink="/login">
                     <mat-icon matListIcon class="sidenav-menu-icon">vpn_key</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Login</div>
