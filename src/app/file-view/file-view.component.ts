@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AlfrescoApiService } from '@alfresco/adf-core';
 import { MatSnackBar } from '@angular/material';
@@ -28,6 +28,7 @@ import { MatSnackBar } from '@angular/material';
 })
 export class FileViewComponent implements OnInit {
 
+    @Input()
     nodeId: string = null;
 
     constructor(private router: Router,

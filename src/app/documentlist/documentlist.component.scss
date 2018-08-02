@@ -3,18 +3,18 @@
     height: 88vh;
     overflow: hidden;
 
-    .adf-viewer {
+    app-file-view {
         flex-grow: 1;
         flex-shrink: 1;
+        min-width: 50%;
     }
 
     .app-doc-list {
         overflow-y: scroll;
         overflow-x: hidden;
-        display: block;
         flex-grow: 1;
         flex-shrink: 1;
-        max-width: 50%;
         height: 100%;
+        width: 100%
     }
 }

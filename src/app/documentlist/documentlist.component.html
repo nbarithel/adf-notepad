@@ -10,6 +10,22 @@
 
   <div class="adf-toolbar--spacer"></div>
 
+  <button mat-button (click)="showTabs('View')">
+    <mat-icon>view_carousel</mat-icon>
+  </button>
+
+  <button mat-button (click)="showTabs('Properties')">
+      <mat-icon>info</mat-icon>
+  </button>
+
+  <button mat-button (click)="showTabs('Versions')">
+    <mat-icon>ballot</mat-icon>
+  </button>
+
+  <button mat-button (click)="showTabs('Comments')">
+      <mat-icon>comment</mat-icon>
+  </button>
+
 </adf-toolbar>
 
 <div class="app-docsAndViewer">
@@ -21,7 +37,8 @@
         #documentList
         [currentFolderId]="myStartFolder"
         [contentActions]="true"
-        (nodeClick)= "getNodeId($event)">
+        (nodeClick)= "getNodeId($event)"
+        (ready)="ready()">
 
         <content-actions>
 
@@ -58,11 +75,45 @@
     </adf-upload-drag-area>
   </div>
 
-    <adf-viewer
-      [overlayMode]="false"
-      [showViewer]="true"
-      [nodeId]="nodeId">
-    </adf-viewer>
+  <app-file-view [nodeId]= "nodeId" *ngIf="nodeId && showView">
+  </app-file-view>
+
+  <adf-info-drawer-layout *ngIf="!nodeId">
+    <div info-drawer-content>
+      <adf-empty-content
+          icon="waves"
+          title="Veuillez sélectionner une note pour afficher ses informations"
+          subtitle="Vous avez actuellement {{ notesNumber }} notes enregistrées">
+      </adf-empty-content>
+    </div>
+</adf-info-drawer-layout>
+
+  <adf-info-drawer-layout *ngIf="nodeId && showProperties">
+      <div info-drawer-title>Propriété<samp></samp></div>
+      <div info-drawer-content>
+        <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
+      </div>
+  </adf-info-drawer-layout>
+
+  <adf-info-drawer-layout *ngIf="nodeId && showVersions">
+      <div info-drawer-title>Versions<samp></samp></div>
+      <div info-drawer-content>
+        <mat-card>
+          <mat-card-content>
+              <adf-version-manager [node]="node">
+              </adf-version-manager>
+          </mat-card-content>
+        </mat-card>
+      </div>
+  </adf-info-drawer-layout>
+
+  <adf-info-drawer-layout *ngIf="nodeId && showComments">
+      <div info-drawer-title>Commentaire<samp></samp></div>
+      <div info-drawer-content>
+        <adf-comments [nodeId]="nodeId"></adf-comments>
+      </div>
+  </adf-info-drawer-layout>
+
 
 </div>
 
