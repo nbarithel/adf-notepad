@@ -10,21 +10,31 @@
 
   <div class="adf-toolbar--spacer"></div>
 
-  <button mat-button (click)="showTabs('View')">
-    <mat-icon>view_carousel</mat-icon>
-  </button>
+  <mat-button-toggle-group [disabled]="!nodeId">
 
-  <button mat-button (click)="showTabs('Properties')">
-      <mat-icon>info</mat-icon>
-  </button>
+    <mat-button-toggle (click)="showTabs('View')" [checked]="nodeId && showView">
+        <mat-icon>view_carousel</mat-icon>
+    </mat-button-toggle>
 
-  <button mat-button (click)="showTabs('Versions')">
-    <mat-icon>ballot</mat-icon>
-  </button>
+    <adf-toolbar-divider></adf-toolbar-divider>
 
-  <button mat-button (click)="showTabs('Comments')">
-      <mat-icon>comment</mat-icon>
-  </button>
+    <mat-button-toggle (click)="showTabs('Properties')">
+        <mat-icon>info</mat-icon>
+    </mat-button-toggle>
+
+    <adf-toolbar-divider></adf-toolbar-divider>
+
+    <mat-button-toggle (click)="showTabs('Versions')">
+      <mat-icon>ballot</mat-icon>
+    </mat-button-toggle>
+
+    <adf-toolbar-divider></adf-toolbar-divider>
+
+    <mat-button-toggle (click)="showTabs('Comments')">
+        <mat-icon>comment</mat-icon>
+    </mat-button-toggle>
+
+  </mat-button-toggle-group>
 
 </adf-toolbar>
 

@@ -18,3 +18,18 @@
         width: 100%
     }
 }
+
+.mat-button-toggle-group {
+    box-shadow: none;
+    mat-button-toggle {
+        padding: 0 15px;
+    }
+}
+
+.mat-button-toggle-disabled.mat-button-toggle-checked {
+    background-color: whitesmoke;
+}
+
+.adf-toolbar-divider {
+    margin-top: 6px;
+}

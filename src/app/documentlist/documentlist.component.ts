@@ -44,23 +44,25 @@ export class DocumentlistComponent {
   }
 
   showTabs(tabName: string) {
-    this.showComments = false;
-    this.showProperties = false;
-    this.showView = false;
-    this.showVersions = false;
-    switch (tabName) {
-      case 'View':
-        this.showView = true;
-        break;
-      case 'Properties':
-        this.showProperties = true;
-        break;
-      case 'Versions':
-        this.showVersions = true;
-        break;
-      case 'Comments':
-        this.showComments = true;
-        break;
+    if (this.nodeId) {
+      this.showComments = false;
+      this.showProperties = false;
+      this.showView = false;
+      this.showVersions = false;
+      switch (tabName) {
+        case 'View':
+          this.showView = true;
+          break;
+        case 'Properties':
+          this.showProperties = true;
+          break;
+        case 'Versions':
+          this.showVersions = true;
+          break;
+        case 'Comments':
+          this.showComments = true;
+          break;
+      }
     }
   }
 
