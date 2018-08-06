@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { PreviewService } from './services/preview.service';
 import { FileViewComponent } from './file-view/file-view.component';
-import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
 
 // ADF modules
 import { AdfModule } from './adf.module';
@@ -24,7 +24,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
     BrowserModule,
     BrowserAnimationsModule,
     ThemePickerModule,
-    MatButtonToggleModule,
+    MatTabsModule,
     RouterModule.forRoot(
       appRoutes // ,
       // { enableTracing: true } // <-- debugging purposes only

@@ -2,7 +2,7 @@ import { Component, ViewChild, Input } from '@angular/core';
 import { NotificationService } from '@alfresco/adf-core';
 import { DocumentListComponent } from '@alfresco/adf-content-services';
 import { PreviewService } from '../services/preview.service';
-import { MinimalNodeEntity, MinimalNodeEntryEntity } from 'alfresco-js-api';
+import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 
 @Component({
   selector: 'app-documentlist',
@@ -13,14 +13,6 @@ export class DocumentlistComponent {
 
   myStartFolder = '-my-';
 
-  showView = true;
-
-  showProperties = false;
-
-  showVersions = false;
-
-  showComments = false;
-
   @Input()
   nodeId: string = null;
 
@@ -30,6 +22,8 @@ export class DocumentlistComponent {
   documentList: DocumentListComponent;
 
   notesNumber: number;
+
+  commentsNumber: number;
 
   constructor(private notificationService: NotificationService, private preview: PreviewService) {
   }
@@ -43,29 +37,6 @@ export class DocumentlistComponent {
     this.documentList.reload();
   }
 
-  showTabs(tabName: string) {
-    if (this.nodeId) {
-      this.showComments = false;
-      this.showProperties = false;
-      this.showView = false;
-      this.showVersions = false;
-      switch (tabName) {
-        case 'View':
-          this.showView = true;
-          break;
-        case 'Properties':
-          this.showProperties = true;
-          break;
-        case 'Versions':
-          this.showVersions = true;
-          break;
-        case 'Comments':
-          this.showComments = true;
-          break;
-      }
-    }
-  }
-
   getNodeId(event): void {
     const entry = event.value.entry;
     if (entry && entry.isFile) {
@@ -75,7 +46,6 @@ export class DocumentlistComponent {
   }
 
   onGoBack(event: any) {
-    this.showView = false;
     this.nodeId = null;
   }
 

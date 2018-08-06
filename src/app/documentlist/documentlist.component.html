@@ -1,43 +1,3 @@
-<adf-toolbar>
-  <adf-toolbar-title>
-    <adf-breadcrumb
-      class="files-breadcrumb"
-      root="Personal Files"
-      [target]="documentList"
-      [folderNode]="documentList.folderNode">
-    </adf-breadcrumb>
-  </adf-toolbar-title>
-
-  <div class="adf-toolbar--spacer"></div>
-
-  <mat-button-toggle-group [disabled]="!nodeId">
-
-    <mat-button-toggle (click)="showTabs('View')" [checked]="nodeId && showView">
-        <mat-icon>view_carousel</mat-icon>
-    </mat-button-toggle>
-
-    <adf-toolbar-divider></adf-toolbar-divider>
-
-    <mat-button-toggle (click)="showTabs('Properties')">
-        <mat-icon>info</mat-icon>
-    </mat-button-toggle>
-
-    <adf-toolbar-divider></adf-toolbar-divider>
-
-    <mat-button-toggle (click)="showTabs('Versions')">
-      <mat-icon>ballot</mat-icon>
-    </mat-button-toggle>
-
-    <adf-toolbar-divider></adf-toolbar-divider>
-
-    <mat-button-toggle (click)="showTabs('Comments')">
-        <mat-icon>comment</mat-icon>
-    </mat-button-toggle>
-
-  </mat-button-toggle-group>
-
-</adf-toolbar>
-
 <div class="app-docsAndViewer">
 
   <div class="app-doc-list">
@@ -85,45 +45,41 @@
     </adf-upload-drag-area>
   </div>
 
-  <app-file-view [nodeId]= "nodeId" *ngIf="nodeId && showView">
-  </app-file-view>
+  <adf-info-drawer (selectedIndexChange)="showTabs($event)" *ngIf="nodeId">
+
+    <adf-info-drawer-tab label="Prévisualisation">
+        <app-file-view [nodeId]= "nodeId">
+        </app-file-view>
+    </adf-info-drawer-tab>
+
+    <adf-info-drawer-tab label="Propriétés">
+      <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
+    </adf-info-drawer-tab>
+
+    <adf-info-drawer-tab label="Versions">
+      <mat-card>
+        <mat-card-content>
+          <adf-version-manager [node]="node">
+          </adf-version-manager>
+        </mat-card-content>
+      </mat-card>
+    </adf-info-drawer-tab>
+
+    <adf-info-drawer-tab label="Commentaire">
+      <adf-comments #comment [nodeId]="nodeId"></adf-comments>
+    </adf-info-drawer-tab>
+
+  </adf-info-drawer>
 
   <adf-info-drawer-layout *ngIf="!nodeId">
     <div info-drawer-content>
       <adf-empty-content
-          icon="waves"
-          title="Veuillez sélectionner une note pour afficher ses informations"
-          subtitle="Vous avez actuellement {{ notesNumber }} notes enregistrées">
+        icon="waves"
+        title="Veuillez sélectionner une note pour afficher ses informations"
+        subtitle="Vous avez actuellement {{ notesNumber }} notes enregistrées">
       </adf-empty-content>
     </div>
-</adf-info-drawer-layout>
-
-  <adf-info-drawer-layout *ngIf="nodeId && showProperties">
-      <div info-drawer-title>Propriété<samp></samp></div>
-      <div info-drawer-content>
-        <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
-      </div>
   </adf-info-drawer-layout>
-
-  <adf-info-drawer-layout *ngIf="nodeId && showVersions">
-      <div info-drawer-title>Versions<samp></samp></div>
-      <div info-drawer-content>
-        <mat-card>
-          <mat-card-content>
-              <adf-version-manager [node]="node">
-              </adf-version-manager>
-          </mat-card-content>
-        </mat-card>
-      </div>
-  </adf-info-drawer-layout>
-
-  <adf-info-drawer-layout *ngIf="nodeId && showComments">
-      <div info-drawer-title>Commentaire<samp></samp></div>
-      <div info-drawer-content>
-        <adf-comments [nodeId]="nodeId"></adf-comments>
-      </div>
-  </adf-info-drawer-layout>
-
 
 </div>
 
