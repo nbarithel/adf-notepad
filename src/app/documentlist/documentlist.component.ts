@@ -3,11 +3,11 @@ import { NotificationService } from '@alfresco/adf-core';
 import { DocumentListComponent } from '@alfresco/adf-content-services';
 import { PreviewService } from '../services/preview.service';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
+import { CommentsComponent } from '../comment/comments.component';
 
 @Component({
   selector: 'app-documentlist',
-  templateUrl: './documentlist.component.html',
-  styleUrls: ['./documentlist.component.scss']
+  templateUrl: './documentlist.component.html'
 })
 export class DocumentlistComponent {
 
@@ -21,6 +21,8 @@ export class DocumentlistComponent {
   @ViewChild('documentList')
   documentList: DocumentListComponent;
 
+  comment: CommentsComponent;
+
   notesNumber: number;
 
   commentsNumber: number;
@@ -30,6 +32,10 @@ export class DocumentlistComponent {
 
   ready(): void {
     this.notesNumber = this.documentList.data.getRows().length;
+  }
+
+  getCommentsNumber(event: number) {
+    this.commentsNumber = event;
   }
 
   success(event: any, action: string): void {

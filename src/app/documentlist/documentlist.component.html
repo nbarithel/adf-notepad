@@ -1,86 +1,86 @@
 <div class="app-docsAndViewer">
 
-  <div class="app-doc-list">
-    <adf-upload-drag-area
-      (success)="success($event,'uploaded')">
-      <adf-document-list
-        #documentList
-        [currentFolderId]="myStartFolder"
-        [contentActions]="true"
-        (nodeClick)= "getNodeId($event)"
-        (ready)="ready()">
+    <div class="app-doc-list">
+      <adf-upload-drag-area
+        (success)="success($event,'uploaded')">
+        <adf-document-list
+          #documentList
+          [currentFolderId]="myStartFolder"
+          [contentActions]="true"
+          (nodeClick)= "getNodeId($event)"
+          (ready)="ready()">
 
-        <content-actions>
+          <content-actions>
 
-          <content-action
-            icon="content_copy"
-            target="document"
-            title="Copier"
-            permission="update"
-            handler="copy"
-            (execute)="success($event,'Copied')">
-          </content-action>
+            <content-action
+              icon="content_copy"
+              target="document"
+              title="Copier"
+              permission="update"
+              handler="copy"
+              (execute)="success($event,'Copied')">
+            </content-action>
 
-          <content-action
-            icon="subdirectory_arrow_left"
-            target="document"
-            title="Déplacer"
-            permission="update"
-            handler="move"
-            (execute)="success($event,'Moved')">
-          </content-action>
+            <content-action
+              icon="subdirectory_arrow_left"
+              target="document"
+              title="Déplacer"
+              permission="update"
+              handler="move"
+              (execute)="success($event,'Moved')">
+            </content-action>
 
-          <content-action
-            icon="delete"
-            target="document"
-            title="Supprimer"
-            permission="update"
-            handler="delete"
-            (execute)="success($event,'Deleted')">
-          </content-action>
+            <content-action
+              icon="delete"
+              target="document"
+              title="Supprimer"
+              permission="update"
+              handler="delete"
+              (execute)="success($event,'Deleted')">
+            </content-action>
 
-        </content-actions>
+          </content-actions>
 
-      </adf-document-list>
-    </adf-upload-drag-area>
+        </adf-document-list>
+      </adf-upload-drag-area>
+    </div>
+
+    <adf-info-drawer (selectedIndexChange)="showTabs($event)" *ngIf="nodeId">
+
+      <adf-info-drawer-tab label="Prévisualisation">
+          <app-file-view [nodeId]= "nodeId">
+          </app-file-view>
+      </adf-info-drawer-tab>
+
+      <adf-info-drawer-tab label="Propriétés">
+        <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
+      </adf-info-drawer-tab>
+
+      <adf-info-drawer-tab label="Versions">
+        <mat-card>
+          <mat-card-content>
+            <adf-version-manager [node]="node">
+            </adf-version-manager>
+          </mat-card-content>
+        </mat-card>
+      </adf-info-drawer-tab>
+
+      <adf-info-drawer-tab label="Commentaire ({{ commentsNumber }})">
+        <app-comments (commentsNumber)="getCommentsNumber($event)" [nodeId]="nodeId"></app-comments>
+      </adf-info-drawer-tab>
+
+    </adf-info-drawer>
+
+    <adf-info-drawer-layout *ngIf="!nodeId">
+      <div info-drawer-content>
+        <adf-empty-content
+          icon="waves"
+          title="Veuillez sélectionner une note pour afficher ses informations"
+          subtitle="Vous avez actuellement {{ notesNumber }} notes enregistrées">
+        </adf-empty-content>
+      </div>
+    </adf-info-drawer-layout>
+
   </div>
 
-  <adf-info-drawer (selectedIndexChange)="showTabs($event)" *ngIf="nodeId">
-
-    <adf-info-drawer-tab label="Prévisualisation">
-        <app-file-view [nodeId]= "nodeId">
-        </app-file-view>
-    </adf-info-drawer-tab>
-
-    <adf-info-drawer-tab label="Propriétés">
-      <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
-    </adf-info-drawer-tab>
-
-    <adf-info-drawer-tab label="Versions">
-      <mat-card>
-        <mat-card-content>
-          <adf-version-manager [node]="node">
-          </adf-version-manager>
-        </mat-card-content>
-      </mat-card>
-    </adf-info-drawer-tab>
-
-    <adf-info-drawer-tab label="Commentaire">
-      <adf-comments #comment [nodeId]="nodeId"></adf-comments>
-    </adf-info-drawer-tab>
-
-  </adf-info-drawer>
-
-  <adf-info-drawer-layout *ngIf="!nodeId">
-    <div info-drawer-content>
-      <adf-empty-content
-        icon="waves"
-        title="Veuillez sélectionner une note pour afficher ses informations"
-        subtitle="Vous avez actuellement {{ notesNumber }} notes enregistrées">
-      </adf-empty-content>
-    </div>
-  </adf-info-drawer-layout>
-
-</div>
-
-<adf-file-uploading-dialog></adf-file-uploading-dialog>
+  <adf-file-uploading-dialog></adf-file-uploading-dialog>

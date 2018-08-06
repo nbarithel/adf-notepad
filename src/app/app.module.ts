@@ -17,6 +17,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DocumentlistComponent } from './documentlist/documentlist.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
+import { CommentsComponent } from './comment/comments.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
   ],
   declarations: [
     AppComponent,
+    CommentsComponent,
     HomeComponent,
     LoginComponent,
     DocumentlistComponent,
