@@ -1,15 +1,50 @@
 @mixin app-documentlist($theme) {
     $foreground: map-get($theme, foreground);
+    $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
     $icon-size: 48px;
 
 .app-docsAndViewer {
     display: flex;
-    height: 94vh;
+    height: 93vh;
     overflow: hidden;
+
+    .adf-toolbar-divider-doclist {
+        height: 100%;
+
+        > div {
+            width: 25%;
+            height: 100%;
+            background: mat-color($primary);
+            opacity: 0.5;
+        }
+    }
 
     app-file-view {
         height: 100%;
+    }
+}
+
+adf-info-drawer-layout {
+    min-width: 50%;
+
+    .createNote-button {
+        background-color: mat-color($primary);
+        margin-top: 10%;
+        margin-left: 40%;
+    }
+
+    .adf-info-drawer-layout-content {
+        height: 100%;
+
+        #info-drawer-content-editor {
+            height: 85%;
+
+            app-text-editor {
+                height: 100%;
+                width: 100%;
+            }
+        }
     }
 }
 
@@ -31,6 +66,7 @@
 
         adf-info-drawer-layout {
             height: 100%;
+            min-width: 50%;
             display: flex;
             flex-direction: column;
 
@@ -75,6 +111,10 @@
                             }
 
                             .mat-tab-body-content {
+                                app-text-editor {
+                                    height: 97%;
+                                }
+
                                 adf-content-metadata-card {
                                     height: 97%;
 

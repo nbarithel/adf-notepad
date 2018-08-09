@@ -1,0 +1,10 @@
+<mat-form-field>
+   <mat-label>Ecrivez votre note ici</mat-label>
+   <textarea matTextareaAutosize matInput [(ngModel)]="value" #textArea placeholder="Ecrivez votre note ici"></textarea>
+   <mat-hint align="end">{{textArea.value?.length || 0}} caractères écrits</mat-hint>
+</mat-form-field>
+
+<button class="savingButton" mat-raised-button (click)="saveTheFile()">
+    <mat-icon>save</mat-icon>
+    ENREGISTRER
+</button>

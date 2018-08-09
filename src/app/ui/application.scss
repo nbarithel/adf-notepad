@@ -1,5 +1,7 @@
 @import './overrides/app-documentlist.theme';
 @import './overrides/app-comments.theme';
+@import './overrides/app-text-editor-theme';
 
 @include app-documentlist($theme);
 @include app-task-list-comment-theme($theme);
+@include app-text-editor-theme($theme);

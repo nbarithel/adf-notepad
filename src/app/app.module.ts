@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { DocumentlistComponent } from './documentlist/documentlist.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { CommentsComponent } from './comment/comments.component';
+import { TextEditorComponent } from './text-editor/text-editor.component';
 
 
 @NgModule({
@@ -32,7 +33,7 @@ import { CommentsComponent } from './comment/comments.component';
     ),
 
     // ADF modules
-    AdfModule,
+    AdfModule
   ],
   declarations: [
     AppComponent,
@@ -41,7 +42,8 @@ import { CommentsComponent } from './comment/comments.component';
     LoginComponent,
     DocumentlistComponent,
     AppLayoutComponent,
-    FileViewComponent
+    FileViewComponent,
+    TextEditorComponent
   ],
   providers: [PreviewService],
   bootstrap: [AppComponent]

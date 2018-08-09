@@ -45,7 +45,9 @@
       </adf-upload-drag-area>
     </div>
 
-    <adf-info-drawer (selectedIndexChange)="showTabs($event)" *ngIf="nodeId">
+    <adf-toolbar-divider class="adf-toolbar-divider-doclist"></adf-toolbar-divider>
+
+    <adf-info-drawer (selectedIndexChange)="showTabs($event)" *ngIf="nodeId && !createNote">
 
       <adf-info-drawer-tab label="Prévisualisation">
           <app-file-view [nodeId]= "nodeId">
@@ -71,13 +73,25 @@
 
     </adf-info-drawer>
 
-    <adf-info-drawer-layout *ngIf="!nodeId">
+    <adf-info-drawer-layout *ngIf="!nodeId && !createNote">
       <div info-drawer-content>
         <adf-empty-content
           icon="waves"
           title="Veuillez sélectionner une note pour afficher ses informations"
           subtitle="Vous avez actuellement {{ notesNumber }} notes enregistrées">
         </adf-empty-content>
+        <button class="createNote-button" mat-button (click)="createNote = true">
+          <mat-icon>create</mat-icon>
+          Créer une note
+        </button>
+      </div>
+    </adf-info-drawer-layout>
+
+
+    <adf-info-drawer-layout *ngIf="createNote">
+      <div info-drawer-title>Edition de note</div>
+      <div info-drawer-content id="info-drawer-content-editor">
+        <app-text-editor></app-text-editor>
       </div>
     </adf-info-drawer-layout>
 
