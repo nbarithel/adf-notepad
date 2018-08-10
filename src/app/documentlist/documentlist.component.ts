@@ -1,7 +1,6 @@
 import { Component, ViewChild, Input } from '@angular/core';
-import { NotificationService, NodesApiService } from '@alfresco/adf-core';
+import { NotificationService } from '@alfresco/adf-core';
 import { DocumentListComponent } from '@alfresco/adf-content-services';
-import { PreviewService } from '../services/preview.service';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { CommentsComponent } from '../comment/comments.component';
 
@@ -29,7 +28,7 @@ export class DocumentlistComponent {
 
   commentsNumber: number;
 
-  constructor(private notificationService: NotificationService, private preview: PreviewService, private nodesApi: NodesApiService) {
+  constructor(private notificationService: NotificationService) {
   }
 
   ready(): void {

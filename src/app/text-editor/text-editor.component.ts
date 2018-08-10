@@ -1,7 +1,9 @@
-import { Component, EventEmitter, Output , NgZone } from '@angular/core';
-import { UploadService, FileModel, FileInfo } from '@alfresco/adf-core';
+import { Component, EventEmitter, Output , NgZone, Input , OnChanges } from '@angular/core';
+import { UploadService, NotificationService, FileModel, ContentService } from '@alfresco/adf-core';
+import { HttpClient } from '@angular/common/http';
 import { UploadFilesEvent } from '@alfresco/adf-content-services';
-
+import { MinimalNodeEntryEntity } from 'alfresco-js-api';
+import 'rxjs/add/operator/toPromise';
 
 @Component({
   selector: 'app-text-editor',
@@ -10,21 +12,60 @@ import { UploadFilesEvent } from '@alfresco/adf-content-services';
   providers: [ UploadService ]
 })
 
-export class TextEditorComponent {
+export class TextEditorComponent implements OnChanges {
 
   value: string;
+
+  @Input()
+  node: MinimalNodeEntryEntity;
+
+  nodeId: string;
 
   @Output()
   success = new EventEmitter();
 
+  @Output()
+  closeEdit = new EventEmitter();
+
   constructor(protected uploadService: UploadService,
-              protected ngZone: NgZone) {}
+              protected ngZone: NgZone,
+              private http: HttpClient,
+              protected contentService: ContentService,
+              protected notificationService: NotificationService) {}
+
+  ngOnChanges() {
+    if (this.node && this.node.id) {
+      this.nodeId = this.node.id;
+      const url = this.contentService.getContentUrl(this.nodeId);
+      this.getUrlContent(url);
+    }
+  }
+
+  private getUrlContent(url: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+        this.http.get(url, { responseType: 'text' }).subscribe(res => {
+            this.value = res;
+            resolve();
+        }, (event) => {
+            reject(event);
+        });
+    });
+  }
 
   saveTheFile() {
-    const blobText = new Blob([this.value], { type: 'text/plain;charset=utf-8'});
-    const file = new File([this.value], 'TESTFILEIMPORTANT');
-    if (!this.value){
+    if (this.value !== undefined) {
+      let fileName: string;
+      if (this.node) {
+        fileName = this.node.name;
+      } else {
+        fileName = 'new';
+      }
+      const file = new File([this.value], fileName);
       this.uploadFiles(file);
+      this.success.emit();
+      this.closeEdit.emit();
+    } else {
+      this.notificationService.openSnackMessage('Note vide');
     }
   }
 
