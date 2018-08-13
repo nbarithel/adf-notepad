@@ -4,12 +4,12 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { PreviewService } from './services/preview.service';
-import { FileViewComponent } from './file-view/file-view.component';
 import { MatTabsModule } from '@angular/material/tabs';
 
 // ADF modules
 import { AdfModule } from './adf.module';
 import { ThemePickerModule } from './theme-picker/theme-picker';
+import { CovalentTextEditorModule } from '@covalent/text-editor';
 
 // App components
 import { AppComponent } from './app.component';
@@ -21,10 +21,12 @@ import { CommentsComponent } from './comment/comments.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
 
 
+
 @NgModule({
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    CovalentTextEditorModule,
     ThemePickerModule,
     MatTabsModule,
     RouterModule.forRoot(
@@ -42,7 +44,6 @@ import { TextEditorComponent } from './text-editor/text-editor.component';
     LoginComponent,
     DocumentlistComponent,
     AppLayoutComponent,
-    FileViewComponent,
     TextEditorComponent
   ],
   providers: [PreviewService],

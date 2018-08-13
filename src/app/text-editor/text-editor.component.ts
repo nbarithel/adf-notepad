@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output , NgZone, Input , OnChanges } from '@angular/core';
+import { Component, EventEmitter, Output , NgZone, Input , OnChanges, ViewChild } from '@angular/core';
 import { UploadService, NotificationService, FileModel, ContentService } from '@alfresco/adf-core';
 import { HttpClient } from '@angular/common/http';
 import { UploadFilesEvent } from '@alfresco/adf-content-services';
@@ -8,13 +8,10 @@ import 'rxjs/add/operator/toPromise';
 @Component({
   selector: 'app-text-editor',
   templateUrl: './text-editor.component.html',
-  styleUrls: ['./text-editor.component.scss'],
   providers: [ UploadService ]
 })
 
 export class TextEditorComponent implements OnChanges {
-
-  value: string;
 
   @Input()
   node: MinimalNodeEntryEntity;
@@ -26,6 +23,35 @@ export class TextEditorComponent implements OnChanges {
 
   @Output()
   closeEdit = new EventEmitter();
+
+  value: string;
+
+  options: any = {
+    lineWrapping: false,
+    toolbar: [
+      'bold',
+      'italic',
+      'strikethrough',
+      'heading',
+      'heading-smaller',
+      'heading-bigger',
+      '|',
+      'quote',
+      'unordered-list',
+      'ordered-list',
+      'table',
+      'link',
+      'image',
+      'code',
+      '|',
+      'preview',
+      'side-by-side',
+      'fullscreen',
+      '|',
+      'guide'
+    ],
+    placeholder: 'Type your note here...',
+  };
 
   constructor(protected uploadService: UploadService,
               protected ngZone: NgZone,
@@ -58,12 +84,11 @@ export class TextEditorComponent implements OnChanges {
       if (this.node) {
         fileName = this.node.name;
       } else {
-        fileName = 'new';
+        fileName = 'new2';
       }
       const file = new File([this.value], fileName);
       this.uploadFiles(file);
       this.success.emit();
-      this.closeEdit.emit();
     } else {
       this.notificationService.openSnackMessage('Note vide');
     }

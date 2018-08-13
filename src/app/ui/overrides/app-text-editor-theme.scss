@@ -3,37 +3,36 @@
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);
 
-textarea {
-    height: 100%;
-    width: 100%;
-    flex-grow: 1;
-}
-
-.savingButton {
-    background-color: mat-color($primary);
-    margin: 2% 0 2% 66% !important;
-}
-
-mat-form-field {
-    height: 95%;
-    width: 100%;
-    display: flex;
-    border-top: 1px, solid, black;
-
-    .mat-input-wrapper {
-        flex: 1;
+    textarea {
         height: 100%;
+        width: 100%;
+        flex-grow: 1;
+    }
 
-        .mat-form-field-flex {
+    .savingButton {
+        background-color: mat-color($primary);
+        margin: 2% 0 2% 75% !important;
+    }
+
+    mat-form-field {
+        height: 95%;
+        width: 100%;
+        display: flex;
+        border-top: 1px, solid, black;
+
+        .mat-input-wrapper {
+            flex: 1;
             height: 100%;
 
-            .mat-form-field-infix {
-                height: 97%;
-                overflow: scroll;
-                border-top: 1px solid rgba(0, 0, 0, 0.42);
+            .mat-form-field-flex {
+                height: 100%;
+
+                .mat-form-field-infix {
+                    height: 97%;
+                    overflow: scroll;
+                    border-top: 1px solid rgba(0, 0, 0, 0.42);
+                }
             }
         }
     }
-}
-
 }

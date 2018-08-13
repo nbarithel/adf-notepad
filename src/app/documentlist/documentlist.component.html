@@ -58,14 +58,9 @@
 
     <adf-info-drawer (selectedIndexChange)="showTabs($event)" (keyup.esc)="nodeId = 0" *ngIf="nodeId && !createNote">
 
-      <adf-info-drawer-tab label="Prévisualisation">
-          <app-file-view [nodeId]= "nodeId">
-          </app-file-view>
-      </adf-info-drawer-tab>
-
-      <adf-info-drawer-tab label="Modification">
+      <adf-info-drawer-tab label="Note">
           <div info-drawer-content id="info-drawer-content-editor">
-              <app-text-editor [node]="node" (success)="success($event,'modifiées')"></app-text-editor>
+            <app-text-editor [node]="node" (success)="success($event,'enregistrée')"  ></app-text-editor>
           </div>
       </adf-info-drawer-tab>
 
@@ -106,7 +101,7 @@
     <adf-info-drawer-layout *ngIf="createNote && !nodeId ">
       <div info-drawer-title>Edition de note</div>
       <div info-drawer-content id="info-drawer-content-editor">
-        <app-text-editor (closeEdit)="createNote = false" (success)="success($event,'enregistrée')"></app-text-editor>
+        <app-text-editor (success)="success($event,'enregistrée')" (keyup.esc)="createNote = false"  ></app-text-editor>
       </div>
     </adf-info-drawer-layout>
 
