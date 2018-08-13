@@ -1,6 +1,6 @@
 <mat-form-field>
    <mat-label>Ecrivez votre note ici</mat-label>
-   <textarea matTextareaAutosize matInput [(ngModel)]="value" #textArea placeholder="Ecrivez votre note ici"></textarea>
+   <textarea matInput #textArea placeholder="Ecrivez votre note ici" [(ngModel)]="value" (keyup.esc)="closeEdit.emit()"></textarea>
    <mat-hint align="end">{{textArea.value?.length || 0}} caractères écrits</mat-hint>
 </mat-form-field>
 

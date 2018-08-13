@@ -49,6 +49,7 @@ export class DocumentlistComponent {
     if (entry && entry.isFile) {
       this.nodeId = entry.id;
       this.node = entry;
+      this.createNote = false;
     }
 }
 

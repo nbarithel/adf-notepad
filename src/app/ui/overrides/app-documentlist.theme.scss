@@ -4,6 +4,7 @@
     $accent: map-get($theme, accent);
     $icon-size: 48px;
 
+
 .app-docsAndViewer {
     display: flex;
     height: 93vh;
@@ -23,15 +24,127 @@
     app-file-view {
         height: 100%;
     }
+
+    .app-doc-list {
+        display: flex;
+        flex-grow: 1;
+        flex-shrink: 1;
+        height: 100%;
+        width: 100%;
+
+        .adf-upload-drag-area {
+            flex-grow: 1;
+            width: 100%;
+
+            .upload-border {
+                display: flex;
+                height: 100%;
+                flex-direction: column;
+
+                adf-breadcrumb {
+                    min-height: 6%;
+                    max-height: 6%;
+
+                    .adf-breadcrumb-item-chevron {
+                        margin-top: 17px;
+                    }
+
+                    .adf-breadcrumb-item {
+                        font-size: 16px;
+                        line-height: 49px;
+                    }
+                }
+
+                adf-document-list {
+                    height: 100%;
+                    flex-grow: 1;
+                    overflow-y: scroll;
+                    overflow-x: hidden;
+                }
+            }
+        }
+    }
 }
 
-adf-info-drawer-layout {
-    min-width: 50%;
+    adf-info-drawer-layout {
+        height: 100%;
+        min-width: 50%;
+        display: flex;
+        flex-direction: column;
 
-    .createNote-button {
-        background-color: mat-color($primary);
-        margin-top: 10%;
-        margin-left: 40%;
+        .createNote-button {
+            background-color: mat-color($primary);
+            margin-top: 10%;
+            margin-left: 40%;
+        }
+
+        .adf-info-drawer-layout-header {
+            margin-bottom: 0;
+        }
+
+        .adf-info-drawer-layout-content {
+            height: 100%;
+
+            .adf-info-drawer-tabs {
+                height: 100%;
+
+                .mat-tab-label {
+                    color: mat-color($accent);
+                    text-transform: none;
+                    padding: 0 0px;
+
+                    .mouseInteraction {
+                        display: inline-flex;
+                        flex-grow: 1;
+                        height: 100%;
+                        > * {
+                            flex-grow:1;
+                        }
+                        .mat-icon-button {
+                            color: mat-color($warn)!important;
+                        }
+                    }
+                }
+
+                .mat-tab-body-wrapper {
+                    height: 100%;
+
+                    .mat-tab-body {
+                        height: 100%;
+                        padding: 10px,0px,10px,0px;
+
+                        .mat-tab-content {
+                            height: 100%;
+                            padding: 10px,0px,10px,0px;
+                        }
+
+                        .mat-tab-body-content {
+                            app-text-editor {
+                                height: 97%;
+                            }
+
+                            adf-content-metadata-card {
+                                height: 97%;
+
+                                .mat-card {
+
+                                    .mat-card-content {
+                                        height: 93%;
+                                    }
+                                }
+                            }
+
+                            .adf-viewer-main {
+
+                                .adf-viewer-layout-content {
+                                    overflow-y: scroll;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .adf-info-drawer-layout-content {
@@ -43,109 +156,9 @@ adf-info-drawer-layout {
             app-text-editor {
                 height: 100%;
                 width: 100%;
-            }
-        }
-    }
-}
 
-.app-doc-list {
-    overflow-y: scroll;
-    overflow-x: hidden;
-    flex-grow: 1;
-    flex-shrink: 1;
-    height: 100%;
-    width: 100%
-}
-
-    .adf-info-drawer {
-        display: flex;
-        flex-direction: column;
-        min-width: 50%;
-        height: 100%;
-        overflow-y: scroll;
-
-        adf-info-drawer-layout {
-            height: 100%;
-            min-width: 50%;
-            display: flex;
-            flex-direction: column;
-
-            .adf-info-drawer-layout-header {
-                margin-bottom: 0;
-            }
-
-            .adf-info-drawer-layout-content {
-                height: 100%;
-
-                .adf-info-drawer-tabs {
+                textarea {
                     height: 100%;
-
-                    .mat-tab-label {
-                        color: mat-color($accent);
-                        text-transform: none;
-                        padding: 0 0px;
-
-                        .mouseInteraction {
-                            display: inline-flex;
-                            flex-grow: 1;
-                            height: 100%;
-                            > * {
-                                flex-grow:1;
-                            }
-                            .mat-icon-button {
-                                color: mat-color($warn)!important;
-                            }
-                        }
-                    }
-
-                    .mat-tab-body-wrapper {
-                        height: 100%;
-
-                        .mat-tab-body {
-                            height: 100%;
-                            padding: 10px,0px,10px,0px;
-
-                            .mat-tab-content {
-                                height: 100%;
-                                padding: 10px,0px,10px,0px;
-                            }
-
-                            .mat-tab-body-content {
-                                app-text-editor {
-                                    height: 97%;
-                                }
-
-                                adf-content-metadata-card {
-                                    height: 97%;
-
-                                    .mat-card {
-                                        height: 100%;
-
-                                        .mat-card-content {
-                                            height: 93%;
-                                        }
-                                    }
-                                }
-
-                                .adf-viewer-main {
-                                    .viewer-pdf-viewer {
-                                        overflow: scroll;
-                                    }
-
-                                    .adf-pdf-viewer__toolbar {
-                                        .mat-toolbar {
-                                            max-height: 53px;
-                                        }
-
-                                        .mat-toolbar-single-row {
-                                            height: 53px;
-                                            padding: 0px;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
         }

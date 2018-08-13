@@ -4,6 +4,12 @@
       <adf-upload-drag-area
         acceptedFilesType=".rtf,.txt,.xml,.html"
         (success)="success($event,'uploaded')">
+
+        <adf-breadcrumb
+          [target]="documentList"
+          [folderNode]="documentList.folderNode">
+        </adf-breadcrumb>
+
         <adf-document-list
           #documentList
           [currentFolderId]="myStartFolder"
@@ -41,12 +47,16 @@
           </content-actions>
 
         </adf-document-list>
+        <adf-pagination
+          [target]="documentList"
+          *ngIf="notesNumber != 0">
+        </adf-pagination>
       </adf-upload-drag-area>
     </div>
 
     <adf-toolbar-divider class="adf-toolbar-divider-doclist"></adf-toolbar-divider>
 
-    <adf-info-drawer (selectedIndexChange)="showTabs($event)" *ngIf="nodeId && !createNote">
+    <adf-info-drawer (selectedIndexChange)="showTabs($event)" (keyup.esc)="nodeId = 0" *ngIf="nodeId && !createNote">
 
       <adf-info-drawer-tab label="Prévisualisation">
           <app-file-view [nodeId]= "nodeId">
