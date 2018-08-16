@@ -1,6 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Injectable } from '@angular/core';
 import { TranslationService, AuthenticationService } from '@alfresco/adf-core';
 import { Router } from '@angular/router';
+
+
+@Injectable()
+export class NoteService {
+
+  createNote = false;
+  nodeId;
+
+  constructor() {
+  }
+
+}
 
 @Component({
   selector: 'app-root',
@@ -9,7 +21,11 @@ import { Router } from '@angular/router';
 })
 export class AppLayoutComponent {
 
-  constructor() {
+  constructor(private noteService: NoteService) {}
+
+  createNotes() {
+    this.noteService.createNote = true;
+    this.noteService.nodeId = 0;
   }
 
 }

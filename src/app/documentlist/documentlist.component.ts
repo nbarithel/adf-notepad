@@ -1,14 +1,15 @@
-import { Component, ViewChild, Input } from '@angular/core';
+import { Component, ViewChild, Input, DoCheck } from '@angular/core';
 import { NotificationService } from '@alfresco/adf-core';
 import { DocumentListComponent } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { CommentsComponent } from '../comment/comments.component';
+import { NoteService } from '../app-layout/app-layout.component';
 
 @Component({
   selector: 'app-documentlist',
   templateUrl: './documentlist.component.html'
 })
-export class DocumentlistComponent {
+export class DocumentlistComponent implements DoCheck {
 
   myStartFolder = '-my-';
 
@@ -28,7 +29,19 @@ export class DocumentlistComponent {
 
   commentsNumber: number;
 
-  constructor(private notificationService: NotificationService) {
+  constructor(private notificationService: NotificationService,
+              private noteService: NoteService ) {
+  }
+
+  ngDoCheck() {
+    this.createNote = this.noteService.createNote;
+    if (this.noteService.nodeId === 0) {
+      this.nodeId = null;
+    }
+  }
+
+  createNotes() {
+    this.noteService.createNote = true;
   }
 
   ready(): void {
@@ -49,7 +62,8 @@ export class DocumentlistComponent {
     if (entry && entry.isFile) {
       this.nodeId = entry.id;
       this.node = entry;
-      this.createNote = false;
+      this.noteService.createNote = false;
+      this.noteService.nodeId = entry.id;
     }
 }
 

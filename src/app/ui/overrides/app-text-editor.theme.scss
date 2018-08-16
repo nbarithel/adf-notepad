@@ -1,4 +1,4 @@
-@mixin app-text-editor-theme($theme) {
+@mixin app-text-editor($theme) {
     $foreground: map-get($theme, foreground);
     $primary: map-get($theme, primary);
     $accent: map-get($theme, accent);

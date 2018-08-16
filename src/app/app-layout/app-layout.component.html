@@ -3,7 +3,7 @@
     <adf-sidenav-layout-header>
         <ng-template let-toggleMenu="toggleMenu">
             <mat-toolbar color="primary" class="adf-app-layout-toolbar mat-elevation-z6">
-                <button mat-icon-button>
+                <button mat-icon-button (click)="toggleMenu()">
                     <mat-icon>menu</mat-icon>
                 </button>
 
@@ -22,16 +22,32 @@
     <adf-sidenav-layout-navigation>
         <ng-template let-isMenuMinimized="isMenuMinimized">
             <mat-nav-list class="adf-sidenav-linklist">
-                <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">
-                    <adf-upload-button
-                        [tooltip]="'Importer'"
-                        [rootFolderId]="'-my-'"
-                        [adf-node-permission]="'create'"
-                        [multipleFiles]="true"
-                        acceptedFilesType=".rtf,.txt,.xml,.html"
-                        [uploadFolders]="false">
-                    </adf-upload-button>
+
+                <div class="sidenav-menu-label">
+                    <adf-sidebar-action-menu title="Create" [expanded]="!isMenuMinimized()">
+                        <mat-icon sidebar-menu-title-icon>arrow_drop_down</mat-icon>
+                        <div sidebar-menu-expand-icon>
+                            <mat-icon>queue</mat-icon>
+                        </div>
+                        <div sidebar-menu-options>
+                            <button mat-menu-item (click)="createNotes()">
+                                <mat-icon>create</mat-icon>
+                                <span>Create Note</span>
+                            </button>
+                            <div mat-menu-item>
+                                <adf-upload-button
+                                    [tooltip]="'Importer'"
+                                    [rootFolderId]="'-my-'"
+                                    [adf-node-permission]="'create'"
+                                    [multipleFiles]="true"
+                                    acceptedFilesType=".rtf,.txt,.xml,.html"
+                                    [uploadFolders]="false">
+                                </adf-upload-button>
+                            </div>
+                        </div>
+                    </adf-sidebar-action-menu>
                 </div>
+
                 <a mat-list-item class="adf-sidenav-link" routerLink="/login">
                     <mat-icon matListIcon class="sidenav-menu-icon">vpn_key</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Login</div>

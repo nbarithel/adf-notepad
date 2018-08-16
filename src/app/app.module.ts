@@ -5,11 +5,14 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { PreviewService } from './services/preview.service';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatDialog } from '@angular/material';
+import { NoteService } from './app-layout/app-layout.component';
 
 // ADF modules
 import { AdfModule } from './adf.module';
 import { ThemePickerModule } from './theme-picker/theme-picker';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
+import { SearchModule } from '@alfresco/adf-content-services';
 
 // App components
 import { AppComponent } from './app.component';
@@ -19,6 +22,7 @@ import { DocumentlistComponent } from './documentlist/documentlist.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { CommentsComponent } from './comment/comments.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
+import { SearchNotepadComponent } from './search/search-notepad.component';
 
 
 
@@ -29,6 +33,7 @@ import { TextEditorComponent } from './text-editor/text-editor.component';
     CovalentTextEditorModule,
     ThemePickerModule,
     MatTabsModule,
+    SearchModule,
     RouterModule.forRoot(
       appRoutes // ,
       // { enableTracing: true } // <-- debugging purposes only
@@ -44,9 +49,14 @@ import { TextEditorComponent } from './text-editor/text-editor.component';
     LoginComponent,
     DocumentlistComponent,
     AppLayoutComponent,
-    TextEditorComponent
+    TextEditorComponent,
+    SearchNotepadComponent
   ],
-  providers: [PreviewService],
+  providers: [
+    PreviewService,
+    MatDialog,
+    NoteService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
