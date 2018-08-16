@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Output , NgZone, Input , OnChanges, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Output , NgZone, Input , OnChanges } from '@angular/core';
 import { UploadService, NotificationService, FileModel, ContentService } from '@alfresco/adf-core';
 import { HttpClient } from '@angular/common/http';
+import { MatDialog } from '@angular/material';
+import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
 import { UploadFilesEvent } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import 'rxjs/add/operator/toPromise';
@@ -23,6 +25,10 @@ export class TextEditorComponent implements OnChanges {
 
   @Output()
   closeEdit = new EventEmitter();
+
+  confirmation: boolean;
+
+  newFileName: string;
 
   value: string;
 
@@ -57,11 +63,13 @@ export class TextEditorComponent implements OnChanges {
               protected ngZone: NgZone,
               private http: HttpClient,
               protected contentService: ContentService,
-              protected notificationService: NotificationService) {}
+              protected notificationService: NotificationService,
+              protected dialog: MatDialog) {}
 
   ngOnChanges() {
     if (this.node && this.node.id) {
       this.nodeId = this.node.id;
+      this.newFileName = this.node.name;
       const url = this.contentService.getContentUrl(this.nodeId);
       this.getUrlContent(url);
     }
@@ -78,21 +86,49 @@ export class TextEditorComponent implements OnChanges {
     });
   }
 
-  saveTheFile() {
-    if (this.value !== undefined) {
-      let fileName: string;
-      if (this.node) {
-        fileName = this.node.name;
+  openSaveConfirmationDialog(): Promise<any> {
+    if (this.value) {
+      let message: string;
+      if (!this.node) {
+        message = 'Sauvegarder ce fichier ?';
       } else {
-        fileName = 'new2';
+        message = 'Créer une nouvelle version ?';
       }
-      const file = new File([this.value], fileName);
-      this.uploadFiles(file);
-      this.success.emit();
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: {
+            title: 'Confirmation',
+            message: message,
+            yesLabel: 'Oui',
+            noLabel: 'Non'
+        },
+        minWidth: '250px'
+      });
+      return new Promise((resolve, reject) => {
+          dialogRef.beforeClose().subscribe(result => {
+          this.confirmation = result;
+          if (this.confirmation) {
+            this.saveTheFile();
+          } else {
+            this.notificationService.openSnackMessage('Annulation');
+          }
+          resolve();
+        });
+      });
     } else {
       this.notificationService.openSnackMessage('Note vide');
     }
   }
+
+  private saveTheFile() {
+      if (this.newFileName) {
+        this.confirmation = false;
+        const file = new File([this.value], this.newFileName);
+        this.uploadFiles(file);
+        this.success.emit();
+      } else {
+        this.notificationService.openSnackMessage('Note sans nom');
+      }
+    }
 
   protected createFileModel(file: File, parentId: string, path: string, id?: string): FileModel {
     return new FileModel(file, {

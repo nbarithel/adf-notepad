@@ -13,26 +13,4 @@
         background-color: mat-color($primary);
         margin: 2% 0 2% 75% !important;
     }
-
-    mat-form-field {
-        height: 95%;
-        width: 100%;
-        display: flex;
-        border-top: 1px, solid, black;
-
-        .mat-input-wrapper {
-            flex: 1;
-            height: 100%;
-
-            .mat-form-field-flex {
-                height: 100%;
-
-                .mat-form-field-infix {
-                    height: 97%;
-                    overflow: scroll;
-                    border-top: 1px solid rgba(0, 0, 0, 0.42);
-                }
-            }
-        }
-    }
 }

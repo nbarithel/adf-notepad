@@ -76,7 +76,7 @@
         }
 
         .adf-info-drawer-layout-header {
-            margin-bottom: 0;
+            display: none;
         }
 
         .adf-info-drawer-layout-content {
@@ -133,18 +133,22 @@
             }
         }
     }
-    .adf-info-drawer-layout-content {
+    .adf-info-drawer-layout {
+        box-shadow: none;
 
-        height: 100%;
+        .adf-info-drawer-layout-content {
 
-        #info-drawer-content-editor {
-            height: 95%;
+            height: 100%;
 
-            td-text-editor {
+            #info-drawer-content-editor {
+                height: 95%;
 
-                .CodeMirror {
-                    min-height: 550px;
-                    max-height: 550px;
+                td-text-editor {
+
+                    .CodeMirror {
+                        min-height: 550px;
+                        max-height: 550px;
+                    }
                 }
             }
         }
