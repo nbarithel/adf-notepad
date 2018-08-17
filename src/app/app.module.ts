@@ -23,6 +23,7 @@ import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { CommentsComponent } from './comment/comments.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
 import { SearchNotepadComponent } from './search/search-notepad.component';
+import { NotepadSocialComponent } from './notepad-social/notepad-social.component';
 
 
 
@@ -50,7 +51,8 @@ import { SearchNotepadComponent } from './search/search-notepad.component';
     DocumentlistComponent,
     AppLayoutComponent,
     TextEditorComponent,
-    SearchNotepadComponent
+    SearchNotepadComponent,
+    NotepadSocialComponent
   ],
   providers: [
     PreviewService,

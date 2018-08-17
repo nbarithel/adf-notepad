@@ -79,6 +79,8 @@
 
       <adf-info-drawer-tab label="Commentaire ({{ commentsNumber }})">
         <app-comments (commentsNumber)="getCommentsNumber($event)" [nodeId]="nodeId"></app-comments>
+        <app-notepad-social [nodeId]="nodeId">
+        </app-notepad-social>
       </adf-info-drawer-tab>
 
     </adf-info-drawer>
