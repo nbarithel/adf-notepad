@@ -7,7 +7,10 @@ import { Router } from '@angular/router';
 export class NoteService {
 
   createNote = false;
+
   nodeId;
+
+  successUpload = false;
 
   constructor() {
   }
@@ -26,6 +29,10 @@ export class AppLayoutComponent {
   createNotes() {
     this.noteService.createNote = true;
     this.noteService.nodeId = 0;
+  }
+
+  onSuccess() {
+    this.noteService.successUpload = true;
   }
 
 }

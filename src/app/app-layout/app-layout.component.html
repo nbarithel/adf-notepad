@@ -41,7 +41,8 @@
                                     [adf-node-permission]="'create'"
                                     [multipleFiles]="true"
                                     acceptedFilesType=".rtf,.txt,.xml,.html"
-                                    [uploadFolders]="false">
+                                    [uploadFolders]="false"
+                                    (success)="onSuccess()">
                                 </adf-upload-button>
                             </div>
                         </div>

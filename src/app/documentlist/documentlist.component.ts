@@ -30,13 +30,15 @@ export class DocumentlistComponent implements DoCheck {
   commentsNumber: number;
 
   constructor(private notificationService: NotificationService,
-              private noteService: NoteService ) {
-  }
+              private noteService: NoteService) {}
 
   ngDoCheck() {
     this.createNote = this.noteService.createNote;
     if (this.noteService.nodeId === 0) {
       this.nodeId = null;
+    } else if (this.noteService.successUpload) {
+      this.documentList.reload();
+      this.noteService.successUpload = false;
     }
   }
 
