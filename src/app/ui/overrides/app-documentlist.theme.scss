@@ -25,6 +25,7 @@
             display: flex;
             flex-grow: 1;
             flex-shrink: 1;
+            min-width: 50%;
             height: 100%;
             width: 100%;
 
@@ -147,7 +148,7 @@
 
                     .CodeMirror {
                         min-height: 550px;
-                        max-height: 550px;
+                        height: 550px;
                     }
                 }
             }

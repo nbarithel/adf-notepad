@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output , NgZone, Input , OnChanges } from '@angular/core';
+import { Component, EventEmitter, ViewChild, Output , NgZone, Input , OnChanges } from '@angular/core';
 import { UploadService, NotificationService, FileModel, ContentService } from '@alfresco/adf-core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
@@ -6,6 +6,8 @@ import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
 import { UploadFilesEvent } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import 'rxjs/add/operator/toPromise';
+import { TdTextEditorComponent } from '@covalent/text-editor';
+import { FullscreenService } from '../services/fullscreen.service';
 
 @Component({
   selector: 'app-text-editor',
@@ -14,6 +16,9 @@ import 'rxjs/add/operator/toPromise';
 })
 
 export class TextEditorComponent implements OnChanges {
+
+  @ViewChild('textEditor')
+  tdEditor: TdTextEditorComponent;
 
   @Input()
   node: MinimalNodeEntryEntity;
@@ -33,7 +38,6 @@ export class TextEditorComponent implements OnChanges {
   value: string;
 
   options: any = {
-    lineWrapping: false,
     toolbar: [
       'bold',
       'italic',
@@ -64,7 +68,8 @@ export class TextEditorComponent implements OnChanges {
               private http: HttpClient,
               protected contentService: ContentService,
               protected notificationService: NotificationService,
-              protected dialog: MatDialog) {}
+              protected dialog: MatDialog,
+              protected fullscreenService: FullscreenService) {}
 
   ngOnChanges() {
     if (this.node && this.node.id) {
@@ -72,6 +77,9 @@ export class TextEditorComponent implements OnChanges {
       this.newFileName = this.node.name;
       const url = this.contentService.getContentUrl(this.nodeId);
       this.getUrlContent(url);
+    }
+    if (this.tdEditor.isFullscreenActive()) {
+      alert('fullscreen');
     }
   }
 

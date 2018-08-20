@@ -3,7 +3,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
-import { PreviewService } from './services/preview.service';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material';
 import { NoteService } from './app-layout/app-layout.component';
@@ -24,6 +23,7 @@ import { CommentsComponent } from './comment/comments.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
 import { SearchNotepadComponent } from './search/search-notepad.component';
 import { NotepadSocialComponent } from './notepad-social/notepad-social.component';
+import { FullscreenService } from './services/fullscreen.service';
 
 
 
@@ -55,7 +55,7 @@ import { NotepadSocialComponent } from './notepad-social/notepad-social.componen
     NotepadSocialComponent
   ],
   providers: [
-    PreviewService,
+    FullscreenService,
     MatDialog,
     NoteService
   ],

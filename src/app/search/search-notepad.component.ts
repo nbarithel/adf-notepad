@@ -2,7 +2,7 @@ import { Component, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NodePaging, Pagination, QueryBody, MinimalNodeEntity } from 'alfresco-js-api';
 import { SearchComponent } from '@alfresco/adf-content-services';
 import { ThumbnailService } from '@alfresco/adf-core';
-import { SearchService, SearchConfigurationService } from '@alfresco/adf-core';
+import { SearchService } from '@alfresco/adf-core';
 
 
 @Component({
@@ -43,21 +43,4 @@ export class SearchNotepadComponent {
         return this.thumbnailService.getMimeTypeIcon(mimeType);
     }
 
-    generateQueryBody(searchTerm: string): QueryBody {
-        if (this.useServiceApproach) {
-            return null;
-        } else {
-            return {
-                query: {
-                    query: searchTerm ? `${searchTerm}* OR name:${searchTerm}*` : searchTerm
-                },
-                include: ['path', 'allowableOperations'],
-                filterQueries: [
-                    /*tslint:disable-next-line */
-                    { query: "TYPE:'cm:folder' OR TYPE:'cm:content'" },
-                    { query: 'NOT cm:creator:System' }]
-            };
-        }
-        this.searchService.searchByQueryBody(this.queryBody);
-    }
 }
