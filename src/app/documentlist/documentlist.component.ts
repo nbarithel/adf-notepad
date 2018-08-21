@@ -1,9 +1,11 @@
 import { Component, ViewChild, Input, DoCheck } from '@angular/core';
-import { NotificationService } from '@alfresco/adf-core';
+import { NotificationService, NodesApiService } from '@alfresco/adf-core';
 import { DocumentListComponent } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { CommentsComponent } from '../comment/comments.component';
 import { NoteService } from '../app-layout/app-layout.component';
+import { MatDialog } from '@angular/material';
+import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
 
 @Component({
   selector: 'app-documentlist',
@@ -30,7 +32,9 @@ export class DocumentlistComponent implements DoCheck {
   commentsNumber: number;
 
   constructor(private notificationService: NotificationService,
-              private noteService: NoteService) {}
+              private noteService: NoteService,
+              private dialog: MatDialog,
+              private nodesApiService: NodesApiService) {}
 
   ngDoCheck() {
     this.createNote = this.noteService.createNote;
@@ -54,20 +58,71 @@ export class DocumentlistComponent implements DoCheck {
     this.commentsNumber = event;
   }
 
-  success(event: any, action: string): void {
-    this.notificationService.openSnackMessage('File ' + action);
+  success(event: any, action: string): any {
+    if(action == 'Deleted'){
+      const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+        data: {
+            title: 'Confirmation',
+            message: 'Voulez vous vraiment effacer ce fichier ?',
+            yesLabel: 'Oui',
+            noLabel: 'Non'
+        },
+        minWidth: '250px'
+      });
+      return new Promise((resolve) => {
+        dialogRef.beforeClose().subscribe(result => {
+        if (result) {
+          const id = event.value.entry.id;
+          this.nodesApiService.deleteNode(id).subscribe(result => {
+            this.documentList.reload();
+          });
+          this.notificationService.openSnackMessage('File ' + action);
+        } else {
+          this.notificationService.openSnackMessage('Message non supprimé');
+        }
+        resolve();
+        });
+      });
+    } else {
+      this.notificationService.openSnackMessage('File ' + action);
+    }
     this.documentList.reload();
   }
 
-  getNodeId(event): void {
+  getNodeId(event): any {
     const entry = event.value.entry;
     if (entry && entry.isFile) {
-      this.nodeId = entry.id;
-      this.node = entry;
-      this.noteService.createNote = false;
-      this.noteService.nodeId = entry.id;
+      if (this.noteService.createNote) {
+        const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+          data: {
+              title: 'Confirmation',
+              message: 'Voulez vous quittez la création de note ?',
+              yesLabel: 'Oui',
+              noLabel: 'Non'
+          },
+          minWidth: '250px'
+        });
+        return new Promise((resolve) => {
+          dialogRef.beforeClose().subscribe(result => {
+          if (result) {
+            this.nodeId = entry.id;
+            this.node = entry;
+            this.noteService.createNote = false;
+            this.noteService.nodeId = entry.id;
+          } else {
+            this.notificationService.openSnackMessage('Retour à la création de note');
+          }
+          resolve();
+          });
+        });
+      } else {
+        this.nodeId = entry.id;
+        this.node = entry;
+        this.noteService.createNote = false;
+        this.noteService.nodeId = entry.id;
+      }
     }
-}
+  }
 
   onGoBack(event: any) {
     this.nodeId = null;

@@ -23,6 +23,12 @@
           <content-actions>
 
             <content-action
+              icon="get_app"
+              title="Télécharger"
+              handler="download">
+            </content-action>
+
+            <content-action
               icon="content_copy"
               title="Copier"
               permission="update"
@@ -42,8 +48,7 @@
               icon="delete"
               title="Supprimer"
               permission="update"
-              handler="delete"
-              (execute)="success($event,'Deleted')">
+              (execute)="success($event,'Deleted')"
             </content-action>
 
           </content-actions>
@@ -68,6 +73,10 @@
 
       <adf-info-drawer-tab label="Propriétés">
         <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
+
+        <adf-tag-node-list  nodeId="nodeId">
+        </adf-tag-node-list>
+
       </adf-info-drawer-tab>
 
       <adf-info-drawer-tab label="Versions">

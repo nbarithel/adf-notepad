@@ -5,7 +5,6 @@ import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
 import { UploadFilesEvent } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
-import 'rxjs/add/operator/toPromise';
 import { TdTextEditorComponent } from '@covalent/text-editor';
 import { FullscreenService } from '../services/fullscreen.service';
 
@@ -78,9 +77,10 @@ export class TextEditorComponent implements OnChanges {
       const url = this.contentService.getContentUrl(this.nodeId);
       this.getUrlContent(url);
     }
-    if (this.tdEditor.isFullscreenActive()) {
-      alert('fullscreen');
-    }
+  }
+
+  ngAfterViewChecked() {
+    this.fullscreenService.fullscreen = this.tdEditor.isFullscreenActive();
   }
 
   private getUrlContent(url: string): Promise<any> {

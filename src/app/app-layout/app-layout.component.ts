@@ -1,6 +1,5 @@
 import { Component, Injectable } from '@angular/core';
-import { TranslationService, AuthenticationService } from '@alfresco/adf-core';
-import { Router } from '@angular/router';
+import { FullscreenService } from '../services/fullscreen.service';
 
 
 @Injectable()
@@ -24,11 +23,18 @@ export class NoteService {
 })
 export class AppLayoutComponent {
 
-  constructor(private noteService: NoteService) {}
+  constructor(private noteService: NoteService,
+              private fullscreenService: FullscreenService) {}
+
+  fullscreen: boolean;
 
   createNotes() {
     this.noteService.createNote = true;
     this.noteService.nodeId = 0;
+  }
+
+  ngAfterViewChecked() {
+    this.fullscreen = this.fullscreenService.fullscreen;
   }
 
   onSuccess() {
