@@ -1,6 +1,6 @@
 import { Component, ViewChild, Input, DoCheck } from '@angular/core';
 import { NotificationService, NodesApiService } from '@alfresco/adf-core';
-import { DocumentListComponent } from '@alfresco/adf-content-services';
+import { DocumentListComponent, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { CommentsComponent } from '../comment/comments.component';
 import { NoteService } from '../app-layout/app-layout.component';
@@ -31,10 +31,22 @@ export class DocumentlistComponent implements DoCheck {
 
   commentsNumber: number;
 
+  fileFilter: RowFilter;
+
   constructor(private notificationService: NotificationService,
               private noteService: NoteService,
               private dialog: MatDialog,
-              private nodesApiService: NodesApiService) {}
+              private nodesApiService: NodesApiService) {
+
+    this.fileFilter = (row: ShareDataRow) => {
+      let node = row.node.entry;
+
+      if (node && !node.isFolder) {
+          return true;
+      }
+      return false;
+    };
+  }
 
   ngDoCheck() {
     this.createNote = this.noteService.createNote;
