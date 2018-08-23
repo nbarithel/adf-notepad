@@ -4,7 +4,15 @@
 
 <td-text-editor [(ngModel)]="value" [options]="options" #textEditor></td-text-editor>
 
-<button class="savingButton" mat-raised-button (click)="openSaveConfirmationDialog()()">
+<button class="savingButton" mat-raised-button (click)="majorVersion = true; openSaveConfirmationDialog('Sauvegarder la note ?')" *ngIf="!nodeId;else versionning">
     <mat-icon>save</mat-icon>
     ENREGISTRER
 </button>
+
+<ng-template #versionning>
+    <mat-slide-toggle [(ngModel)]="majorVersion" >Version Majeur</mat-slide-toggle>
+    <button class="savingButton" mat-raised-button (click)="openSaveConfirmationDialog('Réediter cette note ?')">
+        <mat-icon>save</mat-icon>
+        ENREGISTRER
+    </button>
+</ng-template>

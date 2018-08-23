@@ -64,21 +64,19 @@
 
     <adf-info-drawer (selectedIndexChange)="showTabs($event)" *ngIf="nodeId && !createNote">
 
-      <adf-info-drawer-tab label="Note">
+      <adf-info-drawer-tab icon="notes" label="Note">
           <div info-drawer-content id="info-drawer-content-editor">
             <app-text-editor [node]="node" (success)="success($event,'enregistrée')"></app-text-editor>
           </div>
       </adf-info-drawer-tab>
 
-      <adf-info-drawer-tab label="Propriétés">
+      <adf-info-drawer-tab icon="description" label="Propriétés">
         <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
-
-        <adf-tag-node-list  nodeId="nodeId">
-        </adf-tag-node-list>
-
+        <app-notepad-social [nodeId]="nodeId">
+        </app-notepad-social>
       </adf-info-drawer-tab>
 
-      <adf-info-drawer-tab label="Versions">
+      <adf-info-drawer-tab icon="ballot" label="Versions">
         <mat-card>
           <mat-card-content>
             <adf-version-list [node]="node">
@@ -87,16 +85,14 @@
         </mat-card>
       </adf-info-drawer-tab>
 
-      <adf-info-drawer-tab label="Commentaire ({{ commentsNumber }})">
+      <adf-info-drawer-tab icon="comment" label="Commentaire ({{ commentsNumber }})">
         <app-comments (commentsNumber)="getCommentsNumber($event)" [nodeId]="nodeId"></app-comments>
-        <app-notepad-social [nodeId]="nodeId">
-        </app-notepad-social>
       </adf-info-drawer-tab>
 
     </adf-info-drawer>
 
     <adf-info-drawer-layout *ngIf="!nodeId && !createNote">
-      <div info-drawer-content>
+      <div info-drawer-content  class="empty-align">
         <adf-empty-content
           icon="waves"
           title="Veuillez sélectionner une note pour afficher ses informations"
@@ -110,7 +106,7 @@
     </adf-info-drawer-layout>
 
 
-    <adf-info-drawer-layout *ngIf="createNote && !nodeId ">
+    <adf-info-drawer-layout *ngIf="createNote && !nodeId">
       <div info-drawer-title>Edition de note</div>
       <div info-drawer-content id="info-drawer-content-editor">
         <app-text-editor (success)="success($event,'enregistrée')"></app-text-editor>

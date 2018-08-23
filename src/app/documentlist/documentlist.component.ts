@@ -87,6 +87,9 @@ export class DocumentlistComponent implements DoCheck {
           const id = event.value.entry.id;
           this.nodesApiService.deleteNode(id).subscribe(result => {
             this.documentList.reload();
+          if (id == this.nodeId ) {
+            this.nodeId = null;
+          }
           });
           this.notificationService.openSnackMessage('File ' + action);
         } else {

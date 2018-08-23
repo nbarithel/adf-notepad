@@ -26,7 +26,7 @@ export class AppLayoutComponent {
   constructor(private noteService: NoteService,
               private fullscreenService: FullscreenService) {}
 
-  fullscreen: boolean;
+  fullscreen = false;
 
   createNotes() {
     this.noteService.createNote = true;

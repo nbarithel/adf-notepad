@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class FullscreenService {
 
-  fullscreen:boolean;
+  fullscreen = false;
 
   constructor() { }
 
