@@ -28,6 +28,13 @@
             </content-action>
 
             <content-action
+              icon="gesture"
+              title="Renommer"
+              permission="update"
+              (execute)="rename($event)">
+            </content-action>
+
+            <content-action
               icon="content_copy"
               title="Copier"
               permission="update"

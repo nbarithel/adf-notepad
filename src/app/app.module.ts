@@ -6,12 +6,14 @@ import { appRoutes } from './app.routes';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material';
 import { NoteService } from './app-layout/app-layout.component';
+import { FullscreenService } from './services/fullscreen.service';
+
 
 // ADF modules
-import { AdfModule } from './adf.module';
 import { ThemePickerModule } from './theme-picker/theme-picker';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
-import { SearchModule } from '@alfresco/adf-content-services';
+import { CoreModule } from '@alfresco/adf-core';
+import { ContentModule, SearchModule  } from '@alfresco/adf-content-services';
 
 // App components
 import { AppComponent } from './app.component';
@@ -23,7 +25,7 @@ import { CommentsComponent } from './comment/comments.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
 import { SearchNotepadComponent } from './search/search-notepad.component';
 import { NotepadSocialComponent } from './notepad-social/notepad-social.component';
-import { FullscreenService } from './services/fullscreen.service';
+import { RenameComponent } from './rename/rename.component';
 
 
 
@@ -41,7 +43,8 @@ import { FullscreenService } from './services/fullscreen.service';
     ),
 
     // ADF modules
-    AdfModule
+    CoreModule.forRoot(),
+    ContentModule.forRoot(),
   ],
   declarations: [
     AppComponent,
@@ -52,14 +55,18 @@ import { FullscreenService } from './services/fullscreen.service';
     AppLayoutComponent,
     TextEditorComponent,
     SearchNotepadComponent,
-    NotepadSocialComponent
+    NotepadSocialComponent,
+    RenameComponent,
   ],
   providers: [
     FullscreenService,
     MatDialog,
-    NoteService
+    NoteService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [
+    RenameComponent
+  ]
 })
 export class AppModule {
 }

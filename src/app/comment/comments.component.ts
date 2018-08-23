@@ -19,8 +19,8 @@ import { CommentProcessService } from '@alfresco/adf-core';
 import { CommentContentService } from '@alfresco/adf-core';
 import { CommentModel } from '@alfresco/adf-core';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
+import { Observable } from 'rxjs';
+import { Observer } from 'rxjs';
 
 @Component({
     selector: 'app-comments',
@@ -57,7 +57,7 @@ export class CommentsComponent implements OnChanges {
     beingAdded = false;
 
     constructor(private commentProcessService: CommentProcessService, private commentContentService: CommentContentService) {
-        this.comment$ = new Observable<CommentModel>(observer => this.commentObserver = observer).share();
+        this.comment$ = new Observable<CommentModel>(observer => this.commentObserver = observer);
         this.comment$.subscribe((comment: CommentModel) => {
             this.comments.push(comment);
         });

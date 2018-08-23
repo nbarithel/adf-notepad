@@ -6,6 +6,7 @@ import { CommentsComponent } from '../comment/comments.component';
 import { NoteService } from '../app-layout/app-layout.component';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
+import { RenameComponent } from '../rename/rename.component';
 
 @Component({
   selector: 'app-documentlist',
@@ -102,6 +103,27 @@ export class DocumentlistComponent implements DoCheck {
       this.notificationService.openSnackMessage('File ' + action);
     }
     this.documentList.reload();
+  }
+
+  rename(event: any) {
+    const dialogRef = this.dialog.open(RenameComponent, {
+      data: {
+        fileName: event.value.entry.name
+      },
+      minWidth: '250px'
+    });
+    return new Promise((resolve) => {
+      dialogRef.beforeClose().subscribe(result => {
+      if (result) {
+        const newName = dialogRef.componentInstance.fileName;
+        this.nodesApiService.updateNode(event.value.entry.id, { 'name': newName }).toPromise();
+        this.documentList.reload();
+      } else {
+        this.notificationService.openSnackMessage('Annulation')
+      }
+      resolve();
+      });
+    });
   }
 
   getNodeId(event): any {

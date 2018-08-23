@@ -1,5 +1,5 @@
 import { Component, EventEmitter, ViewChild, Output , NgZone, Input , OnChanges } from '@angular/core';
-import { UploadService, NotificationService, FileModel, ContentService } from '@alfresco/adf-core';
+import { UploadService, NotificationService, FileModel, ContentService, NodesApiService } from '@alfresco/adf-core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
@@ -24,17 +24,21 @@ export class TextEditorComponent implements OnChanges {
 
   nodeId: string;
 
+  name: string;
+
   @Output()
   success = new EventEmitter();
 
   @Output()
   closeEdit = new EventEmitter();
 
-  confirmation: boolean;
-
   newFileName: string;
 
   value: string;
+
+  majorVersion = true;
+
+  modifiedNote: boolean;
 
   options: any = {
     toolbar: [
@@ -68,15 +72,26 @@ export class TextEditorComponent implements OnChanges {
               protected contentService: ContentService,
               protected notificationService: NotificationService,
               protected dialog: MatDialog,
+              protected nodesApiService: NodesApiService,
               protected fullscreenService: FullscreenService) {}
 
   ngOnChanges() {
     if (this.node && this.node.id) {
-      this.nodeId = this.node.id;
-      this.newFileName = this.node.name;
-      const url = this.contentService.getContentUrl(this.nodeId);
-      this.getUrlContent(url);
+      if (this.nodeId) {
+        const url = this.contentService.getContentUrl(this.nodeId);
+        this.checkContent(url,this.node)
+      } else {
+        this.getIdContent(this.node);
+      }
     }
+  }
+
+  private getIdContent(node: MinimalNodeEntryEntity) {
+    this.nodeId = node.id;
+    this.name = node.name;
+    this.newFileName = this.name;
+    const url = this.contentService.getContentUrl(this.nodeId);
+    this.getUrlContent(url);
   }
 
   ngAfterViewChecked() {
@@ -94,14 +109,24 @@ export class TextEditorComponent implements OnChanges {
     });
   }
 
-  openSaveConfirmationDialog(): Promise<any> {
+  private checkContent(url: string, node: MinimalNodeEntryEntity) {
+    return new Promise((resolve, reject) => {
+      this.http.get(url, { responseType: 'text' }).subscribe(res => {
+          if (this.value != res) {
+            this.modifiedNote = true;
+            this.openSaveConfirmationDialog('"Voulez vous sauvegarder les modifications ?');
+          } else {
+            this.getIdContent(node);
+          }
+          resolve();
+      }, (event) => {
+          reject(event);
+      });
+  });
+}
+
+  openSaveConfirmationDialog(message: string): Promise<any> {
     if (this.value) {
-      let message: string;
-      if (!this.node) {
-        message = 'Sauvegarder ce fichier ?';
-      } else {
-        message = 'Créer une nouvelle version ?';
-      }
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         data: {
             title: 'Confirmation',
@@ -113,12 +138,17 @@ export class TextEditorComponent implements OnChanges {
       });
       return new Promise((resolve, reject) => {
           dialogRef.beforeClose().subscribe(result => {
-          this.confirmation = result;
-          if (this.confirmation) {
+          if (result && this.modifiedNote) {
             this.saveTheFile();
+            this.getIdContent(this.node);
+          } else if (result && !this.modifiedNote) {
+            this.saveTheFile();
+          } else if (this.modifiedNote) {
+            this.getIdContent(this.node);
           } else {
             this.notificationService.openSnackMessage('Annulation');
           }
+          this.modifiedNote = false;
           resolve();
         });
       });
@@ -129,7 +159,12 @@ export class TextEditorComponent implements OnChanges {
 
   private saveTheFile() {
       if (this.newFileName) {
-        this.confirmation = false;
+        if (this.nodeId && this.name != this.newFileName ) {
+          this.nodesApiService.updateNode(this.nodeId, { 'name': this.newFileName }).toPromise();
+          const file = new File([this.value], this.newFileName);
+          this.uploadFiles(file);
+          this.success.emit();
+        }
         const file = new File([this.value], this.newFileName);
         this.uploadFiles(file);
         this.success.emit();
@@ -140,7 +175,7 @@ export class TextEditorComponent implements OnChanges {
 
   protected createFileModel(file: File, parentId: string, path: string, id?: string): FileModel {
     return new FileModel(file, {
-        majorVersion: true,
+        majorVersion: this.majorVersion,
         newVersion: true,
         parentId: parentId,
         path: path,
