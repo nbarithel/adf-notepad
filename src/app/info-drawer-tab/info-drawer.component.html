@@ -1,0 +1,28 @@
+<adf-info-drawer-layout>
+    <div *ngIf="title" info-drawer-title>{{title}}</div>
+    <ng-content *ngIf="!title" info-drawer-title select="[info-drawer-title]"></ng-content>
+
+    <ng-content info-drawer-buttons select="[info-drawer-buttons]"></ng-content>
+
+    <ng-container info-drawer-content *ngIf="showTabLayout(); then tabLayout else singleLayout"></ng-container>
+
+    <ng-template #tabLayout>
+        <mat-tab-group [(selectedIndex)]="selectedIndex" class="app-info-drawer-tabs" (selectedTabChange)="onTabChange($event)">
+            <mat-tab *ngFor="let contentBlock of contentBlocks" [label]="contentBlock.label" class="app-info-drawer-tab">
+                <ng-container *ngIf="contentBlock.icon">
+                    <ng-template mat-tab-label>
+                        <mat-icon>{{ contentBlock.icon }}</mat-icon>
+                        <span *ngIf="contentBlock.badge && contentBlock.label" [matBadge]="contentBlock.badge" [matBadgeOverlap]="false">{{ contentBlock.label }}</span>
+                        <span *ngIf="!contentBlock.badge && contentBlock.label">{{ contentBlock.label }}</span>
+                    </ng-template>
+                </ng-container>
+
+                <ng-container *ngTemplateOutlet="contentBlock.content"></ng-container>
+            </mat-tab>
+        </mat-tab-group>
+    </ng-template>
+
+    <ng-template #singleLayout>
+        <ng-content select="[info-drawer-content]"></ng-content>
+    </ng-template>
+</adf-info-drawer-layout>

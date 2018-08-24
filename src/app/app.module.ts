@@ -7,6 +7,8 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material';
 import { NoteService } from './app-layout/app-layout.component';
 import { FullscreenService } from './services/fullscreen.service';
+import { MatBadgeModule } from '@angular/material/badge';
+import { MatChipsModule } from '@angular/material/chips';
 
 
 // ADF modules
@@ -26,6 +28,8 @@ import { TextEditorComponent } from './text-editor/text-editor.component';
 import { SearchNotepadComponent } from './search/search-notepad.component';
 import { NotepadSocialComponent } from './notepad-social/notepad-social.component';
 import { RenameComponent } from './rename/rename.component';
+import { TagComponent } from './tag/tag.component';
+import { InfoDrawerTabComponent, InfoDrawerComponent } from './info-drawer-tab/info-drawer-tab.component';
 
 
 
@@ -36,6 +40,8 @@ import { RenameComponent } from './rename/rename.component';
     CovalentTextEditorModule,
     ThemePickerModule,
     MatTabsModule,
+    MatChipsModule,
+    MatBadgeModule,
     SearchModule,
     RouterModule.forRoot(
       appRoutes // ,
@@ -57,6 +63,9 @@ import { RenameComponent } from './rename/rename.component';
     SearchNotepadComponent,
     NotepadSocialComponent,
     RenameComponent,
+    TagComponent,
+    InfoDrawerTabComponent,
+    InfoDrawerComponent,
   ],
   providers: [
     FullscreenService,

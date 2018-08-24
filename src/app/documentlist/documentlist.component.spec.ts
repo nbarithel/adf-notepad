@@ -3,10 +3,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Location } from '@angular/common';
 import { SpyLocation } from '@angular/common/testing';
 
-import { AdfModule } from '../adf.module';
+import { ContentModule } from '@alfresco/adf-content-services';
 import { DocumentlistComponent } from './documentlist.component';
 import { PreviewService } from '../services/preview.service';
-import { AlfrescoApiServiceMock, AlfrescoApiService} from '@alfresco/adf-core';
+import { AlfrescoApiServiceMock, AlfrescoApiService, CoreModule } from '@alfresco/adf-core';
 import { RouterTestingModule } from '@angular/router/testing';
 
 describe('DocumentlistComponent', () => {
@@ -17,7 +17,8 @@ describe('DocumentlistComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        AdfModule,
+        ContentModule,
+        CoreModule ,
         BrowserAnimationsModule
       ],
       declarations: [ DocumentlistComponent ],

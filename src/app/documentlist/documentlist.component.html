@@ -60,6 +60,7 @@
           </content-actions>
 
         </adf-document-list>
+        <app-tag [nodeId]="nodeId"></app-tag>
         <adf-pagination
           [target]="documentList"
           *ngIf="notesNumber != 0">
@@ -69,34 +70,34 @@
 
     <adf-toolbar-divider class="adf-toolbar-divider-doclist"></adf-toolbar-divider>
 
-    <adf-info-drawer (selectedIndexChange)="showTabs($event)" *ngIf="nodeId && !createNote">
+    <app-info-drawer (selectedIndexChange)="showTabs($event)" *ngIf="nodeId && !createNote">
 
-      <adf-info-drawer-tab icon="notes" label="Note">
+      <app-info-drawer-tab icon="notes" label="Note">
           <div info-drawer-content id="info-drawer-content-editor">
             <app-text-editor [node]="node" (success)="success($event,'enregistrée')"></app-text-editor>
           </div>
-      </adf-info-drawer-tab>
+      </app-info-drawer-tab>
 
-      <adf-info-drawer-tab icon="description" label="Propriétés">
+      <app-info-drawer-tab icon="description" label="Propriétés">
         <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
         <app-notepad-social [nodeId]="nodeId">
         </app-notepad-social>
-      </adf-info-drawer-tab>
+      </app-info-drawer-tab>
 
-      <adf-info-drawer-tab icon="ballot" label="Versions">
+      <app-info-drawer-tab icon="ballot" label="Versions">
         <mat-card>
           <mat-card-content>
             <adf-version-list [node]="node">
             </adf-version-list>
           </mat-card-content>
         </mat-card>
-      </adf-info-drawer-tab>
+      </app-info-drawer-tab>
 
-      <adf-info-drawer-tab icon="comment" label="Commentaire ({{ commentsNumber }})">
+      <app-info-drawer-tab icon="comment" label="Commentaires" badge="{{ commentsNumber }}">
         <app-comments (commentsNumber)="getCommentsNumber($event)" [nodeId]="nodeId"></app-comments>
-      </adf-info-drawer-tab>
+      </app-info-drawer-tab>
 
-    </adf-info-drawer>
+    </app-info-drawer>
 
     <adf-info-drawer-layout *ngIf="!nodeId && !createNote">
       <div info-drawer-content  class="empty-align">
