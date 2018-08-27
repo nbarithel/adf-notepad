@@ -1,6 +1,6 @@
 import { Component, ViewChild, Input, DoCheck } from '@angular/core';
-import { NotificationService, NodesApiService } from '@alfresco/adf-core';
-import { DocumentListComponent, RowFilter, ShareDataRow, TagService } from '@alfresco/adf-content-services';
+import { NotificationService, NodesApiService, AuthenticationService } from '@alfresco/adf-core';
+import { DocumentListComponent, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { CommentsComponent } from '../comment/comments.component';
 import { NoteService } from '../app-layout/app-layout.component';
@@ -37,11 +37,10 @@ export class DocumentlistComponent implements DoCheck {
   constructor(private notificationService: NotificationService,
               private noteService: NoteService,
               private dialog: MatDialog,
-              private tag: TagService,
               private nodesApiService: NodesApiService) {
 
     this.fileFilter = (row: ShareDataRow) => {
-      let node = row.node.entry;
+      const node = row.node.entry;
 
       if (node && !node.isFolder) {
           return true;
@@ -73,7 +72,7 @@ export class DocumentlistComponent implements DoCheck {
   }
 
   success(event: any, action: string): any {
-    if(action == 'Deleted'){
+    if (action === 'Deleted') {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         data: {
             title: 'Confirmation',
@@ -87,15 +86,15 @@ export class DocumentlistComponent implements DoCheck {
         dialogRef.beforeClose().subscribe(result => {
         if (result) {
           const id = event.value.entry.id;
-          this.nodesApiService.deleteNode(id).subscribe(result => {
+          this.nodesApiService.deleteNode(id).subscribe(() => {
             this.documentList.reload();
-          if (id == this.nodeId ) {
+          if (id === this.nodeId ) {
             this.nodeId = null;
           }
           });
           this.notificationService.openSnackMessage('File ' + action);
         } else {
-          this.notificationService.openSnackMessage('Message non supprimé');
+          this.notificationService.openSnackMessage('Note non supprimée');
         }
         resolve();
         });
@@ -120,7 +119,7 @@ export class DocumentlistComponent implements DoCheck {
         this.nodesApiService.updateNode(event.value.entry.id, { 'name': newName }).toPromise();
         this.documentList.reload();
       } else {
-        this.notificationService.openSnackMessage('Annulation')
+        this.notificationService.openSnackMessage('Annulation');
       }
       resolve();
       });

@@ -6,7 +6,16 @@
 
     adf-sidenav-layout {
         height: 100%;
+
+        adf-layout-header .mat-toolbar-single-row .adf-app-logo {
+            position: relative;
+            height: 35px;
+            width: 35px;
+            margin-right: 12px;
+            margin-top: 10px;
+        }
     }
+
     .adf-sidebar-action-menu-icon {
         color: black;
     }

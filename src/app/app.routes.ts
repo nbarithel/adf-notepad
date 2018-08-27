@@ -17,8 +17,7 @@
 
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard, AuthGuardBpm, AuthGuardEcm } from '@alfresco/adf-core';
-import { AppComponent } from './app.component';
+import { AuthGuardEcm } from '@alfresco/adf-core';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DocumentlistComponent } from './documentlist/documentlist.component';
@@ -28,6 +27,7 @@ export const appRoutes: Routes = [
   {
     path: '',
     component: AppLayoutComponent,
+    canActivate: [AuthGuardEcm],
     children: [
       {
         path: '',
@@ -40,7 +40,7 @@ export const appRoutes: Routes = [
       {
         path: 'documentlist',
         component: DocumentlistComponent,
-        canActivate: [AuthGuardEcm]
+        canActivate: [AuthGuardEcm],
       }
 
     ]

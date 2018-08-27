@@ -1,4 +1,4 @@
-import { Component, Injectable } from '@angular/core';
+import { Component, Injectable, AfterViewChecked } from '@angular/core';
 import { FullscreenService } from '../services/fullscreen.service';
 
 
@@ -21,7 +21,7 @@ export class NoteService {
   templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.scss']
 })
-export class AppLayoutComponent {
+export class AppLayoutComponent implements AfterViewChecked {
 
   constructor(private noteService: NoteService,
               private fullscreenService: FullscreenService) {}

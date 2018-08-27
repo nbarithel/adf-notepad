@@ -1,4 +1,5 @@
-import { Component, ContentChildren, EventEmitter, Input, Output, QueryList, TemplateRef, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, ContentChildren, EventEmitter, Input, Output, QueryList, TemplateRef
+    , ViewChild, ViewEncapsulation } from '@angular/core';
 import { MatTabChangeEvent } from '@angular/material';
 
 @Component({
@@ -8,7 +9,7 @@ import { MatTabChangeEvent } from '@angular/material';
 export class InfoDrawerTabComponent {
     /** The title of the tab. */
     @Input()
-    label: string = '';
+    label = '';
 
     /** Icon to render for the tab. */
     @Input()
@@ -25,8 +26,7 @@ export class InfoDrawerTabComponent {
     selector: 'app-info-drawer',
     templateUrl: './info-drawer.component.html',
     styleUrls: ['./info-drawer.component.scss'],
-    encapsulation: ViewEncapsulation.None,
-    host: { 'class': 'app-info-drawer' }
+    encapsulation: ViewEncapsulation.None
 })
 export class InfoDrawerComponent {
     /** The title of the info drawer. */
@@ -35,7 +35,7 @@ export class InfoDrawerComponent {
 
     /** The selected index tab. */
     @Input()
-    selectedIndex: number = 0;
+    selectedIndex = 0;
 
     /** Emitted when the currently active tab changes. */
     @Output()

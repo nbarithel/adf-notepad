@@ -2,20 +2,42 @@
 
     <adf-sidenav-layout-header>
         <ng-template let-toggleMenu="toggleMenu">
-            <mat-toolbar color="primary" class="adf-app-layout-toolbar mat-elevation-z6">
+            <adf-layout-header [redirectUrl]="'/documentlist'" [logo]="logo" [showSidenavToggle]="showMenu" [color]="'primary'">
+
+                <span fxFlex="1 1 auto" fxShow fxHide.lt-sm="true">ADF-Notepad</span>
+
                 <button mat-icon-button (click)="toggleMenu()">
-                    <mat-icon>menu</mat-icon>
+                        <mat-icon>menu</mat-icon>
                 </button>
 
-                <span fxFlex="1 1 auto" fxShow fxHide.lt-sm="true">ADF</span>
+<!--                 <adf-search-control [highlight]="true"
+                [expandable]="false">
+                </adf-search-control>
+ -->
 
                 <div class="adf-toolbar--spacer"></div>
+
+                <div class="adf-header-delimiter"></div>
+
+                <adf-userinfo
+                    class="adf-app-layout-user-profile"
+                    [menuPositionX]="'before'"
+                    [menuPositionY]="'above'">
+                </adf-userinfo>
 
                 <adf-toolbar-divider></adf-toolbar-divider>
 
                 <app-theme-picker></app-theme-picker>
 
-            </mat-toolbar>
+                <button mat-icon-button [matMenuTriggerFor]="langMenu">
+                    <mat-icon>language</mat-icon>
+                </button>
+                <mat-menu #langMenu="matMenu">
+                    <adf-language-menu></adf-language-menu>
+                </mat-menu>
+
+
+            </adf-layout-header>
         </ng-template>
     </adf-sidenav-layout-header>
 

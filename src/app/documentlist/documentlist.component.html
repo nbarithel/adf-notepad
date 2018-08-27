@@ -5,10 +5,14 @@
         acceptedFilesType=".rtf,.txt,.xml,.html"
         (success)="success($event,'uploaded')">
 
-        <adf-breadcrumb
-          [target]="documentList"
-          [folderNode]="documentList.folderNode">
-        </adf-breadcrumb>
+        <adf-toolbar>
+            <adf-toolbar-title>
+                <adf-breadcrumb
+                [target]="documentList"
+                [folderNode]="documentList.folderNode">
+              </adf-breadcrumb>
+            </adf-toolbar-title>
+        </adf-toolbar>
 
         <adf-document-list
           #documentList
@@ -60,7 +64,9 @@
           </content-actions>
 
         </adf-document-list>
-        <app-tag [nodeId]="nodeId"></app-tag>
+
+<!--         <app-tag [nodeId]="nodeId"></app-tag> -->
+
         <adf-pagination
           [target]="documentList"
           *ngIf="notesNumber != 0">
