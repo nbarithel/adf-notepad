@@ -14,7 +14,7 @@ import { MatChipsModule } from '@angular/material/chips';
 // ADF modules
 import { ThemePickerModule } from './theme-picker/theme-picker';
 import { CovalentTextEditorModule } from '@covalent/text-editor';
-import { CoreModule } from '@alfresco/adf-core';
+import { CoreModule, TRANSLATION_PROVIDER } from '@alfresco/adf-core';
 import { ContentModule, SearchModule  } from '@alfresco/adf-content-services';
 
 // App components
@@ -70,6 +70,14 @@ import { TagNodeListComponent } from './tag-node-list/tag-node-list.component';
     TagNodeListComponent,
   ],
   providers: [
+    {
+      provide: TRANSLATION_PROVIDER,
+      multi: true,
+      useValue: {
+          name: 'i18n',
+          source: 'assets/'
+      }
+  },
     FullscreenService,
     MatDialog,
     NoteService,

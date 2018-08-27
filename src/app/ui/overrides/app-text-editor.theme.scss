@@ -11,6 +11,18 @@
 
     .savingButton {
         background-color: mat-color($primary);
-        margin: 2% 0 2% 75% !important;
+    }
+
+    .save {
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 25px;
+
+        .savingButton {
+            background-color: mat-color($primary);
+            flex-grow:0;
+            height: 40px;
+        }
     }
 }

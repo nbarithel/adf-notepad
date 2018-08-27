@@ -1,6 +1,9 @@
-<mat-form-field>
-    <input matInput [(ngModel)]="newFileName" placeholder="Nom de la note">
-</mat-form-field>
+<ng-container *ngIf="!nodeId">
+    <mat-form-field>
+        <input matInput [(ngModel)]="newFileName" placeholder="Nom de la note" required>
+        <mat-error *ngIf="erreur">Ce champ est obligatoire</mat-error>
+    </mat-form-field>
+</ng-container>
 
 <td-text-editor [(ngModel)]="value" [options]="options" #textEditor></td-text-editor>
 
@@ -10,9 +13,15 @@
 </button>
 
 <ng-template #versionning>
-    <mat-slide-toggle [(ngModel)]="majorVersion" >Version Majeur</mat-slide-toggle>
-    <button class="savingButton" mat-raised-button (click)="openSaveConfirmationDialog('Réediter cette note ?')">
-        <mat-icon>save</mat-icon>
-        ENREGISTRER
-    </button>
+    <mat-slide-toggle [(ngModel)]="majorVersion" >Version Majeure</mat-slide-toggle>
+    <div class="save">
+        <mat-form-field>
+                <input matInput [(ngModel)]="newFileName" placeholder="Nom de la note">
+                <mat-error *ngIf="erreur">Erreur</mat-error>
+        </mat-form-field>
+        <button class="savingButton" mat-raised-button (click)="openSaveConfirmationDialog('Réediter cette note ?')">
+                <mat-icon>save</mat-icon>
+                ENREGISTRER
+        </button>
+    </div>
 </ng-template>

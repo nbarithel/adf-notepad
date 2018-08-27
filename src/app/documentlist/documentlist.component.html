@@ -27,20 +27,20 @@
 
             <content-action
               icon="get_app"
-              title="Télécharger"
+              title="{{ 'ADF_VERSION_LIST.ACTIONS.DOWNLOAD' | translate }}"
               handler="download">
             </content-action>
 
             <content-action
               icon="gesture"
-              title="Renommer"
+              title="{{ 'ADF_VERSION_LIST.ACTIONS.DOWNLOAD' | translate }}"
               permission="update"
               (execute)="rename($event)">
             </content-action>
 
             <content-action
               icon="content_copy"
-              title="Copier"
+              title="{{ 'NODE_SELECTOR.COPY' | translate }}"
               permission="update"
               handler="copy"
               (execute)="success($event,'Copied')">
@@ -48,7 +48,7 @@
 
             <content-action
               icon="subdirectory_arrow_left"
-              title="Déplacer"
+              title="{{ 'NODE_SELECTOR.MOVE' | translate }}"
               permission="update"
               handler="move"
               (execute)="success($event,'Moved')">
@@ -56,7 +56,7 @@
 
             <content-action
               icon="delete"
-              title="Supprimer"
+              title="{{ 'ADF_VERSION_LIST.ACTIONS.DELETE' | translate }}"
               permission="update"
               (execute)="success($event,'Deleted')">
             </content-action>
@@ -65,8 +65,8 @@
 
         </adf-document-list>
 
-<!--         <app-tag [nodeId]="nodeId"></app-tag> -->
-
+   <!--      <app-tag [nodeId]="nodeId"></app-tag>
+ -->
         <adf-pagination
           [target]="documentList"
           *ngIf="notesNumber != 0">

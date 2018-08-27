@@ -14,10 +14,9 @@
             height: 100%;
 
             > div {
-                width: 25%;
                 height: 100%;
                 background: mat-color($primary);
-                opacity: 0.5;
+                margin-left: 0;
             }
         }
 
@@ -114,25 +113,29 @@
                     }
                 }
 
-                .mat-tab-body-wrapper {
-                    height: 100%;
+                mat-tab-header {
+                    height: 54px;
 
-                    .mat-tab-body {
+                    .mat-tab-body-wrapper {
                         height: 100%;
-                        padding: 10px,0px,10px,0px;
 
-                        .mat-tab-content {
+                        .mat-tab-body {
                             height: 100%;
                             padding: 10px,0px,10px,0px;
-                        }
 
-                        .mat-tab-body-content {
+                            .mat-tab-content {
+                                height: 100%;
+                                padding: 10px,0px,10px,0px;
+                            }
 
-                            adf-content-metadata-card {
-                                .mat-card {
+                            .mat-tab-body-content {
 
-                                    .mat-card-content {
-                                        height: 93%;
+                                adf-content-metadata-card {
+                                    .mat-card {
+
+                                        .mat-card-content {
+                                            height: 93%;
+                                        }
                                     }
                                 }
                             }
@@ -149,14 +152,18 @@
 
             height: 100%;
 
+            mat-tab-header {
+                margin-bottom: 10px;
+            }
+
             #info-drawer-content-editor {
                 height: 95%;
 
                 td-text-editor {
 
                     .CodeMirror {
-                        min-height: 550px;
-                        height: 550px;
+                        min-height: 530px;
+                        height: 530px;
                     }
                 }
             }

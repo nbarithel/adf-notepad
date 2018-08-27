@@ -1,4 +1,4 @@
-import { Component, EventEmitter, ViewChild, Output , NgZone, Input , OnChanges } from '@angular/core';
+import { Component, EventEmitter, ViewChild, Output , NgZone, Input , OnChanges, AfterViewChecked } from '@angular/core';
 import { UploadService, NotificationService, FileModel, ContentService, NodesApiService } from '@alfresco/adf-core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
@@ -14,7 +14,7 @@ import { FullscreenService } from '../services/fullscreen.service';
   providers: [ UploadService ]
 })
 
-export class TextEditorComponent implements OnChanges {
+export class TextEditorComponent implements OnChanges, AfterViewChecked {
 
   @ViewChild('textEditor')
   tdEditor: TdTextEditorComponent;
@@ -34,6 +34,8 @@ export class TextEditorComponent implements OnChanges {
 
   newFileName: string;
 
+  erreur: boolean;
+
   value: string;
 
   majorVersion = true;
@@ -41,6 +43,7 @@ export class TextEditorComponent implements OnChanges {
   modifiedNote: boolean;
 
   options: any = {
+    spellChecker: false,
     toolbar: [
       'bold',
       'italic',
@@ -79,7 +82,7 @@ export class TextEditorComponent implements OnChanges {
     if (this.node && this.node.id) {
       if (this.nodeId) {
         const url = this.contentService.getContentUrl(this.nodeId);
-        this.checkContent(url,this.node)
+        this.checkContent(url, this.node);
       } else {
         this.getIdContent(this.node);
       }
@@ -112,7 +115,7 @@ export class TextEditorComponent implements OnChanges {
   private checkContent(url: string, node: MinimalNodeEntryEntity) {
     return new Promise((resolve, reject) => {
       this.http.get(url, { responseType: 'text' }).subscribe(res => {
-          if (this.value != res) {
+          if (this.value !== res) {
             this.modifiedNote = true;
             this.openSaveConfirmationDialog('"Voulez vous sauvegarder les modifications ?');
           } else {
@@ -159,17 +162,16 @@ export class TextEditorComponent implements OnChanges {
 
   private saveTheFile() {
       if (this.newFileName) {
-        if (this.nodeId && this.name != this.newFileName ) {
+        if (this.nodeId && this.name !== this.newFileName ) {
           this.nodesApiService.updateNode(this.nodeId, { 'name': this.newFileName }).toPromise();
-          const file = new File([this.value], this.newFileName);
-          this.uploadFiles(file);
+          this.uploadFiles(new File([this.value], this.newFileName));
           this.success.emit();
         }
         const file = new File([this.value], this.newFileName);
         this.uploadFiles(file);
         this.success.emit();
       } else {
-        this.notificationService.openSnackMessage('Note sans nom');
+        this.erreur = true;
       }
     }
 
