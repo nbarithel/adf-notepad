@@ -1,0 +1,59 @@
+{
+    "SOCIAL": {
+        "LIKE": "J'aime",
+        "RATING": "Note générale"
+      },
+    "SIDENAV": {
+        "MENU": {
+            "TITLE": "Notes",
+            "NOTE": "Nouvelle note"
+        }
+    },
+    "HEADER": {
+        "BUTTON":{
+            "LANGUAGE": "Changer de langue",
+            "LOGOUT": "Déconnexion",
+            "MENU": "Afficher le Menu"
+        }
+    },
+    "DOCUMENT": {
+        "CONTENT_ACTION": {
+            "DOWNLOAD": "Télécharger",
+            "RENAME": "Renommer"
+        },
+        "CONTENT_VIEW": {
+            "COMMENTS": "Commentaires"
+        },
+        "EMPTY_CONTENT": {
+            "TITLE": "Veuillez sélectionner une note pour afficher ses informations",
+            "SUBTITLE": "Vous avez actuellement {{ notesNumber }} notes enregistrées"
+        }
+    },
+    "NOTIFICATION": {
+        "YES": "Oui",
+        "NO": "Non",
+        "TITLE": "Confirmation",
+        "DELETE_MESSAGE": "Voulez vous vraiment effacer ce fichier ?",
+        "FILE": "Fichier",
+        "CANCEL": "Annulation",
+        "QUIT_NOTE_MESSAGE": "Voulez vous quitter la création de notes ?",
+        "NOTE_RETURN": "Retour à la création de notes",
+        "RENAME_MESSAGE": "Renommer la note ci-dessous",
+        "VALID": "Valider",
+        "INVALID": "Annuler",
+        "EMPTY_NOTE": "Note vide",
+        "NOTENAME": "Nom de la note",
+        "ERROR": "Ce champ est obligatoire",
+        "FILE_DELETED": "Note supprimée",
+        "RENAMED_FILE": "Note renommée",
+        "MODIFICATION": "Voulez vous sauvegarder les modifications ?",
+        "COPIED": "Note copiée",
+        "MOVED": "Note déplacée"
+
+    },
+    "TEXT_EDITOR": {
+        "VERSION": "Version majeure",
+        "SAVE": "Enregistrer",
+        "TYPE": "Ecrivez ici"
+    }
+}

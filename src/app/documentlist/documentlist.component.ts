@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input, DoCheck } from '@angular/core';
-import { NotificationService, NodesApiService, AuthenticationService } from '@alfresco/adf-core';
+import { NotificationService, NodesApiService, AuthenticationService, TranslationService } from '@alfresco/adf-core';
 import { DocumentListComponent, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { CommentsComponent } from '../comment/comments.component';
@@ -28,6 +28,8 @@ export class DocumentlistComponent implements DoCheck {
 
   createNote: boolean;
 
+  translatedText: string;
+
   notesNumber: number;
 
   commentsNumber: number;
@@ -37,7 +39,8 @@ export class DocumentlistComponent implements DoCheck {
   constructor(private notificationService: NotificationService,
               private noteService: NoteService,
               private dialog: MatDialog,
-              private nodesApiService: NodesApiService) {
+              private nodesApiService: NodesApiService,
+              private translationService: TranslationService) {
 
     this.fileFilter = (row: ShareDataRow) => {
       const node = row.node.entry;
@@ -50,6 +53,15 @@ export class DocumentlistComponent implements DoCheck {
   }
 
   ngDoCheck() {
+    this.translationService.get(
+      'DOCUMENT.EMPTY_CONTENT.SUBTITLE',
+      {
+        notesNumber: this.notesNumber
+      }
+    ).subscribe(translation => {
+      this.translatedText = translation;
+    });
+
     this.createNote = this.noteService.createNote;
     if (this.noteService.nodeId === 0) {
       this.nodeId = null;
@@ -75,10 +87,10 @@ export class DocumentlistComponent implements DoCheck {
     if (action === 'Deleted') {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         data: {
-            title: 'Confirmation',
-            message: 'Voulez vous vraiment effacer ce fichier ?',
-            yesLabel: 'Oui',
-            noLabel: 'Non'
+            title: this.translationService.instant('NOTIFICATION.TITLE'),
+            message: this.translationService.instant('NOTIFICATION.DELETE_MESSAGE'),
+            yesLabel: this.translationService.instant('NOTIFICATION.YES'),
+            noLabel: this.translationService.instant('NOTIFICATION.NO')
         },
         minWidth: '250px'
       });
@@ -92,15 +104,17 @@ export class DocumentlistComponent implements DoCheck {
             this.nodeId = null;
           }
           });
-          this.notificationService.openSnackMessage('File ' + action);
+          this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.FILE_DELETED'));
         } else {
-          this.notificationService.openSnackMessage('Note non supprimée');
+          this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.CANCEL'));
         }
         resolve();
         });
       });
+    } else if (action === 'Copied') {
+      this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.COPIED'));
     } else {
-      this.notificationService.openSnackMessage('File ' + action);
+      this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.MOVED'));
     }
     this.documentList.reload();
   }
@@ -117,9 +131,10 @@ export class DocumentlistComponent implements DoCheck {
       if (result) {
         const newName = dialogRef.componentInstance.fileName;
         this.nodesApiService.updateNode(event.value.entry.id, { 'name': newName }).toPromise();
+        this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.RENAMED_FILE'));
         this.documentList.reload();
       } else {
-        this.notificationService.openSnackMessage('Annulation');
+        this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.CANCEL'));
       }
       resolve();
       });
@@ -132,10 +147,10 @@ export class DocumentlistComponent implements DoCheck {
       if (this.noteService.createNote) {
         const dialogRef = this.dialog.open(ConfirmDialogComponent, {
           data: {
-              title: 'Confirmation',
-              message: 'Voulez vous quittez la création de note ?',
-              yesLabel: 'Oui',
-              noLabel: 'Non'
+              title: this.translationService.instant('NOTIFICATION.TITLE'),
+              message: this.translationService.instant('NOTIFICATION.QUIT_NOTE_MESSAGE'),
+              yesLabel: this.translationService.instant('NOTIFICATION.YES'),
+              noLabel: this.translationService.instant('NOTIFICATION.NO')
           },
           minWidth: '250px'
         });
@@ -147,7 +162,7 @@ export class DocumentlistComponent implements DoCheck {
             this.noteService.createNote = false;
             this.noteService.nodeId = entry.id;
           } else {
-            this.notificationService.openSnackMessage('Retour à la création de note');
+            this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.NOTE_RETURN'));
           }
           resolve();
           });

@@ -1,7 +1,7 @@
 <ng-container *ngIf="!nodeId">
     <mat-form-field>
-        <input matInput [(ngModel)]="newFileName" placeholder="Nom de la note" required>
-        <mat-error *ngIf="erreur">Ce champ est obligatoire</mat-error>
+        <input matInput [(ngModel)]="newFileName" placeholder="{{'NOTIFICATION.NOTENAME' | translate}}" required>
+        <mat-error *ngIf="erreur">{{'NOTIFICATION.ERROR' | translate}}</mat-error>
     </mat-form-field>
 </ng-container>
 
@@ -9,19 +9,18 @@
 
 <button class="savingButton" mat-raised-button (click)="majorVersion = true; openSaveConfirmationDialog('Sauvegarder la note ?')" *ngIf="!nodeId;else versionning">
     <mat-icon>save</mat-icon>
-    ENREGISTRER
+    {{'TEXT_EDITOR.SAVE' | translate}}
 </button>
 
 <ng-template #versionning>
-    <mat-slide-toggle [(ngModel)]="majorVersion" >Version Majeure</mat-slide-toggle>
+    <mat-slide-toggle [(ngModel)]="majorVersion" >{{'TEXT_EDITOR.VERSION' | translate}}</mat-slide-toggle>
     <div class="save">
         <mat-form-field>
-                <input matInput [(ngModel)]="newFileName" placeholder="Nom de la note">
-                <mat-error *ngIf="erreur">Erreur</mat-error>
+                <input matInput [(ngModel)]="newFileName" placeholder="{{'NOTIFICATION.NOTENAME' | translate}}">
         </mat-form-field>
         <button class="savingButton" mat-raised-button (click)="openSaveConfirmationDialog('Réediter cette note ?')">
                 <mat-icon>save</mat-icon>
-                ENREGISTRER
+                {{'TEXT_EDITOR.SAVE' | translate}}
         </button>
     </div>
 </ng-template>

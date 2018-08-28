@@ -1,5 +1,6 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
+import { TranslationService } from '@alfresco/adf-core';
 
 @Component({
   selector: 'app-rename',
@@ -34,13 +35,14 @@ export class RenameComponent {
   yesLabel: string;
   noLabel: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) data) {
+  constructor(private translationService: TranslationService,
+    @Inject(MAT_DIALOG_DATA) data) {
     data = data || {};
-    this.title = 'Renommer';
-    this.message = 'Renommer le fichier ci-dessous';
+    this.title = this.translationService.instant('DOCUMENT.CONTENT_ACTION.RENAME'),
+    this.message = this.translationService.instant('NOTIFICATION.RENAME_MESSAGE'),
     this.fileName = data.fileName;
-    this.yesLabel = 'Valider';
-    this.noLabel = 'Annuler';
+    this.yesLabel = this.translationService.instant('NOTIFICATION.VALID'),
+    this.noLabel = this.translationService.instant('NOTIFICATION.INVALID')
   }
 }
 

@@ -6,11 +6,11 @@
 
                 <span fxFlex="1 1 auto" fxShow fxHide.lt-sm="true">ADF-Notepad</span>
 
-                <button mat-icon-button (click)="toggleMenu()">
+                <button mat-icon-button matTooltip="{{'HEADER.BUTTON.MENU' | translate}}" (click)="toggleMenu()">
                         <mat-icon>menu</mat-icon>
                 </button>
 
-<!--                 <adf-search-control [highlight]="true">
+<!--            <adf-search-control [highlight]="true">
                 </adf-search-control> -->
 
 
@@ -26,14 +26,22 @@
 
                 <adf-toolbar-divider></adf-toolbar-divider>
 
-                <app-theme-picker></app-theme-picker>
+                <ng-container *ngIf="!production">
 
-                <button mat-icon-button [matMenuTriggerFor]="langMenu">
-                    <mat-icon>language</mat-icon>
+                    <app-theme-picker></app-theme-picker>
+
+                    <button mat-icon-button matTooltip="{{'HEADER.BUTTON.LANGUAGE' | translate}}" [matMenuTriggerFor]="langMenu" >
+                        <mat-icon>language</mat-icon>
+                    </button>
+                    <mat-menu #langMenu="matMenu">
+                        <adf-language-menu></adf-language-menu>
+                    </mat-menu>
+
+                </ng-container>
+
+                <button mat-icon-button matTooltip="{{'HEADER.BUTTON.LOGOUT' | translate}}" adf-logout class="adf-sidenav-link">
+                    <mat-icon matListIcon class="sidenav-menu-icon">exit_to_app</mat-icon>
                 </button>
-                <mat-menu #langMenu="matMenu">
-                    <adf-language-menu></adf-language-menu>
-                </mat-menu>
 
 
             </adf-layout-header>
@@ -70,18 +78,11 @@
                     </adf-sidebar-action-menu>
                 </div>
 
-                <a mat-list-item class="adf-sidenav-link" routerLink="/login">
-                    <mat-icon matListIcon class="sidenav-menu-icon">vpn_key</mat-icon>
-                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Login</div>
-                </a>
                 <a mat-list-item class="adf-sidenav-link" routerLink="/documentlist">
                     <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Documents</div>
                 </a>
-                <a mat-list-item adf-logout class="adf-sidenav-link">
-                    <mat-icon matListIcon class="sidenav-menu-icon">exit_to_app</mat-icon>
-                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Logout</div>
-                </a>
+
             </mat-nav-list>
         </ng-template>
     </adf-sidenav-layout-navigation>

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, ViewChild, Output , NgZone, Input , OnChanges, AfterViewChecked } from '@angular/core';
-import { UploadService, NotificationService, FileModel, ContentService, NodesApiService } from '@alfresco/adf-core';
+import { UploadService, NotificationService, FileModel, ContentService, NodesApiService, TranslationService } from '@alfresco/adf-core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
@@ -66,7 +66,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
       '|',
       'guide'
     ],
-    placeholder: 'Type your note here...',
+    placeholder: this.trans.instant('TEXT_EDITOR.TYPE'),
   };
 
   constructor(protected uploadService: UploadService,
@@ -75,6 +75,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
               protected contentService: ContentService,
               protected notificationService: NotificationService,
               protected dialog: MatDialog,
+              private trans: TranslationService,
               protected nodesApiService: NodesApiService,
               protected fullscreenService: FullscreenService) {}
 
@@ -117,7 +118,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
       this.http.get(url, { responseType: 'text' }).subscribe(res => {
           if (this.value !== res) {
             this.modifiedNote = true;
-            this.openSaveConfirmationDialog('"Voulez vous sauvegarder les modifications ?');
+            this.openSaveConfirmationDialog(this.trans.instant('NOTIFICATION.MODIFICATION'));
           } else {
             this.getIdContent(node);
           }
@@ -132,10 +133,10 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
     if (this.value) {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         data: {
-            title: 'Confirmation',
+            title: this.trans.instant('NOTIFICATION.TITLE'),
             message: message,
-            yesLabel: 'Oui',
-            noLabel: 'Non'
+            yesLabel: this.trans.instant('NOTIFICATION.YES'),
+            noLabel: this.trans.instant('NOTIFICATION.NO')
         },
         minWidth: '250px'
       });
@@ -149,14 +150,14 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
           } else if (this.modifiedNote) {
             this.getIdContent(this.node);
           } else {
-            this.notificationService.openSnackMessage('Annulation');
+            this.notificationService.openSnackMessage(this.trans.instant('NOTIFICATION.CANCEL'));
           }
           this.modifiedNote = false;
           resolve();
         });
       });
     } else {
-      this.notificationService.openSnackMessage('Note vide');
+      this.notificationService.openSnackMessage(this.trans.instant('NOTIFICATION.EMPTY_NOTE'));
     }
   }
 

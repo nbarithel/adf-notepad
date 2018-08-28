@@ -75,7 +75,7 @@ import { TagNodeListComponent } from './tag-node-list/tag-node-list.component';
       multi: true,
       useValue: {
           name: 'i18n',
-          source: 'assets/'
+          source: 'assets'
       }
   },
     FullscreenService,

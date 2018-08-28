@@ -1,0 +1,58 @@
+{
+    "SOCIAL": {
+        "LIKE": "Like",
+        "RATING": "Community rating"
+      },
+    "SIDENAV": {
+        "MENU": {
+            "TITLE": "Notes",
+            "NOTE": "New note"
+        }
+    },
+    "HEADER": {
+        "BUTTON":{
+            "LANGUAGE": "Change language",
+            "LOGOUT": "Log out",
+            "MENU": "Toggle Menu"
+        }
+    },
+    "DOCUMENT": {
+        "CONTENT_ACTION": {
+            "DOWNLOAD": "Download",
+            "RENAME": "Rename"
+        },
+        "CONTENT_VIEW": {
+            "COMMENTS": "Comments"
+        },
+        "EMPTY_CONTENT": {
+            "TITLE": "Please pick a note to show its informations",
+            "SUBTITLE": "You have {{ notesNumber }} saved notes"
+        }
+    },
+    "NOTIFICATION": {
+        "YES": "Yes",
+        "NO": "No",
+        "TITLE": "Confirm",
+        "DELETE_MESSAGE": "Do you confirm deleting this file ?",
+        "FILE": "File",
+        "CANCEL": "Cancelled",
+        "QUIT_NOTE_MESSAGE": "Do you really want to quit note editions ?",
+        "NOTE_RETURN": "Returning to note edition",
+        "RENAME_MESSAGE": "Rename the note below",
+        "VALID": "Submit",
+        "INVALID": "Cancel",
+        "EMPTY_NOTE": "Empty note",
+        "NOTENAME": "Note name",
+        "ERROR": "Field required",
+        "FILE_DELETED": "Note deleted",
+        "RENAMED_FILE": "Note renamed",
+        "MODIFICATION": "Do you want to save changes ?",
+        "COPIED": "Note copied",
+        "MOVED": "Note moved"
+    },
+    "TEXT_EDITOR": {
+        "VERSION": "Major version",
+        "SAVE": "Save the note",
+        "TYPE": "Type your note here"
+    }
+}

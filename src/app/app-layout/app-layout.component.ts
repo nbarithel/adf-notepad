@@ -1,5 +1,6 @@
 import { Component, Injectable, AfterViewChecked } from '@angular/core';
 import { FullscreenService } from '../services/fullscreen.service';
+import { environment } from 'environments/environment';
 
 
 @Injectable()
@@ -27,6 +28,8 @@ export class AppLayoutComponent implements AfterViewChecked {
               private fullscreenService: FullscreenService) {}
 
   fullscreen = false;
+
+  production = environment.production;
 
   createNotes() {
     this.noteService.createNote = true;
