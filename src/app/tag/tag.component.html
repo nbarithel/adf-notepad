@@ -1,4 +1,4 @@
-<label for="nodeId"><b>{{'TAG.INSERT' | translate }}</b></label><br>
+<label for="nodeId"><b>Tag</b></label><br>
 
 <div fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="stretch">
     <div fxFlex.gt-md="1 1 auto">
@@ -8,7 +8,7 @@
     </div>
     <div fxFlex.gt-md="1 1 auto">
         <mat-card>
-            <app-tag-node-list [nodeId]="nodeId" *ngIf="nodeId"></app-tag-node-list>
+            <adf-tag-node-list [nodeId]="nodeId" ></adf-tag-node-list>
         </mat-card>
     </div>
 </div>

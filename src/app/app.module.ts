@@ -25,12 +25,10 @@ import { DocumentlistComponent } from './documentlist/documentlist.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { CommentsComponent } from './comment/comments.component';
 import { TextEditorComponent } from './text-editor/text-editor.component';
-import { SearchNotepadComponent } from './search/search-notepad.component';
 import { NotepadSocialComponent } from './notepad-social/notepad-social.component';
 import { RenameComponent } from './rename/rename.component';
 import { TagComponent } from './tag/tag.component';
 import { InfoDrawerTabComponent, InfoDrawerComponent } from './info-drawer-tab/info-drawer-tab.component';
-import { TagNodeListComponent } from './tag-node-list/tag-node-list.component';
 
 
 
@@ -61,13 +59,11 @@ import { TagNodeListComponent } from './tag-node-list/tag-node-list.component';
     DocumentlistComponent,
     AppLayoutComponent,
     TextEditorComponent,
-    SearchNotepadComponent,
     NotepadSocialComponent,
     RenameComponent,
     TagComponent,
     InfoDrawerTabComponent,
     InfoDrawerComponent,
-    TagNodeListComponent,
   ],
   providers: [
     {

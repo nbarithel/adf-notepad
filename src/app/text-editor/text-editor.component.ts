@@ -156,11 +156,8 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
           resolve();
         });
       });
-    } else if (!this.newFileName) {
-      this.erreur = true;
-      this.notificationService.openSnackMessage(this.trans.instant('NOTIFICATION.EMPTY_NOTENAME'));
     } else {
-      this.notificationService.openSnackMessage(this.trans.instant('NOTIFICATION.EMPTY_NOTE'));
+      this.getIdContent(this.node);
     }
   }
 

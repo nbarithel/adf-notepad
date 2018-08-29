@@ -1,13 +1,13 @@
 <ng-container *ngIf="!nodeId">
     <mat-form-field>
         <input matInput [(ngModel)]="newFileName" placeholder="{{'NOTIFICATION.NOTENAME' | translate}}" required>
-        <mat-error *ngIf="erreur">{{'NOTIFICATION.ERROR' | translate}}</mat-error>
+           <mat-error>{{'NOTIFICATION.ERROR' | translate}}</mat-error>
     </mat-form-field>
 </ng-container>
 
-<td-text-editor [(ngModel)]="value" [options]="options" #textEditor></td-text-editor>
+<td-text-editor [(ngModel)]="value" [options]="options" #textEditor required></td-text-editor>
 
-<button class="savingButton" mat-raised-button (click)="majorVersion = true; openSaveConfirmationDialog(this.trans.instant('TEXT_EDITOR.CREATE'))" *ngIf="!nodeId;else versionning">
+<button class="savingButton"  mat-raised-button  [disabled]="!value || !newFileName" (click)="majorVersion = true; openSaveConfirmationDialog(this.trans.instant('TEXT_EDITOR.CREATE'))" *ngIf="!nodeId;else versionning">
     <mat-icon>save</mat-icon>
     {{'TEXT_EDITOR.SAVE' | translate}}
 </button>
@@ -16,9 +16,10 @@
     <mat-slide-toggle [(ngModel)]="majorVersion" >{{'TEXT_EDITOR.VERSION' | translate}}</mat-slide-toggle>
     <div class="save">
         <mat-form-field>
-                <input matInput [(ngModel)]="newFileName" placeholder="{{'NOTIFICATION.NOTENAME' | translate}}">
+                <input matInput [(ngModel)]="newFileName" placeholder="{{'NOTIFICATION.NOTENAME' | translate}}" required>
+                <mat-error>{{'NOTIFICATION.ERROR' | translate}}</mat-error>
         </mat-form-field>
-        <button class="savingButton" mat-raised-button (click)="openSaveConfirmationDialog(this.trans.instant('TEXT_EDITOR.EDIT'))">
+        <button class="savingButton" mat-raised-button [disabled]="!value || !newFileName" (click)="openSaveConfirmationDialog(this.trans.instant('TEXT_EDITOR.EDIT'))">
                 <mat-icon>save</mat-icon>
                 {{'TEXT_EDITOR.SAVE' | translate}}
         </button>
