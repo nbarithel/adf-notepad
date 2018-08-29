@@ -113,7 +113,7 @@ export class DocumentlistComponent implements DoCheck {
       });
     } else if (action === 'Copied') {
       this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.COPIED'));
-    } else {
+    } else if (action === 'Moved') {
       this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.MOVED'));
     }
     this.documentList.reload();

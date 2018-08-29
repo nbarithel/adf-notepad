@@ -42,6 +42,7 @@
         "VALID": "Submit",
         "INVALID": "Cancel",
         "EMPTY_NOTE": "Empty note",
+        "EMPTY_NOTENAME": "Empty name input",
         "NOTENAME": "Note name",
         "ERROR": "Field required",
         "FILE_DELETED": "Note deleted",
@@ -53,6 +54,8 @@
     "TEXT_EDITOR": {
         "VERSION": "Major version",
         "SAVE": "Save the note",
-        "TYPE": "Type your note here"
+        "TYPE": "Type your note here",
+        "EDIT": "Save the note changes ?",
+        "CREATE": "Create a new note ?"
     }
 }

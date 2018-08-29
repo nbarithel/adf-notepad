@@ -7,7 +7,7 @@
 
 <td-text-editor [(ngModel)]="value" [options]="options" #textEditor></td-text-editor>
 
-<button class="savingButton" mat-raised-button (click)="majorVersion = true; openSaveConfirmationDialog('Sauvegarder la note ?')" *ngIf="!nodeId;else versionning">
+<button class="savingButton" mat-raised-button (click)="majorVersion = true; openSaveConfirmationDialog(this.trans.instant('TEXT_EDITOR.CREATE'))" *ngIf="!nodeId;else versionning">
     <mat-icon>save</mat-icon>
     {{'TEXT_EDITOR.SAVE' | translate}}
 </button>
@@ -18,7 +18,7 @@
         <mat-form-field>
                 <input matInput [(ngModel)]="newFileName" placeholder="{{'NOTIFICATION.NOTENAME' | translate}}">
         </mat-form-field>
-        <button class="savingButton" mat-raised-button (click)="openSaveConfirmationDialog('Réediter cette note ?')">
+        <button class="savingButton" mat-raised-button (click)="openSaveConfirmationDialog(this.trans.instant('TEXT_EDITOR.EDIT'))">
                 <mat-icon>save</mat-icon>
                 {{'TEXT_EDITOR.SAVE' | translate}}
         </button>

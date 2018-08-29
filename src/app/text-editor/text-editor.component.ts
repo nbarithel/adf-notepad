@@ -130,7 +130,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
 }
 
   openSaveConfirmationDialog(message: string): Promise<any> {
-    if (this.value) {
+    if (this.value && this.newFileName) {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         data: {
             title: this.trans.instant('NOTIFICATION.TITLE'),
@@ -156,25 +156,25 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
           resolve();
         });
       });
+    } else if (!this.newFileName) {
+      this.erreur = true;
+      this.notificationService.openSnackMessage(this.trans.instant('NOTIFICATION.EMPTY_NOTENAME'));
     } else {
       this.notificationService.openSnackMessage(this.trans.instant('NOTIFICATION.EMPTY_NOTE'));
     }
   }
 
   private saveTheFile() {
-      if (this.newFileName) {
-        if (this.nodeId && this.name !== this.newFileName ) {
-          this.nodesApiService.updateNode(this.nodeId, { 'name': this.newFileName }).toPromise();
-          this.uploadFiles(new File([this.value], this.newFileName));
-          this.success.emit();
-        }
-        const file = new File([this.value], this.newFileName);
-        this.uploadFiles(file);
-        this.success.emit();
-      } else {
-        this.erreur = true;
-      }
+    if (this.nodeId && this.name !== this.newFileName ) {
+      this.nodesApiService.updateNode(this.nodeId, { 'name': this.newFileName }).toPromise();
+      this.uploadFiles(new File([this.value], this.newFileName));
+      this.success.emit();
+    } else {
+      const file = new File([this.value], this.newFileName);
+      this.uploadFiles(file);
+      this.success.emit();
     }
+  }
 
   protected createFileModel(file: File, parentId: string, path: string, id?: string): FileModel {
     return new FileModel(file, {

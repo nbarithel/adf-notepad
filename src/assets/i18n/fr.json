@@ -42,6 +42,7 @@
         "VALID": "Valider",
         "INVALID": "Annuler",
         "EMPTY_NOTE": "Note vide",
+        "EMPTY_NOTENAME": "Note sans nom",
         "NOTENAME": "Nom de la note",
         "ERROR": "Ce champ est obligatoire",
         "FILE_DELETED": "Note supprimée",
@@ -54,6 +55,8 @@
     "TEXT_EDITOR": {
         "VERSION": "Version majeure",
         "SAVE": "Enregistrer",
-        "TYPE": "Ecrivez ici"
+        "TYPE": "Ecrivez ici",
+        "EDIT": "Sauvegarder les modifications ?",
+        "CREATE": "Créer une nouvelle note ?"
     }
 }
