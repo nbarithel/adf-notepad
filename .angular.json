@@ -27,6 +27,36 @@
               "src/app.config.json",
               "src/versions.json",
               {
+              "glob": "**/*",
+                "input": "../node_modules/flip-book/css/",
+                "output": "./node_modules/flip-book/css/"
+              },
+              {
+                  "glob": "default-book-view.html",
+                  "input": "../node_modules/flip-book/templates/",
+                  "output": "./node_modules/flip-book/templates/"
+              },
+              {
+                "glob": "default-book-view.js",
+                  "input": "../node_modules/flip-book/js/",
+                  "output": "./node_modules/flip-book/js/"
+              },
+              {
+                  "glob": "**/*",
+                  "input": "../node_modules/flip-book/sounds/",
+                  "output": "./node_modules/flip-book/sounds/"
+              },
+              {
+                  "glob": "**/*",
+                  "input": "../node_modules/flip-book/fonts/",
+                  "output": "./node_modules/flip-book/fonts/"
+              },
+              {
+                  "glob": "**/*",
+                  "input": "../node_modules/flip-book/images/",
+                  "output": "./node_modules/flip-book/images/"
+              },
+              {
                 "glob": "**/*",
                 "input": "node_modules/@alfresco/adf-core/prebuilt-themes",
                 "output": "/assets/prebuilt-themes"
@@ -54,8 +84,13 @@
               "node_modules/pdfjs-dist/build/pdf.js",
               "node_modules/pdfjs-dist/web/pdf_viewer.js",
               "node_modules/raphael/raphael.min.js",
-              "node_modules/moment/min/moment.min.js"
-            ]
+              "node_modules/moment/min/moment.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/flip-book/js/jquery.min.js",
+              "node_modules/flip-book/js/three.min.js",
+              "node_modules/flip-book/js/html2canvas.min.js",
+              "node_modules/flip-book/dist/flip-book.js"
+              ]
           },
           "configurations": {
             "production": {

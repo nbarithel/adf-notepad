@@ -31,6 +31,7 @@ import { RenameComponent } from './rename/rename.component';
 import { TagComponent } from './tag/tag.component';
 import { InfoDrawerTabComponent, InfoDrawerComponent } from './info-drawer-tab/info-drawer-tab.component';
 import { TagNodeListComponent } from './tag-node-list/tag-node-list.component';
+import { AtolViewerComponent } from './atol-viewer/atol-viewer.component';
 
 
 
@@ -68,6 +69,7 @@ import { TagNodeListComponent } from './tag-node-list/tag-node-list.component';
     InfoDrawerTabComponent,
     InfoDrawerComponent,
     TagNodeListComponent,
+    AtolViewerComponent,
   ],
   providers: [
     {
