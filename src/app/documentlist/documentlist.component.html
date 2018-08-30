@@ -65,8 +65,6 @@
 
         </adf-document-list>
 
-        <app-tag [nodeId]="nodeId"></app-tag>
-
         <adf-pagination
           [target]="documentList"
           *ngIf="notesNumber != 0">
@@ -100,7 +98,10 @@
       </app-info-drawer-tab>
 
       <app-info-drawer-tab icon="comment" label="{{'DOCUMENT.CONTENT_VIEW.COMMENTS' | translate}}" badge="{{ commentsNumber }}">
-        <app-comments (commentsNumber)="getCommentsNumber($event)" [nodeId]="nodeId"></app-comments>
+          <mat-card>
+            <app-comments (commentsNumber)="getCommentsNumber($event)" [nodeId]="nodeId"></app-comments>
+            <app-tag [nodeId]="nodeId"></app-tag>
+          </mat-card>
       </app-info-drawer-tab>
 
     </app-info-drawer>
