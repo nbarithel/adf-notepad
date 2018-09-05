@@ -19,10 +19,12 @@
     "DOCUMENT": {
         "CONTENT_ACTION": {
             "DOWNLOAD": "Download",
-            "RENAME": "Rename"
+            "RENAME": "Rename",
+            "LINK": "Add appendix"
         },
         "CONTENT_VIEW": {
-            "COMMENTS": "Comments"
+            "COMMENTS": "Comments",
+            "LINKDOC": "Appendix"
         },
         "EMPTY_CONTENT": {
             "TITLE": "Please pick a note to show its informations",

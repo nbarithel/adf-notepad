@@ -1,11 +1,11 @@
 import { Component, ViewChild, Input, DoCheck } from '@angular/core';
-import { NotificationService, NodesApiService, AuthenticationService, TranslationService } from '@alfresco/adf-core';
+import { NotificationService, NodesApiService, TranslationService } from '@alfresco/adf-core';
 import { DocumentListComponent, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { CommentsComponent } from '../comment/comments.component';
 import { NoteService } from '../app-layout/app-layout.component';
 import { MatDialog } from '@angular/material';
-import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
+import { ConfirmDialogComponent, NodePaging } from '@alfresco/adf-content-services';
 import { RenameComponent } from '../rename/rename.component';
 
 @Component({
@@ -27,6 +27,8 @@ export class DocumentlistComponent implements DoCheck {
   comment: CommentsComponent;
 
   createNote: boolean;
+
+  linkAction = false;
 
   translatedText: string;
 
@@ -71,7 +73,7 @@ export class DocumentlistComponent implements DoCheck {
     }
   }
 
-  createNotes() {
+  createNotes(): void {
     this.noteService.createNote = true;
   }
 
@@ -79,7 +81,7 @@ export class DocumentlistComponent implements DoCheck {
     this.notesNumber = this.documentList.data.getRows().length;
   }
 
-  getCommentsNumber(event: number) {
+  getCommentsNumber(event: number): void {
     this.commentsNumber = event;
   }
 
@@ -117,6 +119,10 @@ export class DocumentlistComponent implements DoCheck {
       this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.MOVED'));
     }
     this.documentList.reload();
+  }
+
+  link(): void {
+    this.linkAction = true;
   }
 
   rename(event: any) {

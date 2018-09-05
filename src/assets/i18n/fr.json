@@ -19,10 +19,12 @@
     "DOCUMENT": {
         "CONTENT_ACTION": {
             "DOWNLOAD": "Télécharger",
-            "RENAME": "Renommer"
+            "RENAME": "Renommer",
+            "LINK": "Annexes"
         },
         "CONTENT_VIEW": {
-            "COMMENTS": "Commentaires"
+            "COMMENTS": "Commentaires",
+            "LINKDOC": "Annexes"
         },
         "EMPTY_CONTENT": {
             "TITLE": "Veuillez sélectionner une note pour afficher ses informations",

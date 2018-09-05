@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { CommentProcessService } from '@alfresco/adf-core';
+import { CommentProcessService, NotificationService } from '@alfresco/adf-core';
 import { CommentContentService } from '@alfresco/adf-core';
 import { CommentModel } from '@alfresco/adf-core';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
@@ -56,7 +56,9 @@ export class CommentsComponent implements OnChanges {
 
     beingAdded = false;
 
-    constructor(private commentProcessService: CommentProcessService, private commentContentService: CommentContentService) {
+    constructor(private commentProcessService: CommentProcessService,
+                private notificationService: NotificationService,
+                private commentContentService: CommentContentService) {
         this.comment$ = new Observable<CommentModel>(observer => this.commentObserver = observer);
         this.comment$.subscribe((comment: CommentModel) => {
             this.comments.push(comment);
@@ -160,7 +162,7 @@ export class CommentsComponent implements OnChanges {
                         }
                     );
             }
-        }
+        } this.notificationService.openSnackMessage('Commentaire ajouté !');
     }
 
     clear(): void {

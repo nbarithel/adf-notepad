@@ -42,7 +42,7 @@ export class RenameComponent {
     this.message = this.translationService.instant('NOTIFICATION.RENAME_MESSAGE'),
     this.fileName = data.fileName;
     this.yesLabel = this.translationService.instant('NOTIFICATION.VALID'),
-    this.noLabel = this.translationService.instant('NOTIFICATION.INVALID')
+    this.noLabel = this.translationService.instant('NOTIFICATION.INVALID');
   }
 }
 

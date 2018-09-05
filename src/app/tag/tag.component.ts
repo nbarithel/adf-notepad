@@ -1,6 +1,6 @@
 import { Component, Input, EventEmitter , Output, OnInit, OnChanges } from '@angular/core';
 import { TagService } from '@alfresco/adf-content-services';
-import { TranslationService } from '@alfresco/adf-core';
+import { TranslationService, NotificationService } from '@alfresco/adf-core';
 
 
 @Component({
@@ -10,7 +10,8 @@ import { TranslationService } from '@alfresco/adf-core';
 export class TagComponent implements OnInit, OnChanges {
 
   constructor(private tagService: TagService,
-              private translateService: TranslationService) {}
+              private translateService: TranslationService,
+              private notificationService: NotificationService) {}
 
   @Input()
   nodeId;
@@ -66,6 +67,7 @@ export class TagComponent implements OnInit, OnChanges {
         this.tagService.addTag(this.nodeId, this.newTagName).subscribe(() => {
             this.newTagName = '';
             this.successAdd.emit(this.nodeId);
+            this.notificationService.openSnackMessage('Tag ajouté !');
         });
     }
   }

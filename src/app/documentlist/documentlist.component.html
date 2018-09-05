@@ -7,11 +7,13 @@
 
         <adf-toolbar>
             <adf-toolbar-title>
-                <adf-breadcrumb
+              <adf-breadcrumb
                 [target]="documentList"
                 [folderNode]="documentList.folderNode">
               </adf-breadcrumb>
             </adf-toolbar-title>
+            <adf-search-control [highlight]="true" (searchChange)="getSearchTerm($event)">
+            </adf-search-control>
         </adf-toolbar>
 
         <adf-document-list
@@ -22,6 +24,23 @@
           [allowDropFiles]="true"
           (nodeClick)= "getNodeId($event)"
           (ready)="ready()">
+
+          <data-columns>
+              <data-column key="icon" type="image" [sortable]="false"></data-column>
+              <data-column key="name" title="Name"></data-column>
+              <data-column
+                class="full-width name-column"
+                title="Tag"
+                key="id"
+                [sortable]="false"
+                class="full-width ellipsis-cell">
+                <ng-template let-entry="$implicit">
+                    <adf-tag-node-list  [nodeId]="entry.data.getValue(entry.row, entry.col)"></adf-tag-node-list>
+                </ng-template>
+              </data-column>
+              <data-column key="createdAt" title="Created on" type="date" format="medium"></data-column>
+              <data-column key="createdByUser.displayName" title="Created By"></data-column>
+          </data-columns>
 
           <content-actions>
 
@@ -93,6 +112,14 @@
           <mat-card-content>
             <adf-version-list [node]="node">
             </adf-version-list>
+          </mat-card-content>
+        </mat-card>
+      </app-info-drawer-tab>
+
+      <app-info-drawer-tab icon="link" label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}">
+        <mat-card>
+          <mat-card-content>
+            <app-appendix [nodeId]="nodeId"></app-appendix>
           </mat-card-content>
         </mat-card>
       </app-info-drawer-tab>
