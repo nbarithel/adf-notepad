@@ -21,7 +21,7 @@
 </mat-list>
 
 <div class="mat-assoc-button">
-    <button mat-mini-fab color="primary">
+    <button mat-mini-fab color="primary" (click)="addAssociation()">
         <mat-icon>link</mat-icon>
     </button>
 
@@ -33,7 +33,7 @@
         [multipleFiles]="true"
         acceptedFilesType=".rtf,.txt,.xml,.html"
         [uploadFolders]="false"
-        (success)="addAssociation()">
+        (success)="addUploadAssociation()">
     </adf-upload-button>
 
     <adf-file-uploading-dialog></adf-file-uploading-dialog>

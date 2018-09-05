@@ -1,6 +1,7 @@
 import { Component, OnChanges, Input } from '@angular/core';
+import { ContentNodeDialogService } from '@alfresco/adf-content-services';
 import { AlfrescoApiService, NotificationService } from '@alfresco/adf-core';
-import { NodeAssocMinimalEntry, NodeAssocMinimal} from 'alfresco-js-api';
+import { NodeAssocMinimalEntry } from 'alfresco-js-api';
 
 @Component({
   selector: 'app-appendix',
@@ -14,11 +15,14 @@ export class AppendixComponent implements OnChanges {
 
   associatedNodeId: string;
 
+  nodeSelector: false;
+
   isLoading: boolean;
 
   associatedNotes: NodeAssocMinimalEntry;
 
   constructor(private alfrescoApi: AlfrescoApiService,
+              private dialogService: ContentNodeDialogService,
               private notificationService: NotificationService) { }
 
   ngOnChanges() {
@@ -39,7 +43,21 @@ export class AppendixComponent implements OnChanges {
     });
   }
 
-  addAssociation(): void {
+  addAssociation() {
+    this.dialogService.openFileBrowseDialogByFolderId('-my-').subscribe((pick) => {
+      if (pick[0].id === this.nodeId) {
+        this.notificationService.openSnackMessage('Vous ne pouvez pas mettre la source en annexe');
+      } else if (pick) {
+        this.alfrescoApi.getInstance().core.associationsApi
+        .addAssoc(this.nodeId, { targetId: pick[0].id, assocType: 'cm:attachments'} ).then(() => {
+          this.loadAssociations();
+          this.notificationService.openSnackMessage('Nouvelle annexe');
+        });
+      }
+    });
+  }
+
+  addUploadAssociation(): void {
     this.alfrescoApi.getInstance().nodes.getNodeChildren('-my-')
     .then(result => {
       this.associatedNodeId = result.list.entries[result.list.entries.length - 1].entry.id;
