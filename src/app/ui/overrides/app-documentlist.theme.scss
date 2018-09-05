@@ -4,6 +4,18 @@
     $accent: map-get($theme, accent);
     $icon-size: 48px;
 
+    .mat-assoc-button {
+        display: flex;
+        justify-content: right;
+
+        adf-upload-button {
+            padding-left: 20px;
+
+            #upload-multiple-files {
+                width: 100%;
+            }
+        }
+    }
 
     .app-docsAndViewer {
         display: flex;
@@ -27,6 +39,25 @@
             min-width: 50%;
             height: 100%;
             width: 100%;
+
+            adf-toolbar {
+                mat-toolbar {
+                    justify-content: space-between;
+                }
+            }
+
+            .mat-standard-chip.mat-chip-with-trailing-icon {
+                padding-left: 7px;
+            }
+
+            .mat-chip-list-wrapper {
+                overflow-x: scroll;
+                display: block;
+            }
+
+            .adf-tag-chips-delete {
+                display: none;
+            }
 
             .adf-upload-drag-area {
                 flex-grow: 1;

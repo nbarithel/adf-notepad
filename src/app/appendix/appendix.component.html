@@ -1,0 +1,47 @@
+<mat-list class="adf-association-list" *ngIf="!isLoading; else loading_template">
+    <mat-list-item *ngFor="let associatedNote of associatedNotes; let idx = index">
+        <mat-icon mat-list-icon>insert_drive_file</mat-icon>
+        <h4 mat-line class="adf-association-list-item-name" [id]="'adf-association-list-item-name-' + associatedNote.entry.id" >{{associatedNote.entry.name}}</h4>
+        <p mat-line>
+            <span class="adf-association-list-item-association"  [id]="'adf-association-list-item-association-' + associatedNote.entry.id" >{{idx}}</span> -
+            <span class="adf-association-list-item-date"     [id]="'adf-association-list-item-date-' + associatedNote.entry.id" >{{associatedNote.entry.modifiedAt | date}}</span>
+        </p>
+
+        <div>
+            <mat-menu #associationMenu="matMenu">
+                <button mat-menu-item (click)="deleteAssociation(associatedNote.entry.id)">Remove link</button>
+            </mat-menu>
+
+            <button mat-icon-button [matMenuTriggerFor]="associationMenu">
+                    <mat-icon>more_vert</mat-icon>
+            </button>
+        </div>
+
+    </mat-list-item>
+</mat-list>
+
+<div class="mat-assoc-button">
+    <button mat-mini-fab color="primary">
+        <mat-icon>link</mat-icon>
+    </button>
+
+    <adf-upload-button
+        [tooltip]="'Importer une annexe'"
+        [rootFolderId]="'-my-'"
+        [nodeType]="'cm:content'"
+        [adf-node-permission]="'create'"
+        [multipleFiles]="true"
+        acceptedFilesType=".rtf,.txt,.xml,.html"
+        [uploadFolders]="false"
+        (success)="addAssociation()">
+    </adf-upload-button>
+
+    <adf-file-uploading-dialog></adf-file-uploading-dialog>
+
+</div>
+
+<ng-template #loading_template>
+    <mat-progress-bar data-automation-id="association-history-loading-bar" mode="indeterminate"
+                      color="accent">
+    </mat-progress-bar>
+</ng-template>

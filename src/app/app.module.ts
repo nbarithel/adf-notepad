@@ -29,6 +29,7 @@ import { NotepadSocialComponent } from './notepad-social/notepad-social.componen
 import { RenameComponent } from './rename/rename.component';
 import { TagComponent } from './tag/tag.component';
 import { InfoDrawerTabComponent, InfoDrawerComponent } from './info-drawer-tab/info-drawer-tab.component';
+import { AppendixComponent } from './appendix/appendix.component';
 
 
 
@@ -64,6 +65,7 @@ import { InfoDrawerTabComponent, InfoDrawerComponent } from './info-drawer-tab/i
     TagComponent,
     InfoDrawerTabComponent,
     InfoDrawerComponent,
+    AppendixComponent,
   ],
   providers: [
     {
