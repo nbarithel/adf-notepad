@@ -67,7 +67,9 @@
             "UPLOAD": "Import d'une annexe",
             "LINK": "Lier une annexe",
             "MANAGE": "Gérer l'annexe",
-            "REMOVE_LINK": "Supprimer le lien"
+            "REMOVE_LINK": "Enlever le lien",
+            "NEW_APPENDIX": "Nouvelle annexe créée",
+            "ERROR_APPENDIX": "Vous ne pouvez pas mettre la source en annexe"
         }
     }
 }

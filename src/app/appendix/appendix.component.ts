@@ -13,13 +13,13 @@ export class AppendixComponent implements OnChanges {
   @Input()
   nodeId: string;
 
-  associatedNodeId: string;
-
   nodeSelector: false;
+
+  folderId = '-my-';
 
   isLoading: boolean;
 
-  associatedNotes: NodeAssocMinimalEntry;
+  appendixNodes: NodeAssocMinimalEntry;
 
   constructor(private alfrescoApi: AlfrescoApiService,
               private dialogService: ContentNodeDialogService,
@@ -32,40 +32,39 @@ export class AppendixComponent implements OnChanges {
   private loadAssociations() {
     this.isLoading = true;
     this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId).then((data) => {
-      this.associatedNotes = data.list.entries;
+      this.appendixNodes = data.list.entries;
       this.isLoading = false;
     });
   }
 
-  deleteAssociation(entry: string): void {
-    this.alfrescoApi.getInstance().core.associationsApi.removeAssoc(this.nodeId, entry)
+  private addAssociation(annexId: string) {
+    this.alfrescoApi.getInstance().core.associationsApi
+      .addAssoc(this.nodeId, { targetId: annexId, assocType: 'cm:attachments'} ).then(() => {
+        this.loadAssociations();
+        this.notificationService.openSnackMessage('TOOLTIP.APPENDIX.NEW_APPENDIX');
+    });
+  }
+
+  deleteAssociation(appendixId: string): void {
+    this.alfrescoApi.getInstance().core.associationsApi.removeAssoc(this.nodeId, appendixId)
     .then(() => { this.loadAssociations();
     });
   }
 
-  addAssociation() {
-    this.dialogService.openFileBrowseDialogByFolderId('-my-').subscribe((pick) => {
+  nodeAssociation(): void {
+    this.dialogService.openFileBrowseDialogByFolderId(this.folderId).subscribe((pick) => {
       if (pick[0].id === this.nodeId) {
         this.notificationService.openSnackMessage('Vous ne pouvez pas mettre la source en annexe');
       } else if (pick) {
-        this.alfrescoApi.getInstance().core.associationsApi
-        .addAssoc(this.nodeId, { targetId: pick[0].id, assocType: 'cm:attachments'} ).then(() => {
-          this.loadAssociations();
-          this.notificationService.openSnackMessage('Nouvelle annexe');
-        });
+        this.addAssociation(pick[0].id);
       }
     });
   }
 
-  addUploadAssociation(): void {
-    this.alfrescoApi.getInstance().nodes.getNodeChildren('-my-')
+  uploadAssociation(): void {
+    this.alfrescoApi.getInstance().nodes.getNodeChildren(this.folderId)
     .then(result => {
-      this.associatedNodeId = result.list.entries[result.list.entries.length - 1].entry.id;
-      this.alfrescoApi.getInstance().core.associationsApi
-      .addAssoc(this.nodeId, { targetId: this.associatedNodeId, assocType: 'cm:attachments'} ).then(() => {
-        this.loadAssociations();
-        this.notificationService.openSnackMessage('Nouvelle annexe');
-      });
+      this.addAssociation(result.list.entries[result.list.entries.length - 1].entry.id);
     });
   }
 

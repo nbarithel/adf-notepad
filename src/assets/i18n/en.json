@@ -66,7 +66,9 @@
             "UPLOAD": "Upload an annex",
             "LINK": "Bound a note",
             "MANAGE": "Manage this annex",
-            "REMOVE_LINK": "Delete the bound"
+            "REMOVE_LINK": "Delete the bound",
+            "NEW_APPENDIX": "New appendix created",
+            "ERROR_APPENDIX": "You can't link the source to itself"
         }
     }
 }

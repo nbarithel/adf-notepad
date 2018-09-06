@@ -1,15 +1,15 @@
 <mat-list class="adf-association-list" *ngIf="!isLoading; else loading_template">
-    <mat-list-item *ngFor="let associatedNote of associatedNotes; let idx = index">
+    <mat-list-item *ngFor="let appendixNode of appendixNodes; let idx = index">
         <mat-icon mat-list-icon>insert_drive_file</mat-icon>
-        <h4 mat-line class="adf-association-list-item-name" [id]="'adf-association-list-item-name-' + associatedNote.entry.id" >{{associatedNote.entry.name}}</h4>
+        <h4 mat-line class="adf-association-list-item-name" [id]="'adf-association-list-item-name-' + appendixNode.entry.id" >{{appendixNode.entry.name}}</h4>
         <p mat-line>
-            <span class="adf-association-list-item-association"  [id]="'adf-association-list-item-association-' + associatedNote.entry.id" >{{idx}}</span> -
-            <span class="adf-association-list-item-date"     [id]="'adf-association-list-item-date-' + associatedNote.entry.id" >{{associatedNote.entry.modifiedAt | date}}</span>
+            <span class="adf-association-list-item-association"  [id]="'adf-association-list-item-association-' + appendixNode.entry.id" >{{idx}}</span> -
+            <span class="adf-association-list-item-date"     [id]="'adf-association-list-item-date-' + appendixNode.entry.id" >{{appendixNode.entry.modifiedAt | date}}</span>
         </p>
 
         <div>
             <mat-menu #associationMenu="matMenu">
-                <button mat-menu-item (click)="deleteAssociation(associatedNote.entry.id)">{{'TOOLTIP.APPENDIX.REMOVE_LINK' | translate}}</button>
+                <button mat-menu-item (click)="deleteAssociation(appendixNode.entry.id)">{{'TOOLTIP.APPENDIX.REMOVE_LINK' | translate}}</button>
             </mat-menu>
 
             <button mat-icon-button matTooltip="{{ 'TOOLTIP.APPENDIX.MANAGE' | translate }}" [matMenuTriggerFor]="associationMenu">
@@ -21,7 +21,7 @@
 </mat-list>
 
 <div class="mat-assoc-button">
-    <button mat-mini-fab matTooltip="{{ 'TOOLTIP.APPENDIX.LINK' | translate }}"  color="primary" (click)="addAssociation()">
+    <button mat-mini-fab matTooltip="{{ 'TOOLTIP.APPENDIX.LINK' | translate }}"  color="primary" (click)="nodeAssociation()">
         <mat-icon>link</mat-icon>
     </button>
 
@@ -34,7 +34,7 @@
         [multipleFiles]="true"
         acceptedFilesType=".rtf,.txt,.xml,.html"
         [uploadFolders]="false"
-        (success)="addUploadAssociation()">
+        (success)="uploadAssociation()">
     </adf-upload-button>
 
     <adf-file-uploading-dialog></adf-file-uploading-dialog>
