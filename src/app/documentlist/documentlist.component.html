@@ -27,7 +27,7 @@
 
           <data-columns>
               <data-column key="icon" type="image" [sortable]="false"></data-column>
-              <data-column key="name" title="Name"></data-column>
+              <data-column key="name" title="{{ 'METADATA.BASIC.NAME'| translate }}" ></data-column>
               <data-column
                 class="full-width name-column"
                 title="Tag"
@@ -38,14 +38,18 @@
                     <adf-tag-node-list  [nodeId]="entry.data.getValue(entry.row, entry.col)"></adf-tag-node-list>
                 </ng-template>
               </data-column>
-              <data-column key="createdAt" title="Created on" type="date" format="medium"></data-column>
-              <data-column key="createdByUser.displayName" title="Created By"></data-column>
+              <data-column key="createdAt" title="{{'METADATA.BASIC.CREATED_DATE' | translate }}" >
+                  <ng-template let-value="value">
+                      <span title="{{ value | date:'medium' }}">{{ value | adfTimeAgo }}</span>
+                  </ng-template>
+              </data-column>
+              <data-column key="createdByUser.displayName" title="{{'METADATA.BASIC.CREATOR'| translate }}"></data-column>
 
-     <!--        <data-column key="ui" title="Annexes">
-                <ng-template let-entry="$implicit">
-                    <span>0</span>
-                </ng-template>
-            </data-column> -->
+<!--        <data-column key="id" title="Annexes">
+                  <ng-template let-entry="$implicit">
+                      <span>{{ getAssociations(entry.data.getValue(entry.row, entry.col)) }}</span>
+                  </ng-template>
+              </data-column> -->
 
           </data-columns>
 
@@ -147,7 +151,7 @@
           title="{{'DOCUMENT.EMPTY_CONTENT.TITLE' | translate}}"
           [subtitle]="translatedText">
         </adf-empty-content>
-        <button class="createNote-button" mat-button (click)="createNotes()">
+        <button class="createNote-button" mat-button matTooltip="{{ 'TOOLTIP.NEW_NOTE' | translate }}" (click)="createNotes()">
           <mat-icon>create</mat-icon>
           {{'SIDENAV.MENU.NOTE' | translate}}
         </button>

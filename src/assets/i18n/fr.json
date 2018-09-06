@@ -60,5 +60,14 @@
         "TYPE": "Ecrivez ici",
         "EDIT": "Sauvegarder les modifications ?",
         "CREATE": "Créer une nouvelle note ?"
+    },
+    "TOOLTIP": {
+        "NEW_NOTE": "Ecrire une nouvelle note",
+        "APPENDIX": {
+            "UPLOAD": "Import d'une annexe",
+            "LINK": "Lier une annexe",
+            "MANAGE": "Gérer l'annexe",
+            "REMOVE_LINK": "Supprimer le lien"
+        }
     }
 }

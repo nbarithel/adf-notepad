@@ -9,10 +9,10 @@
 
         <div>
             <mat-menu #associationMenu="matMenu">
-                <button mat-menu-item (click)="deleteAssociation(associatedNote.entry.id)">Remove link</button>
+                <button mat-menu-item (click)="deleteAssociation(associatedNote.entry.id)">{{'TOOLTIP.APPENDIX.REMOVE_LINK' | translate}}</button>
             </mat-menu>
 
-            <button mat-icon-button [matMenuTriggerFor]="associationMenu">
+            <button mat-icon-button matTooltip="{{ 'TOOLTIP.APPENDIX.MANAGE' | translate }}" [matMenuTriggerFor]="associationMenu">
                     <mat-icon>more_vert</mat-icon>
             </button>
         </div>
@@ -21,12 +21,13 @@
 </mat-list>
 
 <div class="mat-assoc-button">
-    <button mat-mini-fab color="primary" (click)="addAssociation()">
+    <button mat-mini-fab matTooltip="{{ 'TOOLTIP.APPENDIX.LINK' | translate }}"  color="primary" (click)="addAssociation()">
         <mat-icon>link</mat-icon>
     </button>
 
     <adf-upload-button
-        [tooltip]="'Importer une annexe'"
+        matTooltip= "{{ 'TOOLTIP.APPENDIX.UPLOAD' | translate }}"
+        [tooltip]="''"
         [rootFolderId]="'-my-'"
         [nodeType]="'cm:content'"
         [adf-node-permission]="'create'"

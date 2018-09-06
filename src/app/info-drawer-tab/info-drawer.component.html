@@ -11,9 +11,8 @@
             <mat-tab *ngFor="let contentBlock of contentBlocks" [label]="contentBlock.label" class="app-info-drawer-tab">
                 <ng-container *ngIf="contentBlock.icon">
                     <ng-template mat-tab-label>
-                        <mat-icon>{{ contentBlock.icon }}</mat-icon>
-                        <span *ngIf="contentBlock.badge && contentBlock.label" [matBadge]="contentBlock.badge" [matBadgeOverlap]="false">{{ contentBlock.label }}</span>
-                        <span *ngIf="!contentBlock.badge && contentBlock.label">{{ contentBlock.label }}</span>
+                        <mat-icon [matBadge]="contentBlock.badge" matBadgeColor="accent" matBadgePosition="'below'">{{ contentBlock.icon }}</mat-icon>
+                        <span *ngIf="contentBlock.label">{{ contentBlock.label }}</span>
                     </ng-template>
                 </ng-container>
 

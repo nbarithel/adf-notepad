@@ -59,5 +59,14 @@
         "TYPE": "Type your note here",
         "EDIT": "Save the note changes ?",
         "CREATE": "Create a new note ?"
+    },
+    "TOOLTIP": {
+        "NEW_NOTE": "Write a new note",
+        "APPENDIX": {
+            "UPLOAD": "Upload an annex",
+            "LINK": "Bound a note",
+            "MANAGE": "Manage this annex",
+            "REMOVE_LINK": "Delete the bound"
+        }
     }
 }

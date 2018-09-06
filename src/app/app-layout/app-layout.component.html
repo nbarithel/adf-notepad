@@ -55,13 +55,14 @@
                             <mat-icon>queue</mat-icon>
                         </div>
                         <div sidebar-menu-options>
-                            <button mat-menu-item (click)="createNotes()">
+                            <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_NOTE' | translate }}" matTooltipPosition="after" (click)="createNotes()">
                                 <mat-icon>create</mat-icon>
                                 <span>{{'SIDENAV.MENU.NOTE' | translate}}</span>
                             </button>
                             <div mat-menu-item>
                                 <adf-upload-button
-                                    [tooltip]="'Importer'"
+                                    matTooltip="{{ 'FILE_UPLOAD.BUTTON.UPLOAD_FILE' | translate }}"
+                                    [tooltip]="''"
                                     [rootFolderId]="'-my-'"
                                     [adf-node-permission]="'create'"
                                     [multipleFiles]="true"

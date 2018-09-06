@@ -5,7 +5,8 @@ import { TranslationService, NotificationService } from '@alfresco/adf-core';
 
 @Component({
   selector: 'app-tag',
-  templateUrl: './tag.component.html'
+  templateUrl: './tag.component.html',
+  styleUrls: ['./tag.component.scss'],
 })
 export class TagComponent implements OnInit, OnChanges {
 

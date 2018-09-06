@@ -1,6 +1,9 @@
 .adf-association-list {
-    .mat-list-item-content {
+    padding-bottom: 15px;
+
+    mat-list-item {
         border-bottom:1px solid #d8d8d8;
+        padding: 10px 0;
     }
 
     &-item-association {

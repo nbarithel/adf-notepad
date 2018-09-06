@@ -5,7 +5,7 @@ import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { CommentsComponent } from '../comment/comments.component';
 import { NoteService } from '../app-layout/app-layout.component';
 import { MatDialog } from '@angular/material';
-import { ConfirmDialogComponent, NodePaging } from '@alfresco/adf-content-services';
+import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
 import { RenameComponent } from '../rename/rename.component';
 
 @Component({
