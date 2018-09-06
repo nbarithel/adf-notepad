@@ -64,6 +64,7 @@
     "TOOLTIP": {
         "NEW_NOTE": "Ecrire une nouvelle note",
         "APPENDIX": {
+            "UPLOAD_BUTTON": "Importer une annexe",
             "UPLOAD": "Import d'une annexe",
             "LINK": "Lier une annexe",
             "MANAGE": "Gérer l'annexe",

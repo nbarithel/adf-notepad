@@ -63,6 +63,7 @@
     "TOOLTIP": {
         "NEW_NOTE": "Write a new note",
         "APPENDIX": {
+            "UPLOAD_BUTTON": "Upload an appendix",
             "UPLOAD": "Upload an annex",
             "LINK": "Bound a note",
             "MANAGE": "Manage this annex",
