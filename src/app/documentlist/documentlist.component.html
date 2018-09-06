@@ -27,15 +27,12 @@
 
           <data-columns>
               <data-column key="icon" type="image" [sortable]="false"></data-column>
-              <data-column key="name" title="{{ 'METADATA.BASIC.NAME'| translate }}" ></data-column>
               <data-column
-                class="full-width name-column"
-                title="Tag"
-                key="id"
-                [sortable]="false"
-                class="full-width ellipsis-cell">
+                title="{{ 'METADATA.BASIC.NAME'| translate }}"
+                key="name">
                 <ng-template let-entry="$implicit">
-                    <adf-tag-node-list  [nodeId]="entry.data.getValue(entry.row, entry.col)"></adf-tag-node-list>
+                    <span>{{ entry.row.getValue('name') }}</span>
+                    <adf-tag-node-list  [nodeId]="entry.row.getValue('id')"></adf-tag-node-list>
                 </ng-template>
               </data-column>
               <data-column key="createdAt" title="{{'METADATA.BASIC.CREATED_DATE' | translate }}" >
@@ -44,12 +41,6 @@
                   </ng-template>
               </data-column>
               <data-column key="createdByUser.displayName" title="{{'METADATA.BASIC.CREATOR'| translate }}"></data-column>
-
-<!--        <data-column key="id" title="Annexes">
-                  <ng-template let-entry="$implicit">
-                      <span>{{ getAssociations(entry.data.getValue(entry.row, entry.col)) }}</span>
-                  </ng-template>
-              </data-column> -->
 
           </data-columns>
 

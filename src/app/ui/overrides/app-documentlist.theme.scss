@@ -47,12 +47,25 @@
             }
 
             .mat-standard-chip.mat-chip-with-trailing-icon {
-                padding-left: 7px;
+                padding: 2px;
+            }
+
+            .cell-container {
+                display: block;
             }
 
             .mat-chip-list-wrapper {
+                margin-top: -3px;
+                margin-bottom: -14px;
+                margin-left: -5px;
+                margin-right: -5px;
+                padding-top: 6px;
                 overflow-x: scroll;
-                display: block;
+
+                .mat-chip {
+                    font-size: 11px;
+                    border-radius: 6px;
+                }
             }
 
             .adf-tag-chips-delete {
