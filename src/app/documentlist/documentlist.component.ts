@@ -2,7 +2,6 @@ import { Component, ViewChild, Input, DoCheck } from '@angular/core';
 import { NotificationService, NodesApiService, TranslationService } from '@alfresco/adf-core';
 import { DocumentListComponent, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
-import { CommentsComponent } from '../comment/comments.component';
 import { NoteService } from '../app-layout/app-layout.component';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
@@ -24,8 +23,6 @@ export class DocumentlistComponent implements DoCheck {
   @ViewChild('documentList')
   documentList: DocumentListComponent;
 
-  comment: CommentsComponent;
-
   createNote: boolean;
 
   linkAction = false;
@@ -33,8 +30,6 @@ export class DocumentlistComponent implements DoCheck {
   translatedText: string;
 
   notesNumber: number;
-
-  commentsNumber: number;
 
   fileFilter: RowFilter;
 
@@ -79,10 +74,6 @@ export class DocumentlistComponent implements DoCheck {
 
   ready(): void {
     this.notesNumber = this.documentList.data.getRows().length;
-  }
-
-  getCommentsNumber(event: number): void {
-    this.commentsNumber = event;
   }
 
   success(event: any, action: string): any {

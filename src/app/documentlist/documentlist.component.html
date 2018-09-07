@@ -109,26 +109,26 @@
         </app-notepad-social>
       </app-info-drawer-tab>
 
-      <app-info-drawer-tab icon="ballot" label="Versions">
+      <app-info-drawer-tab icon="ballot" label="Versions" badge="{{ versions.versions.length }}">
         <mat-card>
           <mat-card-content>
-            <adf-version-list [node]="node">
+            <adf-version-list [node]="node" #versions>
             </adf-version-list>
           </mat-card-content>
         </mat-card>
       </app-info-drawer-tab>
 
-      <app-info-drawer-tab icon="link" label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}">
+      <app-info-drawer-tab icon="link" label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}" badge="{{ appendix.appendixNodesNumber }}">
         <mat-card>
           <mat-card-content>
-            <app-appendix [nodeId]="nodeId"></app-appendix>
+            <app-appendix [nodeId]="nodeId" #appendix></app-appendix>
           </mat-card-content>
         </mat-card>
       </app-info-drawer-tab>
 
-      <app-info-drawer-tab icon="comment" label="{{'DOCUMENT.CONTENT_VIEW.COMMENTS' | translate}}" badge="{{ commentsNumber }}">
+      <app-info-drawer-tab icon="comment" label="{{'DOCUMENT.CONTENT_VIEW.COMMENTS' | translate}}" badge="{{ comment.commentsNumber }}">
           <mat-card>
-            <app-comments (commentsNumber)="getCommentsNumber($event)" [nodeId]="nodeId"></app-comments>
+            <app-comments [nodeId]="nodeId" #comment></app-comments>
             <app-tag [nodeId]="nodeId"></app-tag>
           </mat-card>
       </app-info-drawer-tab>

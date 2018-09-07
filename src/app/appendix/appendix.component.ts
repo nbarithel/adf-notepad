@@ -1,4 +1,4 @@
-import { Component, OnChanges, Input } from '@angular/core';
+import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { ContentNodeDialogService } from '@alfresco/adf-content-services';
 import { AlfrescoApiService, NotificationService } from '@alfresco/adf-core';
 import { NodeAssocMinimalEntry } from 'alfresco-js-api';
@@ -12,6 +12,8 @@ export class AppendixComponent implements OnChanges {
 
   @Input()
   nodeId: string;
+
+  appendixNodesNumber: number;
 
   nodeSelector: false;
 
@@ -33,6 +35,7 @@ export class AppendixComponent implements OnChanges {
     this.isLoading = true;
     this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId).then((data) => {
       this.appendixNodes = data.list.entries;
+      this.appendixNodesNumber = data.list.pagination.count;
       this.isLoading = false;
     });
   }

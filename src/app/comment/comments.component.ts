@@ -44,8 +44,7 @@ export class CommentsComponent implements OnChanges {
     @Output()
     error: EventEmitter<any> = new EventEmitter<any>();
 
-    @Output()
-    commentsNumber: EventEmitter<number> = new EventEmitter<number>();
+    commentsNumber: number;
 
     comments: CommentModel [] = [];
 
@@ -115,7 +114,7 @@ export class CommentsComponent implements OnChanges {
                         res.forEach((comment) => {
                             this.commentObserver.next(comment);
                         });
-                    } this.commentsNumber.emit(this.comments.length);
+                    } this.commentsNumber = this.comments.length;
                 },
                 (err) => {
                     this.error.emit(err);
