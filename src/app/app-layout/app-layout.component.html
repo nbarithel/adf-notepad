@@ -71,6 +71,10 @@
                                     (success)="onSuccess()">
                                 </adf-upload-button>
                             </div>
+                            <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_SITE' | translate }}" matTooltipPosition="after"> <!-- (click)="createSite()" -->
+                                <mat-icon>create_new_folder</mat-icon>
+                                <span>{{'SIDENAV.MENU.SITE' | translate}}</span>
+                            </button>
                         </div>
                     </adf-sidebar-action-menu>
                 </div>
@@ -78,6 +82,14 @@
                 <a mat-list-item class="adf-sidenav-link" routerLink="/documentlist">
                     <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Documents</div>
+                </a>
+                <a mat-list-item class="adf-sidenav-link" routerLink="/yaouen">
+                    <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
+                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Yaouen</div>
+                </a>
+                <a mat-list-item class="adf-sidenav-link" routerLink="/nicolas">
+                    <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
+                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Nicolas</div>
                 </a>
 
             </mat-nav-list>

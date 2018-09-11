@@ -6,7 +6,8 @@
     "SIDENAV": {
         "MENU": {
             "TITLE": "Notes",
-            "NOTE": "New note"
+            "NOTE": "New note",
+            "SITE": "New site"
         }
     },
     "HEADER": {
@@ -62,6 +63,7 @@
     },
     "TOOLTIP": {
         "NEW_NOTE": "Write a new note",
+        "NEW_SITE": "Create a new site",
         "APPENDIX": {
             "UPLOAD_BUTTON": "Upload an appendix",
             "UPLOAD": "Upload an annex",

@@ -30,6 +30,7 @@ import { RenameComponent } from './rename/rename.component';
 import { TagComponent } from './tag/tag.component';
 import { InfoDrawerTabComponent, InfoDrawerComponent } from './info-drawer-tab/info-drawer-tab.component';
 import { AppendixComponent } from './appendix/appendix.component';
+import { ResizerDirective } from './resizer.directive';
 
 
 
@@ -66,6 +67,7 @@ import { AppendixComponent } from './appendix/appendix.component';
     InfoDrawerTabComponent,
     InfoDrawerComponent,
     AppendixComponent,
+    ResizerDirective,
   ],
   providers: [
     {

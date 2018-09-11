@@ -1,7 +1,7 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { ContentNodeDialogService } from '@alfresco/adf-content-services';
 import { AlfrescoApiService, NotificationService } from '@alfresco/adf-core';
-import { NodeAssocMinimalEntry } from 'alfresco-js-api';
+import { NodeAssocMinimalEntry, MinimalNode, MinimalNodeEntryEntity } from 'alfresco-js-api';
 
 @Component({
   selector: 'app-appendix',
@@ -11,13 +11,18 @@ import { NodeAssocMinimalEntry } from 'alfresco-js-api';
 export class AppendixComponent implements OnChanges {
 
   @Input()
+  node: MinimalNodeEntryEntity;
+
+  @Output()
+  success: EventEmitter<any> = new EventEmitter();
+
   nodeId: string;
+
+  folderId: string;
 
   appendixNodesNumber: number;
 
   nodeSelector: false;
-
-  folderId = '-my-';
 
   isLoading: boolean;
 
@@ -28,6 +33,8 @@ export class AppendixComponent implements OnChanges {
               private notificationService: NotificationService) { }
 
   ngOnChanges() {
+    this.nodeId = this.node.id;
+    this.folderId = this.node.parentId;
     this.loadAssociations();
    }
 
@@ -68,6 +75,7 @@ export class AppendixComponent implements OnChanges {
     this.alfrescoApi.getInstance().nodes.getNodeChildren(this.folderId)
     .then(result => {
       this.addAssociation(result.list.entries[result.list.entries.length - 1].entry.id);
+      this.success.emit();
     });
   }
 

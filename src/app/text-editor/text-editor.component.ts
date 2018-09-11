@@ -22,6 +22,9 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
   @Input()
   node: MinimalNodeEntryEntity;
 
+  @Input()
+  parentId: string;
+
   nodeId: string;
 
   name: string;
@@ -43,6 +46,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
   modifiedNote: boolean;
 
   options: any = {
+    lineWrapping: true,
     spellChecker: false,
     toolbar: [
       'bold',
@@ -184,7 +188,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
   }
 
   uploadFiles(file): void {
-    const filteredFiles = this.createFileModel(file, '-root-', (file.webkitRelativePath || '').replace(/\/[^\/]*$/, ''));
+    const filteredFiles = this.createFileModel(file, this.parentId , (file.webkitRelativePath || '').replace(/\/[^\/]*$/, ''));
     this.uploadQueue(filteredFiles);
   }
 

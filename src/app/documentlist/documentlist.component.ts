@@ -1,19 +1,20 @@
-import { Component, ViewChild, Input, DoCheck } from '@angular/core';
-import { NotificationService, NodesApiService, TranslationService } from '@alfresco/adf-core';
+import { Component, ViewChild, Input, DoCheck, OnInit, ChangeDetectorRef } from '@angular/core';
+import { NotificationService, NodesApiService, TranslationService, AlfrescoApiService } from '@alfresco/adf-core';
 import { DocumentListComponent, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { NoteService } from '../app-layout/app-layout.component';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
 import { RenameComponent } from '../rename/rename.component';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-documentlist',
   templateUrl: './documentlist.component.html'
 })
-export class DocumentlistComponent implements DoCheck {
+export class DocumentlistComponent implements DoCheck , OnInit {
 
-  myStartFolder = '-my-';
+  currentFolderId: string;
 
   @Input()
   nodeId: string = null;
@@ -35,8 +36,11 @@ export class DocumentlistComponent implements DoCheck {
 
   constructor(private notificationService: NotificationService,
               private noteService: NoteService,
+              private route: ActivatedRoute,
+              private apiService: AlfrescoApiService,
               private dialog: MatDialog,
               private nodesApiService: NodesApiService,
+              private changeDetector: ChangeDetectorRef,
               private translationService: TranslationService) {
 
     this.fileFilter = (row: ShareDataRow) => {
@@ -47,6 +51,24 @@ export class DocumentlistComponent implements DoCheck {
       }
       return false;
     };
+  }
+
+  ngOnInit() {
+    const { data } = this.route.snapshot;
+    if (!data.siteName) {
+      this.currentFolderId = '-my-';
+    } else {
+      const nodes: any = this.apiService.getInstance().nodes;
+      nodes.getNodeInfo('-root-', {
+          includeSource: true,
+          include: ['path', 'properties'],
+          relativePath: '/sites/' + data.siteName + '/blog'
+      })
+      .then(node => {
+          this.currentFolderId = node.id;
+          this.changeDetector.detectChanges();
+      });
+    }
   }
 
   ngDoCheck() {
