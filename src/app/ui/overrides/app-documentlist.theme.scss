@@ -24,7 +24,6 @@
 
         .adf-toolbar-divider-doclist {
             height: 100%;
-
             > div {
                 height: 100%;
                 background: mat-color($primary);
@@ -36,7 +35,6 @@
             display: flex;
             flex-grow: 1;
             flex-shrink: 1;
-            min-width: 50%;
             height: 100%;
             width: 100%;
 
@@ -101,6 +99,10 @@
                         flex-grow: 1;
                         overflow-y: scroll;
                         overflow-x: hidden;
+
+                        .full-width adf-data-table ng-star-inserted{
+                            overflow-x: scroll;
+                        }
                     }
                 }
             }
@@ -109,9 +111,10 @@
 
     adf-info-drawer-layout,app-info-drawer {
         height: 100%;
-        min-width: 50%;
         display: flex;
         flex-direction: column;
+        flex-grow: 1;
+        overflow: auto;
 
         .createNote-button {
             background-color: mat-color($primary);
