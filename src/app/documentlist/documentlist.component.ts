@@ -57,6 +57,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
     const { data } = this.route.snapshot;
     if (!data.siteName) {
       this.currentFolderId = '-my-';
+      this.noteService.uploadFolder = this.currentFolderId;
     } else {
       const nodes: any = this.apiService.getInstance().nodes;
       nodes.getNodeInfo('-root-', {
@@ -66,6 +67,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
       })
       .then(node => {
           this.currentFolderId = node.id;
+          this.noteService.uploadFolder = this.currentFolderId;
           this.changeDetector.detectChanges();
       });
     }

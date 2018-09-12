@@ -63,18 +63,18 @@
                                 <adf-upload-button
                                     matTooltip="{{ 'FILE_UPLOAD.BUTTON.UPLOAD_FILE' | translate }}"
                                     [tooltip]="''"
-                                    [rootFolderId]="'-my-'"
+                                    [rootFolderId]="uploadFolder"
                                     [adf-node-permission]="'create'"
                                     [multipleFiles]="true"
                                     acceptedFilesType=".rtf,.txt,.xml,.html"
                                     [uploadFolders]="false"
-                                    (success)="onSuccess()">
+                                    (success)="success()">
                                 </adf-upload-button>
                             </div>
-                            <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_SITE' | translate }}" matTooltipPosition="after"> <!-- (click)="createSite()" -->
+              <!--               <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_SITE' | translate }}" matTooltipPosition="after" (click)="createSite()">
                                 <mat-icon>create_new_folder</mat-icon>
                                 <span>{{'SIDENAV.MENU.SITE' | translate}}</span>
-                            </button>
+                            </button> -->
                         </div>
                     </adf-sidebar-action-menu>
                 </div>

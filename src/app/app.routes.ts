@@ -40,9 +40,6 @@ export const appRoutes: Routes = [
       {
         path: 'documentlist',
         component: DocumentlistComponent,
-        data: {
-          siteId: '-my-'
-        },
         canActivate: [AuthGuardEcm],
       },
       {
