@@ -1,5 +1,4 @@
 import { Directive, ElementRef, HostListener, Renderer } from '@angular/core';
-import { NoteService } from './app-layout/app-layout.component';
 
 @Directive({
   selector: '[appResizer]'

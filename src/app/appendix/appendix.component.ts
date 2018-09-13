@@ -1,7 +1,7 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
 import { ContentNodeDialogService } from '@alfresco/adf-content-services';
-import { AlfrescoApiService, NotificationService } from '@alfresco/adf-core';
-import { NodeAssocMinimalEntry, MinimalNode, MinimalNodeEntryEntity } from 'alfresco-js-api';
+import { AlfrescoApiService, NotificationService, UploadService } from '@alfresco/adf-core';
+import { NodeAssocMinimalEntry, MinimalNodeEntryEntity } from 'alfresco-js-api';
 
 @Component({
   selector: 'app-appendix',
@@ -29,6 +29,7 @@ export class AppendixComponent implements OnChanges {
   appendixNodes: NodeAssocMinimalEntry;
 
   constructor(private alfrescoApi: AlfrescoApiService,
+              /* private uploadService: UploadService, */
               private dialogService: ContentNodeDialogService,
               private notificationService: NotificationService) { }
 
@@ -72,6 +73,11 @@ export class AppendixComponent implements OnChanges {
   }
 
   uploadAssociation(): void {
+/*     this.uploadService.fileUploadComplete.subscribe((result) => {
+      this.addAssociation(result.data.entry.id);
+      this.success.emit();
+    }); */
+
     this.alfrescoApi.getInstance().nodes.getNodeChildren(this.folderId)
     .then(result => {
       this.addAssociation(result.list.entries[result.list.entries.length - 1].entry.id);

@@ -12,7 +12,7 @@ export class NoteService {
 
   nodeId;
 
-  uploadFolder: string;
+  uploadFolderId: string;
 
   successUpload = false;
 
@@ -33,7 +33,7 @@ export class AppLayoutComponent implements AfterViewChecked {
 
   fullscreen = false;
 
-  uploadFolder = '-my-';
+  uploadFolderId = '-my-';
 
   production = environment.production;
 
@@ -55,8 +55,10 @@ export class AppLayoutComponent implements AfterViewChecked {
   } */
 
   ngAfterViewChecked() {
-    this.uploadFolder = this.noteService.uploadFolder;
     this.fullscreen = this.fullscreenService.fullscreen;
+    setTimeout(() => {
+      this.uploadFolderId = this.noteService.uploadFolderId;
+    });
   }
 
   success() {
