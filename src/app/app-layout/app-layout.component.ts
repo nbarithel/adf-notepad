@@ -1,4 +1,4 @@
-import { Component, Injectable, AfterViewChecked } from '@angular/core';
+import { Component, Injectable, DoCheck } from '@angular/core';
 import { FullscreenService } from '../services/fullscreen.service';
 import { environment } from 'environments/environment';
 /* import { Router } from '@angular/router';
@@ -26,7 +26,7 @@ export class NoteService {
   templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.scss']
 })
-export class AppLayoutComponent implements AfterViewChecked {
+export class AppLayoutComponent implements DoCheck {
 
   constructor(private noteService: NoteService,
               private fullscreenService: FullscreenService) {}
@@ -54,11 +54,9 @@ export class AppLayoutComponent implements AfterViewChecked {
     this.router.resetConfig(config);
   } */
 
-  ngAfterViewChecked() {
+  ngDoCheck() {
     this.fullscreen = this.fullscreenService.fullscreen;
-    setTimeout(() => {
-      this.uploadFolderId = this.noteService.uploadFolderId;
-    });
+    this.uploadFolderId = this.noteService.uploadFolderId;
   }
 
   success() {
