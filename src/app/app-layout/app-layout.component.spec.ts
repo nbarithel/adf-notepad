@@ -4,9 +4,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AlfrescoApiService, AlfrescoApiServiceMock, CoreModule } from '@alfresco/adf-core';
 import { ContentModule } from '@alfresco/adf-content-services';
-import { AppLayoutComponent } from './app-layout.component';
+import { AppLayoutComponent, NoteService } from './app-layout.component';
+import { ThemePickerModule } from '../theme-picker/theme-picker';
+import { FullscreenService } from '../services/fullscreen.service';
 
-describe('AppLayoutComponent', () => {
+fdescribe('AppLayoutComponent', () => {
   let component: AppLayoutComponent;
   let fixture: ComponentFixture<AppLayoutComponent>;
 
@@ -16,11 +18,14 @@ describe('AppLayoutComponent', () => {
         RouterTestingModule,
         CoreModule.forRoot(),
         ContentModule.forRoot(),
-        BrowserAnimationsModule
+        BrowserAnimationsModule,
+        ThemePickerModule
       ],
       declarations: [AppLayoutComponent],
       providers: [
-        { provide: AlfrescoApiService, useClass: AlfrescoApiServiceMock }
+        { provide: AlfrescoApiService, useClass: AlfrescoApiServiceMock },
+        NoteService,
+        FullscreenService
       ]
     })
       .compileComponents();

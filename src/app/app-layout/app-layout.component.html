@@ -55,7 +55,7 @@
                             <mat-icon>queue</mat-icon>
                         </div>
                         <div sidebar-menu-options>
-                            <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_NOTE' | translate }}" matTooltipPosition="after" (click)="createNotes()">
+                            <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_NOTE' | translate }}" matTooltipPosition="after" (click)="noteService.createNotes()">
                                 <mat-icon>create</mat-icon>
                                 <span>{{'SIDENAV.MENU.NOTE' | translate}}</span>
                             </button>
@@ -68,7 +68,7 @@
                                     [multipleFiles]="true"
                                     acceptedFilesType=".rtf,.txt,.xml,.html"
                                     [uploadFolders]="false"
-                                    (success)="success()">
+                                    (success)="noteService.success()">
                                 </adf-upload-button>
                             </div>
               <!--               <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_SITE' | translate }}" matTooltipPosition="after" (click)="createSite()">

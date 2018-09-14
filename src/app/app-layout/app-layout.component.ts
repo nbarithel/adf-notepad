@@ -16,9 +16,16 @@ export class NoteService {
 
   successUpload = false;
 
-  constructor() {
+  constructor() { }
+
+  createNotes() {
+    this.createNote = true;
+    this.nodeId = 0;
   }
 
+  success() {
+    this.successUpload = true;
+  }
 }
 
 @Component({
@@ -37,11 +44,6 @@ export class AppLayoutComponent implements DoCheck {
 
   production = environment.production;
 
-  createNotes() {
-    this.noteService.createNote = true;
-    this.noteService.nodeId = 0;
-  }
-
 /*   createSite() {
     // créer le site avec l'api siteAPi
     // ajouter le html correspondant et la route
@@ -57,10 +59,6 @@ export class AppLayoutComponent implements DoCheck {
   ngDoCheck() {
     this.fullscreen = this.fullscreenService.fullscreen;
     this.uploadFolderId = this.noteService.uploadFolderId;
-  }
-
-  success() {
-    this.noteService.successUpload = true;
   }
 
 }
