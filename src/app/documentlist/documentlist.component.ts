@@ -32,7 +32,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
 
   notesNumber: number;
 
-  fileFilter: RowFilter;
+  nodeFilter: RowFilter;
 
   constructor(private notificationService: NotificationService,
               private noteService: NoteService,
@@ -43,7 +43,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
               private changeDetector: ChangeDetectorRef,
               private translationService: TranslationService) {
 
-    this.fileFilter = (row: ShareDataRow) => {
+    this.nodeFilter = (row: ShareDataRow) => {
       const node = row.node.entry;
 
       if (node && !node.isFolder) {

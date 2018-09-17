@@ -2,7 +2,7 @@
 
     <div class="app-doc-list" id='leftEl'>
       <adf-upload-drag-area
-        acceptedFilesType=".rtf,.txt,.xml,.html"
+        acceptedFilesType=",text,.rtf,.txt,.xml,.html"
         (success)="success($event,'uploaded')">
 
         <adf-toolbar>
@@ -20,7 +20,7 @@
           #documentList
           [currentFolderId]="currentFolderId"
           [contentActions]="true"
-          [rowFilter]="fileFilter"
+          [rowFilter]="nodeFilter"
           [allowDropFiles]="true"
           (nodeClick)= "getNodeId($event)"
           (ready)="ready()">
