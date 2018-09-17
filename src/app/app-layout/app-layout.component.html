@@ -4,7 +4,7 @@
         <ng-template let-toggleMenu="toggleMenu">
             <adf-layout-header [redirectUrl]="'/documentlist'" [logo]="logo" [showSidenavToggle]="showMenu" [color]="'primary'">
 
-                <span fxFlex="1 1 auto" fxShow fxHide.lt-sm="true">ADF-Notepad</span>
+                <h1 fxFlex="1 1 auto" fxShow fxHide.lt-sm="true">ADF-Notepad</h1>
 
                 <button mat-icon-button matTooltip="{{'HEADER.BUTTON.MENU' | translate}}" (click)="toggleMenu()">
                         <mat-icon>menu</mat-icon>

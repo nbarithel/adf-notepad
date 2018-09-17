@@ -39,7 +39,7 @@ export class AppendixComponent implements OnChanges {
     this.loadAssociations();
    }
 
-  private loadAssociations() {
+  private loadAssociations(): void {
     this.isLoading = true;
     this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId).then((data) => {
       this.appendixNodes = data.list.entries;
@@ -48,7 +48,7 @@ export class AppendixComponent implements OnChanges {
     });
   }
 
-  private addAssociation(annexId: string) {
+  private addAssociation(annexId: string): void {
     this.alfrescoApi.getInstance().core.associationsApi
       .addAssoc(this.nodeId, { targetId: annexId, assocType: 'cm:attachments'} ).then(() => {
         this.loadAssociations();
@@ -74,9 +74,10 @@ export class AppendixComponent implements OnChanges {
 
   uploadAssociation(): void {
 /*     this.uploadService.fileUploadComplete.subscribe((result) => {
+      console.log(result.data.entry.id);
       this.addAssociation(result.data.entry.id);
       this.success.emit();
-    }); */
+  }); */
 
     this.alfrescoApi.getInstance().nodes.getNodeChildren(this.folderId)
     .then(result => {

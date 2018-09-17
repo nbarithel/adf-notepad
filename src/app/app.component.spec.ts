@@ -3,6 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 
 
 import { AppComponent } from './app.component';
+import { AuthenticationService } from '@alfresco/adf-core';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
@@ -13,6 +14,9 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+        { provide: AuthenticationService },
+      ]
     }).compileComponents();
   }));
 

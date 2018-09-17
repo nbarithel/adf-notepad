@@ -12,7 +12,7 @@ export class NoteService {
 
   nodeId;
 
-  uploadFolderId: string;
+  uploadFolderId = '-my-';
 
   successUpload = false;
 
@@ -38,9 +38,9 @@ export class AppLayoutComponent implements DoCheck {
   constructor(private noteService: NoteService,
               private fullscreenService: FullscreenService) {}
 
-  fullscreen = false;
+  fullscreen: boolean;
 
-  uploadFolderId = '-my-';
+  uploadFolderId: string;
 
   production = environment.production;
 

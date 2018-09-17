@@ -40,4 +40,23 @@ fdescribe('AppLayoutComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('init fullScreen should be false', () => {
+    expect(component.fullscreen).toBeFalsy();
+  });
+
+  it('init uploadFolderId should be my', () => {
+    expect(component.uploadFolderId).toBe('-my-');
+  });
+
+  it('production should be defined', () => {
+    expect(component.production).toBeDefined();
+  });
+
+  it('should be ADF-Notepad', () => {
+    const h1: HTMLElement = fixture.nativeElement.querySelector('h1');
+    expect(h1.textContent).toEqual('ADF-Notepad');
+  });
+
+
 });
