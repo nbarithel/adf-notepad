@@ -2,7 +2,7 @@
 
     <adf-sidenav-layout-header>
         <ng-template let-toggleMenu="toggleMenu">
-            <adf-layout-header [redirectUrl]="'/documentlist'" [logo]="logo" [showSidenavToggle]="showMenu" [color]="'primary'">
+            <adf-layout-header [redirectUrl]="'/documentlist'" [logo]="logo" [showSidenavToggle]="false" [color]="'primary'">
 
                 <h1 fxFlex="1 1 auto" fxShow fxHide.lt-sm="true">ADF-Notepad</h1>
 
@@ -66,7 +66,7 @@
                                     [rootFolderId]="uploadFolderId"
                                     [adf-node-permission]="'create'"
                                     [multipleFiles]="true"
-                                    acceptedFilesType=".rtf,.txt,.xml,.html"
+                                    acceptedFilesType=",text,.rtf,.txt,.xml,.html"
                                     [uploadFolders]="false"
                                     (success)="noteService.success()">
                                 </adf-upload-button>

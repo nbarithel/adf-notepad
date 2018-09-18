@@ -8,6 +8,16 @@ import { DocumentlistComponent } from './documentlist.component';
 import { PreviewService } from '../services/preview.service';
 import { AlfrescoApiServiceMock, AlfrescoApiService, CoreModule } from '@alfresco/adf-core';
 import { RouterTestingModule } from '@angular/router/testing';
+import { TextEditorComponent } from '../text-editor/text-editor.component';
+import { InfoDrawerComponent, InfoDrawerTabComponent } from '../info-drawer-tab/info-drawer-tab.component';
+import { NotepadSocialComponent } from '../notepad-social/notepad-social.component';
+import { AppendixComponent } from '../appendix/appendix.component';
+import { CommentsComponent } from '../comment/comments.component';
+import { TagComponent } from '../tag/tag.component';
+import { TdTextEditorComponent } from '@covalent/text-editor';
+import { MatChipsModule, MatBadgeModule, MatDialog } from '@angular/material';
+import { NoteService } from '../app-layout/app-layout.component';
+
 
 describe('DocumentlistComponent', () => {
   let component: DocumentlistComponent;
@@ -17,15 +27,28 @@ describe('DocumentlistComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
+        MatBadgeModule,
+        MatChipsModule,
         ContentModule,
         CoreModule ,
         BrowserAnimationsModule
       ],
-      declarations: [ DocumentlistComponent ],
+      declarations: [
+        DocumentlistComponent,
+        TextEditorComponent,
+        InfoDrawerComponent,
+        InfoDrawerTabComponent,
+        NotepadSocialComponent,
+        AppendixComponent,
+        CommentsComponent,
+        TagComponent,
+        TdTextEditorComponent
+      ],
       providers: [
         PreviewService,
         {provide: AlfrescoApiService, useClass: AlfrescoApiServiceMock},
-        { provide: Location, useClass: SpyLocation }
+        { provide: Location, useClass: SpyLocation },
+        NoteService
       ]
     })
     .compileComponents();
@@ -40,4 +63,9 @@ describe('DocumentlistComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it('Node filter should be defined' , () => {
+    expect(component.nodeFilter).toBeDefined();
+  });
+
 });

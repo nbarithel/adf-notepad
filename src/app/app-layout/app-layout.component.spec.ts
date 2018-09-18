@@ -41,6 +41,26 @@ fdescribe('AppLayoutComponent', () => {
     expect(component).toBeTruthy();
   });
 
+  it('should define adf-sidenav-layout', () => {
+    const sidenavLayout = fixture.nativeElement.querySelector('adf-sidenav-layout');
+    expect(sidenavLayout).toBeDefined();
+  });
+
+  it('should define adf-sidenav-layout-header', () => {
+    const sidenavHeader = fixture.nativeElement.querySelector('adf-sidenav-layout-header');
+    expect(sidenavHeader).toBeDefined();
+  });
+
+  it('should define adf-sidenav-layout-navigation', () => {
+    const sidenavNav = fixture.nativeElement.querySelector('adf-sidenav-layout-navigation');
+    expect(sidenavNav).toBeDefined();
+  });
+
+  it('should define adf-sidenav-layout-content', () => {
+    const sidenavContent = fixture.nativeElement.querySelector('adf-sidenav-layout-content');
+    expect(sidenavContent).toBeDefined();
+  });
+
   it('init fullScreen should be false', () => {
     expect(component.fullscreen).toBeFalsy();
   });
@@ -57,6 +77,5 @@ fdescribe('AppLayoutComponent', () => {
     const h1: HTMLElement = fixture.nativeElement.querySelector('h1');
     expect(h1.textContent).toEqual('ADF-Notepad');
   });
-
 
 });
