@@ -40,33 +40,33 @@
                   <data-column
                       class="adf-data-table-cell--ellipsis__name"
                       key="name"
-                      title="TRASHCAN.COLUMNS.NAME">
+                      title="ADF-DOCUMENT-LIST.LAYOUT.NAME">
                       <ng-template let-value="value" let-context>
                           <span class="adf-datatable-cell" title="{{ context?.row?.obj | adfNodeNameTooltip }}">{{ value }}</span>
                       </ng-template>
                   </data-column>
 
                   <data-column
-                      *ngIf="!isSmallScreen"
-                      key="content.sizeInBytes"
-                      title="TRASHCAN.COLUMNS.NAME"
-                      type="fileSize">
-                  </data-column>
+                    *ngIf="!isSmallScreen"
+                    key="content.sizeInBytes"
+                    title="ADF-DOCUMENT-LIST.LAYOUT.SIZE"
+                    type="fileSize">
+                 </data-column>
 
                   <data-column
                       *ngIf="!isSmallScreen"
                       key="archivedAt"
-                      title="TRASHCAN.COLUMNS.NAME">
+                      title="ADF-DOCUMENT-LIST.LAYOUT.DELETED_ON">
                       <ng-template let-value="value">
                           <span title="{{ value | date:'medium' }}">{{ value | adfTimeAgo }}</span>
                       </ng-template>
                   </data-column>
 
                   <data-column
-                      *ngIf="!isSmallScreen && (user$ | async)?.isAdmin"
+                      *ngIf="!isSmallScreen"
                       class="adf-data-table-cell--ellipsis"
                       key="archivedByUser.displayName"
-                      title="APP.DOCUMENT_LIST.COLUMNS.DELETED_BY">
+                      title="ADF-DOCUMENT-LIST.LAYOUT.DELETED_BY">
                   </data-column>
 
               </data-columns>

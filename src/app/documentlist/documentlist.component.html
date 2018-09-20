@@ -27,20 +27,25 @@
 
           <data-columns>
               <data-column key="icon" type="image" [sortable]="false"></data-column>
+
               <data-column
-                title="{{ 'METADATA.BASIC.NAME'| translate }}"
+                title="ADF-DOCUMENT-LIST.LAYOUT.NAME"
                 key="name">
                 <ng-template let-entry="$implicit">
                     <span>{{ entry.row.getValue('name') }}</span>
                     <adf-tag-node-list  [nodeId]="entry.row.getValue('id')"></adf-tag-node-list>
                 </ng-template>
               </data-column>
-              <data-column key="createdAt" title="{{'METADATA.BASIC.CREATED_DATE' | translate }}" >
-                  <ng-template let-value="value">
-                      <span title="{{ value | date:'medium' }}">{{ value | adfTimeAgo }}</span>
-                  </ng-template>
+
+              <data-column key="content.sizeInBytes" type="fileSize" title="ADF-DOCUMENT-LIST.LAYOUT.SIZE"></data-column>
+
+              <data-column key="modifiedAt" type="date" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON" >
+                <ng-template let-value="value">
+                    <span title="{{ value | date:'medium' }}">{{ value | adfTimeAgo }}</span>
+                </ng-template>
               </data-column>
-              <data-column key="createdByUser.displayName" title="{{'METADATA.BASIC.CREATOR'| translate }}"></data-column>
+
+              <data-column key="modifiedByUser.displayName" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_BY"></data-column>
 
           </data-columns>
 
@@ -48,20 +53,20 @@
 
             <content-action
               icon="get_app"
-              title="{{'DOCUMENT.CONTENT_ACTION.DOWNLOAD'}}"
+              title="DOCUMENT.CONTENT_ACTION.DOWNLOAD"
               handler="download">
             </content-action>
 
             <content-action
               icon="gesture"
-              title="{{'DOCUMENT.CONTENT_ACTION.RENAME'}}"
+              title="DOCUMENT.CONTENT_ACTION.RENAME"
               permission="update"
               (execute)="rename($event)">
             </content-action>
 
             <content-action
               icon="content_copy"
-              title="{{'NODE_SELECTOR.COPY'}}"
+              title="NODE_SELECTOR.COPY"
               permission="update"
               handler="copy"
               (execute)="success($event,'Copied')">
@@ -69,7 +74,7 @@
 
             <content-action
               icon="subdirectory_arrow_left"
-              title="{{'NODE_SELECTOR.MOVE'}}"
+              title="NODE_SELECTOR.MOVE"
               permission="update"
               handler="move"
               (execute)="success($event,'Moved')">
@@ -77,7 +82,7 @@
 
             <content-action
               icon="delete"
-              title="{{'ADF_VERSION_LIST.ACTIONS.DELETE'}}"
+              title="ADF_VERSION_LIST.ACTIONS.DELETE"
               permission="update"
               (execute)="success($event,'Deleted')">
             </content-action>

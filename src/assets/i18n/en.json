@@ -80,12 +80,6 @@
             "TITLE": "Trash is empty",
             "FIRST_TEXT": "Items you delete are moved to the Trash.",
             "SECOND_TEXT": "Empty Trash to permanently delete items."
-          },
-          "COLUMNS": {
-              "NAME": "Name",
-              "SIZE": "Size",
-              "ARCHIVED_AT": "Archived at",
-              "DELETED_BY": "Deleted by"
           }
       }
   }
