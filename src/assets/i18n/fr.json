@@ -74,5 +74,19 @@
             "NEW_APPENDIX": "Nouvelle annexe créée",
             "ERROR_APPENDIX": "Vous ne pouvez pas mettre la source en annexe"
         }
+    },
+    "TRASHCAN": {
+        "TITLE": "CORBEILLE",
+        "EMPTY_STATE": {
+            "TITLE": "La corbeille est vide",
+            "FIRST_TEXT": "Les éléments supprimés sont placés dans la corbeille.",
+            "SECOND_TEXT": "Videz la corbeille pour supprimer définitivement les éléments."
+        },
+        "COLUMNS": {
+            "NAME": "Nom",
+            "SIZE": "Taille",
+            "ARCHIVED_AT": "Supprimé le",
+            "DELETED_BY": "Supprimé par"
+        }
     }
 }

@@ -22,6 +22,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DocumentlistComponent } from './documentlist/documentlist.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
+import { TrashcanComponent } from './trashcan/trashcan.component';
 
 export const appRoutes: Routes = [
   {
@@ -38,11 +39,6 @@ export const appRoutes: Routes = [
         component: HomeComponent
       },
       {
-        path: 'documentlist',
-        component: DocumentlistComponent,
-        canActivate: [AuthGuardEcm],
-      },
-      {
         path: 'yaouen',
         component: DocumentlistComponent,
         data: {
@@ -56,6 +52,15 @@ export const appRoutes: Routes = [
         data: {
           siteName: 'nicolas'
         },
+        canActivate: [AuthGuardEcm],
+      },
+      { path: 'trashcan',
+      component: TrashcanComponent,
+      canActivate: [AuthGuardEcm],
+      },
+      {
+        path: 'documentlist',
+        component: DocumentlistComponent,
         canActivate: [AuthGuardEcm],
       }
     ]

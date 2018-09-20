@@ -31,6 +31,7 @@ import { TagComponent } from './tag/tag.component';
 import { InfoDrawerTabComponent, InfoDrawerComponent } from './info-drawer-tab/info-drawer-tab.component';
 import { AppendixComponent } from './appendix/appendix.component';
 import { ResizerDirective } from './resizer.directive';
+import { TrashcanComponent } from './trashcan/trashcan.component';
 
 
 
@@ -68,6 +69,7 @@ import { ResizerDirective } from './resizer.directive';
     InfoDrawerComponent,
     AppendixComponent,
     ResizerDirective,
+    TrashcanComponent,
   ],
   providers: [
     {

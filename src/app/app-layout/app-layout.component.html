@@ -91,6 +91,10 @@
                     <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Nicolas</div>
                 </a>
+                <a mat-list-item class="adf-sidenav-link" routerLink="/trashcan">
+                    <mat-icon matListIcon class="sidenav-menu-icon">delete</mat-icon>
+                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Trashcan</div>
+                </a>
 
             </mat-nav-list>
         </ng-template>
