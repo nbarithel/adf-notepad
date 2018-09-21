@@ -14,8 +14,26 @@
            #documentList
             currentFolderId="-trashcan-"
             selectionMode="multiple"
+            [contentActions]="true"
             [navigate]="false"
             [sorting]="[ 'archivedAt', 'desc' ]">
+
+            <content-actions>
+
+                <content-action
+                    icon="replay"
+                    title="ADF_VERSION_LIST.ACTIONS.RESTORE"
+                    (execute)="restore($event)">
+                </content-action>
+
+                <content-action
+                    icon="delete"
+                    title="ADF_VERSION_LIST.ACTIONS.DELETE"
+                    permission="update"
+                    (execute)="delete($event)">
+                </content-action>
+
+            </content-actions>
 
               <empty-folder-content>
                   <ng-template>

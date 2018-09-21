@@ -49,10 +49,14 @@
         "NOTENAME": "Nom de la note",
         "ERROR": "Ce champ est obligatoire",
         "FILE_DELETED": "Note supprimée",
+        "FILE_PERM_DELETED": "Note supprimée définitivement",
+        "RESTORE_MESSAGE": "Restaurer cette note ?",
+        "FILE_RESTORED": "Note restaurée",
         "RENAMED_FILE": "Note renommée",
         "MODIFICATION": "Voulez vous sauvegarder les modifications ?",
         "COPIED": "Note copiée",
         "MOVED": "Note déplacée"
+
 
     },
     "TEXT_EDITOR": {
