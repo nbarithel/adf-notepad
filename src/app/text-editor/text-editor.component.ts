@@ -7,6 +7,8 @@ import { UploadFilesEvent } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { TdTextEditorComponent } from '@covalent/text-editor';
 import { FullscreenService } from '../services/fullscreen.service';
+/* import { EditorModule } from '@tinymce/tinymce-angular'; */
+
 
 @Component({
   selector: 'app-text-editor',

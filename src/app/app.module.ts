@@ -9,6 +9,7 @@ import { NoteService } from './app-layout/app-layout.component';
 import { FullscreenService } from './services/fullscreen.service';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatChipsModule } from '@angular/material/chips';
+/* import { EditorModule } from '@tinymce/tinymce-angular'; */
 
 
 // ADF modules
@@ -42,6 +43,7 @@ import { TrashcanComponent } from './trashcan/trashcan.component';
     CovalentTextEditorModule,
     ThemePickerModule,
     MatTabsModule,
+    /* EditorModule, */
     MatChipsModule,
     MatBadgeModule,
     SearchModule,

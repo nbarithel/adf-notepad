@@ -5,7 +5,9 @@
     </mat-form-field>
 </ng-container>
 
-<td-text-editor [(ngModel)]="value" [options]="options" #textEditor required></td-text-editor>
+<td-text-editor [(ngModel)]="value" [options]="options" #textEditor></td-text-editor>
+
+<!-- <editor  [(ngModel)]="value" apiKey="4xjwenuoyam450cjqofalldtc9nfiayqa5690nd0w2xxsmc8" [init]="{plugins: 'fullscreen'}"></editor> -->
 
 <button class="savingButton"  mat-raised-button  [disabled]="!value || !newFileName" (click)="majorVersion = true; openSaveConfirmationDialog(this.trans.instant('TEXT_EDITOR.CREATE'))" *ngIf="!nodeId;else versionning">
     <mat-icon>save</mat-icon>
