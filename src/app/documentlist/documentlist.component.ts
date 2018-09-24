@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
 import { RenameComponent } from '../rename/rename.component';
 import { ActivatedRoute } from '@angular/router';
+import { AppendixComponent } from '../appendix/appendix.component';
 
 @Component({
   selector: 'app-documentlist',
@@ -23,6 +24,9 @@ export class DocumentlistComponent implements DoCheck , OnInit {
 
   @ViewChild('documentList')
   documentList: DocumentListComponent;
+
+  @ViewChild('appendix')
+  appendix: AppendixComponent;
 
   createNote: boolean;
 
@@ -116,6 +120,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
         if (result) {
           const id = event.value.entry.id;
           this.nodesApiService.deleteNode(id).subscribe(() => {
+            this.appendix.loadAssociations();
             this.documentList.reload();
           if (id === this.nodeId ) {
             this.nodeId = null;

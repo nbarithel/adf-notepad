@@ -39,7 +39,7 @@ export class AppendixComponent implements OnChanges {
     this.loadAssociations();
    }
 
-  private loadAssociations(): void {
+  loadAssociations(): void {
     this.isLoading = true;
     this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId).then((data) => {
       this.appendixNodes = data.list.entries;
