@@ -29,7 +29,7 @@ export class AppendixComponent implements OnChanges {
   appendixNodes: NodeAssocMinimalEntry;
 
   constructor(private alfrescoApi: AlfrescoApiService,
-              /* private uploadService: UploadService, */
+              private uploadService: UploadService,
               private dialogService: ContentNodeDialogService,
               private notificationService: NotificationService) { }
 
@@ -58,7 +58,8 @@ export class AppendixComponent implements OnChanges {
 
   deleteAssociation(appendixId: string): void {
     this.alfrescoApi.getInstance().core.associationsApi.removeAssoc(this.nodeId, appendixId)
-    .then(() => { this.loadAssociations();
+    .then(() => {
+      this.loadAssociations();
     });
   }
 
@@ -73,15 +74,8 @@ export class AppendixComponent implements OnChanges {
   }
 
   uploadAssociation(): void {
-/*     this.uploadService.fileUploadComplete.subscribe((result) => {
-      console.log(result.data.entry.id);
+    this.uploadService.fileUploadComplete.subscribe((result) => {
       this.addAssociation(result.data.entry.id);
-      this.success.emit();
-  }); */
-
-    this.alfrescoApi.getInstance().nodes.getNodeChildren(this.folderId)
-    .then(result => {
-      this.addAssociation(result.list.entries[result.list.entries.length - 1].entry.id);
       this.success.emit();
     });
   }
