@@ -120,7 +120,9 @@ export class DocumentlistComponent implements DoCheck , OnInit {
         if (result) {
           const id = event.value.entry.id;
           this.nodesApiService.deleteNode(id).subscribe(() => {
-            this.appendix.loadAssociations();
+            if (this.appendix !== undefined ) {
+              this.appendix.loadAssociations();
+            }
             this.documentList.reload();
           if (id === this.nodeId ) {
             this.nodeId = null;
