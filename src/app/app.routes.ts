@@ -23,6 +23,7 @@ import { LoginComponent } from './login/login.component';
 import { DocumentlistComponent } from './documentlist/documentlist.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
 import { TrashcanComponent } from './trashcan/trashcan.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 export const appRoutes: Routes = [
   {
@@ -31,20 +32,12 @@ export const appRoutes: Routes = [
     canActivate: [AuthGuardEcm],
     children: [
       {
-        path: '',
-        component: HomeComponent
-      },
-      {
-        path: 'home',
-        component: HomeComponent
-      },
-      {
         path: 'yaouen',
         component: DocumentlistComponent,
         data: {
           siteName: 'yaouen'
         },
-        canActivate: [AuthGuardEcm],
+        canActivate: [AuthGuardEcm]
       },
       {
         path: 'nicolas',
@@ -52,17 +45,22 @@ export const appRoutes: Routes = [
         data: {
           siteName: 'nicolas'
         },
-        canActivate: [AuthGuardEcm],
+        canActivate: [AuthGuardEcm]
       },
-      { path: 'trashcan',
-      component: TrashcanComponent,
-      canActivate: [AuthGuardEcm],
+      {
+        path: 'trashcan',
+        component: TrashcanComponent,
+        canActivate: [AuthGuardEcm]
       },
       {
         path: 'documentlist',
         component: DocumentlistComponent,
-        canActivate: [AuthGuardEcm],
-      }
+        canActivate: [AuthGuardEcm]
+      },
+      {
+        path: 'search/:event',
+        component: SearchPageComponent
+      },
     ]
   },
   {

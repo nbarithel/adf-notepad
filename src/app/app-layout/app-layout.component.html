@@ -12,6 +12,8 @@
 
                 <div class="adf-toolbar--spacer"></div>
 
+                <adf-search-control [highlight]="true" (searchChange)="getSearchTerm($event)"></adf-search-control>
+
                 <div class="adf-header-delimiter"></div>
 
                 <adf-userinfo

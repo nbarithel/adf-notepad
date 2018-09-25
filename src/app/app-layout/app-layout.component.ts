@@ -1,8 +1,7 @@
 import { Component, Injectable, DoCheck } from '@angular/core';
 import { FullscreenService } from '../services/fullscreen.service';
 import { environment } from 'environments/environment';
-/* import { Router } from '@angular/router';
-import { DocumentlistComponent } from '../documentlist/documentlist.component'; */
+import { Router } from '@angular/router';
 
 
 @Injectable()
@@ -36,6 +35,7 @@ export class NoteService {
 export class AppLayoutComponent implements DoCheck {
 
   constructor(private noteService: NoteService,
+              private router: Router,
               private fullscreenService: FullscreenService) {}
 
   fullscreen: boolean;
@@ -43,6 +43,10 @@ export class AppLayoutComponent implements DoCheck {
   uploadFolderId: string;
 
   production = environment.production;
+
+  getSearchTerm(event: any) {
+    this.router.navigate(['/search', event]);
+  }
 
 /*   createSite() {
     // créer le site avec l'api siteAPi

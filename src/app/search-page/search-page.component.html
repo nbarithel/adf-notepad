@@ -1,0 +1,44 @@
+<div class="inner-layout">
+
+  <adf-toolbar>
+      <adf-toolbar-title>
+        <adf-breadcrumb root="Résultat de la recherche">
+        </adf-breadcrumb>
+      </adf-toolbar-title>
+  </adf-toolbar>
+
+    <adf-search
+        [searchTerm]="searchTerm"
+        (resultLoaded)="getSearchResult($event)">
+    </adf-search>
+
+
+  <div class="inner-layout__content">
+      <div class="inner-layout__panel">
+            <adf-document-list
+                #documentList
+                [showHeader]="false"
+                [sortingMode]="'server'"
+                [sorting]="sorting"
+                [node]="searchPaging"
+                [navigate]="false">
+
+                <empty-folder-content>
+                    <ng-template>
+                        <ng-container *ngIf="data">
+                            <div class="empty-search__block">
+                                <p class="empty-search__text">
+                                    {{ 'APP.BROWSE.SEARCH.NO_RESULTS' | translate }}
+                                </p>
+                            </div>
+                        </ng-container>
+                    </ng-template>
+                </empty-folder-content>
+
+            </adf-document-list>
+
+        <adf-pagination [target]="documentList">
+        </adf-pagination>
+      </div>
+  </div>
+</div>

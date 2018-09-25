@@ -33,6 +33,7 @@ import { InfoDrawerTabComponent, InfoDrawerComponent } from './info-drawer-tab/i
 import { AppendixComponent } from './appendix/appendix.component';
 import { ResizerDirective } from './resizer.directive';
 import { TrashcanComponent } from './trashcan/trashcan.component';
+import { SearchPageComponent } from './search-page/search-page.component';
 
 
 
@@ -72,6 +73,7 @@ import { TrashcanComponent } from './trashcan/trashcan.component';
     AppendixComponent,
     ResizerDirective,
     TrashcanComponent,
+    SearchPageComponent
   ],
   providers: [
     {
