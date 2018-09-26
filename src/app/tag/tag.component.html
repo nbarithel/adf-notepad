@@ -11,8 +11,8 @@
                     <input matInput placeholder="{{'TAG.LABEL.NEWTAG' | translate }}"
                         type="text"
                         (keyup.enter)="addTag()"
-                        [(ngModel)]="newTagName"
-                        id="new-tag-text"/>
+                        [(ngModel)]="tagName"
+                        (ngModelChange)="clearError()"/>
                     <mat-hint *ngIf="errorMsg" [ngStyle]="{'color': 'red'}" align="start">{{errorMsg}}</mat-hint>
                 </mat-form-field>
             </td>
