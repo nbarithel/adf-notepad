@@ -1,7 +1,7 @@
 import { Component, DoCheck } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { NodePaging } from '@alfresco/adf-content-services';
+import { NodePaging, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 
 @Component({
   selector: 'app-search-page',
@@ -11,21 +11,34 @@ import { NodePaging } from '@alfresco/adf-content-services';
 export class SearchPageComponent implements DoCheck {
 
   constructor(private activatedRoute: ActivatedRoute,
-              private route: Router) { }
+              private route: Router) {
+
+    this.nodeFilter = (row: ShareDataRow) => {
+      const node = row.node.entry;
+
+      if (node && !node.isFolder) {
+          return true;
+      }
+      return false;
+    };
+  }
+
+  nodeFilter: RowFilter;
 
   searchTerm: string;
 
   searchPaging: NodePaging;
 
   ngDoCheck() {
-      this.searchTerm = this.activatedRoute.snapshot.paramMap.get('event');
-    if (!this.searchTerm) {
-      this.route.navigate(['/documentlist']);
-    }
+    this.searchTerm = this.activatedRoute.snapshot.paramMap.get('searchTerm');
   }
 
-  getSearchResult(event: NodePaging) {
+  getSearchResult(event: NodePaging): void {
     this.searchPaging = event;
+  }
+
+  goToFolder(event: any): void {
+    const entry = event.value.entry;
   }
 
 }

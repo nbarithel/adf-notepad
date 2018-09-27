@@ -1,4 +1,5 @@
-import { Component, Injectable, DoCheck } from '@angular/core';
+import { Component, Injectable, DoCheck, ViewChild } from '@angular/core';
+import { SearchControlComponent } from '@alfresco/adf-content-services';
 import { FullscreenService } from '../services/fullscreen.service';
 import { environment } from 'environments/environment';
 import { Router } from '@angular/router';
@@ -38,14 +39,40 @@ export class AppLayoutComponent implements DoCheck {
               private router: Router,
               private fullscreenService: FullscreenService) {}
 
+
+  @ViewChild('searchBar')
+  searchBar: SearchControlComponent;
+
   fullscreen: boolean;
 
   uploadFolderId: string;
 
+  searchedWord: string;
+
   production = environment.production;
 
-  getSearchTerm(event: any) {
-    this.router.navigate(['/search', event]);
+  ngDoCheck() {
+    this.fullscreen = this.fullscreenService.fullscreen;
+    this.uploadFolderId = this.noteService.uploadFolderId;
+    if (this.searchBar) {
+      this.manageSearchBar();
+    }
+  }
+
+  loadSearchPage(searchInput: any) {
+    this.router.navigate(['/search', searchInput.target.value]);
+    this.searchedWord = searchInput.target.value;
+  }
+
+  private manageSearchBar() {
+    if ((this.router.url === '/search/' + this.searchedWord) && this.searchBar.subscriptAnimationState === 'inactive') {
+      this.searchBar.subscriptAnimationState = 'active';
+      this.searchBar.searchTerm = this.searchedWord;
+    } else if (this.searchedWord && !(this.router.url === '/search/' + this.searchedWord) && this.searchBar.searchTerm !== '') {
+      this.searchBar.subscriptAnimationState = 'inactive';
+      this.searchedWord = '';
+      this.searchBar.searchTerm = this.searchedWord;
+    }
   }
 
 /*   createSite() {
@@ -59,10 +86,5 @@ export class AppLayoutComponent implements DoCheck {
       }});
     this.router.resetConfig(config);
   } */
-
-  ngDoCheck() {
-    this.fullscreen = this.fullscreenService.fullscreen;
-    this.uploadFolderId = this.noteService.uploadFolderId;
-  }
 
 }

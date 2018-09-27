@@ -17,11 +17,27 @@
       <div class="inner-layout__panel">
             <adf-document-list
                 #documentList
-                [showHeader]="false"
-                [sortingMode]="'server'"
-                [sorting]="sorting"
+                [rowFilter]="nodeFilter"
                 [node]="searchPaging"
-                [navigate]="false">
+                (nodeDblClick)= "goToFolder($event)">
+
+                <!-- <data-columns>
+                    <data-column key="icon" type="image" [sortable]="false"></data-column>
+
+                    <data-column key="name" title="ADF-DOCUMENT-LIST.LAYOUT.NAME"></data-column>
+
+                    <data-column key="path" type="location" title="ADF-DOCUMENT-LIST.LAYOUT.LOCATION" sorting="false"></data-column>
+
+                    <data-column key="content.sizeInBytes" type="fileSize" title="ADF-DOCUMENT-LIST.LAYOUT.SIZE"></data-column>
+
+                    <data-column key="modifiedAt" type="date" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON" >
+                        <ng-template let-value="value">
+                            <span title="{{ value | date:'medium' }}">{{ value | adfTimeAgo }}</span>
+                        </ng-template>
+                    </data-column>
+
+                    <data-column key="modifiedByUser.displayName" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_BY"></data-column>
+                </data-columns> -->
 
                 <empty-folder-content>
                     <ng-template>

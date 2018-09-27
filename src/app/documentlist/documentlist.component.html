@@ -28,7 +28,8 @@
 
               <data-column
                 title="ADF-DOCUMENT-LIST.LAYOUT.NAME"
-                key="name">
+                key="name"
+                class="adf-data-table-cell--ellipsis__name">
                 <ng-template let-entry="$implicit">
                     <span>{{ entry.row.getValue('name') }}</span>
                     <adf-tag-node-list  [nodeId]="entry.row.getValue('id')"></adf-tag-node-list>
@@ -37,10 +38,7 @@
 
               <data-column key="content.sizeInBytes" type="fileSize" title="ADF-DOCUMENT-LIST.LAYOUT.SIZE"></data-column>
 
-              <data-column key="modifiedAt" type="date" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON" >
-                <ng-template let-value="value">
-                    <span title="{{ value | date:'medium' }}">{{ value | adfTimeAgo }}</span>
-                </ng-template>
+              <data-column key="modifiedAt" type="date" format="short" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON" >
               </data-column>
 
               <data-column key="modifiedByUser.displayName" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_BY"></data-column>
