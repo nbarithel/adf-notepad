@@ -60,7 +60,10 @@ export class DocumentlistComponent implements DoCheck , OnInit {
   ngOnInit() {
     const { data } = this.route.snapshot;
     if (!data.siteName) {
-      this.currentFolderId = '-my-';
+      this.currentFolderId = this.route.snapshot.paramMap.get('siteId');
+      if (!this.currentFolderId) {
+        this.currentFolderId = '-my-';
+      }
       this.noteService.uploadFolderId = this.currentFolderId;
     } else {
       const nodes: any = this.apiService.getInstance().nodes;

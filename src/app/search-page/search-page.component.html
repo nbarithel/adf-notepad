@@ -21,23 +21,27 @@
                 [node]="searchPaging"
                 (nodeDblClick)= "goToFolder($event)">
 
-                <!-- <data-columns>
+                <data-columns>
                     <data-column key="icon" type="image" [sortable]="false"></data-column>
 
-                    <data-column key="name" title="ADF-DOCUMENT-LIST.LAYOUT.NAME"></data-column>
+                    <data-column
+                        title="ADF-DOCUMENT-LIST.LAYOUT.NAME"
+                        key="name"
+                        class="adf-data-table-cell--ellipsis__name">
+                        <ng-template let-entry="$implicit">
+                            <span>{{ entry.row.getValue('name') }}</span>
+                        </ng-template>
+                  </data-column>
 
                     <data-column key="path" type="location" title="ADF-DOCUMENT-LIST.LAYOUT.LOCATION" sorting="false"></data-column>
 
                     <data-column key="content.sizeInBytes" type="fileSize" title="ADF-DOCUMENT-LIST.LAYOUT.SIZE"></data-column>
 
-                    <data-column key="modifiedAt" type="date" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON" >
-                        <ng-template let-value="value">
-                            <span title="{{ value | date:'medium' }}">{{ value | adfTimeAgo }}</span>
-                        </ng-template>
+                    <data-column key="modifiedAt" type="date" format="short" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON" >
                     </data-column>
 
                     <data-column key="modifiedByUser.displayName" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_BY"></data-column>
-                </data-columns> -->
+                </data-columns>
 
                 <empty-folder-content>
                     <ng-template>

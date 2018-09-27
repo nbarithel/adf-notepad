@@ -38,7 +38,7 @@ export class SearchPageComponent implements DoCheck {
   }
 
   goToFolder(event: any): void {
-    const entry = event.value.entry;
+    this.route.navigate(['/documentlist', event.value.entry.parentId]);
   }
 
 }
