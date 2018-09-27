@@ -78,7 +78,7 @@
         }
     },
     "TRASHCAN": {
-        "TITLE": "TRASHCAN",
+        "TITLE": "Trashcan",
         "EMPTY_STATE": {
             "TITLE": "Trash is empty",
             "FIRST_TEXT": "Items you delete are moved to the Trash.",

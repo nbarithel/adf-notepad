@@ -80,7 +80,7 @@
         }
     },
     "TRASHCAN": {
-        "TITLE": "CORBEILLE",
+        "TITLE": "Corbeille",
         "EMPTY_STATE": {
             "TITLE": "La corbeille est vide",
             "FIRST_TEXT": "Les éléments supprimés sont placés dans la corbeille.",
