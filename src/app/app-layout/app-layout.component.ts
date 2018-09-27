@@ -60,15 +60,19 @@ export class AppLayoutComponent implements DoCheck {
   }
 
   loadSearchPage(searchInput: any) {
-    this.router.navigate(['/search', searchInput.target.value]);
-    this.searchedWord = searchInput.target.value;
+    if (searchInput.target.value) {
+      this.router.navigate(['/search', searchInput.target.value]);
+      this.searchedWord = searchInput.target.value;
+    }
   }
 
   private manageSearchBar() {
-    if ((this.router.url === '/search/' + this.searchedWord) && this.searchBar.subscriptAnimationState === 'inactive') {
+    if (((this.router.url === '/search/' + this.searchedWord) || (this.router.url === '/search/'))
+     && (this.searchBar.subscriptAnimationState === 'inactive')) {
       this.searchBar.subscriptAnimationState = 'active';
       this.searchBar.searchTerm = this.searchedWord;
-    } else if (this.searchedWord && !(this.router.url === '/search/' + this.searchedWord) && this.searchBar.searchTerm !== '') {
+    } else if (this.searchedWord && !((this.router.url === '/search/' + this.searchedWord)
+      || (this.router.url === '/search/'))) {
       this.searchBar.subscriptAnimationState = 'inactive';
       this.searchedWord = '';
       this.searchBar.searchTerm = this.searchedWord;
