@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { AuthenticationService } from '@alfresco/adf-core';
 import { Router } from '@angular/router';
 
-fdescribe('AppComponent', () => {
+describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   const routerSpy = jasmine.createSpyObj('Router', ['navigate']);

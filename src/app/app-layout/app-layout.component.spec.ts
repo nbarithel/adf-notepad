@@ -90,10 +90,11 @@ describe('AppLayoutComponent', () => {
   it('can get RouterLinks from template', () => {
     const linkDes = fixture.debugElement.queryAll(By.directive(RouterLinkDirectiveStub));
     const routerLinks = linkDes.map(de => de.injector.get(RouterLinkDirectiveStub));
-    expect(routerLinks.length).toBe(3, 'should have 3 routerLinks');
+    expect(routerLinks.length).toBe(4, 'should have 4 routerLinks');
     expect(routerLinks[0].linkParams).toBe('/documentlist');
     expect(routerLinks[1].linkParams).toBe('/yaouen');
     expect(routerLinks[2].linkParams).toBe('/nicolas');
+    expect(routerLinks[3].linkParams).toBe('/trashcan');
   });
 
   it('can click sites', () => {
@@ -114,6 +115,11 @@ describe('AppLayoutComponent', () => {
     linkDes[2].triggerEventHandler('click', ButtonClickEvents.left);
     fixture.detectChanges();
     expect(routerLinks[2].navigatedTo).toBe('/nicolas');
+
+    expect(routerLinks[3].navigatedTo).toBeNull('should not have navigated yet');
+    linkDes[3].triggerEventHandler('click', ButtonClickEvents.left);
+    fixture.detectChanges();
+    expect(routerLinks[3].navigatedTo).toBe('/trashcan');
 
   });
 
