@@ -1,40 +1,46 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component, AfterViewChecked, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { NodePaging, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
+import { RowFilter, ShareDataRow, DocumentListComponent } from '@alfresco/adf-content-services';
+import { SearchService } from '@alfresco/adf-core';
 
 @Component({
   selector: 'app-search-page',
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent implements DoCheck {
+export class SearchPageComponent implements AfterViewChecked {
 
   constructor(private activatedRoute: ActivatedRoute,
-              private route: Router) {
+              private route: Router,
+              private searchService: SearchService) {
 
     this.nodeFilter = (row: ShareDataRow) => {
       const node = row.node.entry;
 
-      if (node && !node.isFolder) {
+      if (node && !node.isFolder && node.content) {
           return true;
       }
       return false;
     };
   }
 
+  @ViewChild('documentlist')
+  documentlist: DocumentListComponent;
+
   nodeFilter: RowFilter;
 
   searchTerm: string;
 
-  searchPaging: NodePaging;
+  searchPaging: any;
 
-  ngDoCheck() {
-    this.searchTerm = this.activatedRoute.snapshot.paramMap.get('searchTerm');
-  }
-
-  getSearchResult(event: NodePaging): void {
-    this.searchPaging = event;
+  ngAfterViewChecked() {
+    if (this.activatedRoute.snapshot.paramMap.get('searchTerm') !== this.searchTerm ) {
+      this.searchTerm = this.activatedRoute.snapshot.paramMap.get('searchTerm');
+      this.searchService.search(this.searchTerm, 50, 0).subscribe((result) => {
+      this.searchPaging = result;
+    });
+    }
   }
 
   goToFolder(event: any): void {
