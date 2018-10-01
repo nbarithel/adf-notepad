@@ -47,6 +47,8 @@ export class AppLayoutComponent implements DoCheck {
 
   uploadFolderId: string;
 
+  searchPageOpened = false;
+
   searchedWord: string;
 
   production = environment.production;
@@ -64,9 +66,18 @@ export class AppLayoutComponent implements DoCheck {
   }
 
   loadSearchPage(searchInput: any) {
+    if (searchInput && this.searchPageOpened) {
+      this.router.navigate(['/search', searchInput]);
+      this.searchedWord = searchInput;
+    }
+  }
+
+  searchPageOpen(searchInput: any) {
     if (searchInput.target.value) {
       this.router.navigate(['/search', searchInput.target.value]);
       this.searchedWord = searchInput.target.value;
+      this.searchPageOpened = true;
+      this.searchBar.liveSearchMaxResults = 0;
     }
   }
 
@@ -78,6 +89,8 @@ export class AppLayoutComponent implements DoCheck {
     } else if (this.searchedWord && !((this.router.url === '/search/' + this.searchedWord)
       || (this.router.url === '/search/'))) {
       this.searchBar.subscriptAnimationState = 'inactive';
+      this.searchPageOpened = false;
+      this.searchBar.liveSearchMaxResults = 10;
       this.searchedWord = '';
       this.searchBar.searchTerm = this.searchedWord;
     }
