@@ -35,7 +35,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
   success = new EventEmitter();
 
   @Output()
-  closeEdit = new EventEmitter();
+  openNewNote = new EventEmitter();
 
   newFileName: string;
 
@@ -175,6 +175,9 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
     } else {
       const file = new File([this.value], this.newFileName);
       this.uploadFiles(file);
+      this.uploadService.fileUploadComplete.subscribe((result) => {
+         this.openNewNote.emit(result.data.entry);
+      });
       this.success.emit();
     }
   }

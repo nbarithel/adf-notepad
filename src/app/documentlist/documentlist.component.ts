@@ -172,6 +172,13 @@ export class DocumentlistComponent implements DoCheck , OnInit {
     });
   }
 
+  openNode(node): void {
+    if (node && node.id) {
+      this.setNode(node);
+      this.documentList.reload();
+    }
+  }
+
   getNodeId(event): any {
     const entry = event.value.entry;
     if (entry && entry.isFile) {
@@ -188,10 +195,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
         return new Promise((resolve) => {
           dialogRef.beforeClose().subscribe(result => {
           if (result) {
-            this.nodeId = entry.id;
-            this.node = entry;
-            this.noteService.createNote = false;
-            this.noteService.nodeId = entry.id;
+            this.setNode(entry);
           } else {
             this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.NOTE_RETURN'));
           }
@@ -199,16 +203,16 @@ export class DocumentlistComponent implements DoCheck , OnInit {
           });
         });
       } else {
-        this.nodeId = entry.id;
-        this.node = entry;
-        this.noteService.createNote = false;
-        this.noteService.nodeId = entry.id;
+        this.setNode(entry);
       }
     }
   }
 
-  onGoBack(event: any) {
-    this.nodeId = null;
+  private setNode(node: MinimalNodeEntryEntity) {
+    this.node = node;
+    this.nodeId = node.id;
+    this.noteService.createNote = false;
+    this.noteService.nodeId = node.id;
   }
 
 }
