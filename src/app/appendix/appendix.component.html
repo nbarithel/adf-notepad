@@ -1,4 +1,5 @@
 <mat-list class="adf-association-list" *ngIf="!isLoading; else loading_template">
+
     <mat-list-item *ngFor="let appendixNode of appendixNodes; let idx = index">
         <mat-icon mat-list-icon>insert_drive_file</mat-icon>
         <h4 mat-line class="adf-association-list-item-name" [id]="'adf-association-list-item-name-' + appendixNode.entry.id" >{{appendixNode.entry.name}}</h4>
@@ -16,8 +17,16 @@
                     <mat-icon>more_vert</mat-icon>
             </button>
         </div>
-
     </mat-list-item>
+
+    <ng-container *ngIf="appendixNodes.length == 0">
+        <adf-empty-content
+                icon="link_off"
+                title="APPENDIX.NO_APPENDIX"
+                subtitle="APPENDIX.NO_APPENDIX_HELP">
+        </adf-empty-content>
+    </ng-container>
+
 </mat-list>
 
 <div class="mat-assoc-button">

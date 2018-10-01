@@ -85,6 +85,10 @@
             "SECOND_TEXT": "Empty Trash to permanently delete items."
           }
     },
+    "APPENDIX": {
+        "NO_APPENDIX": "This note contains no appendix",
+        "NO_APPENDIX_HELP": "Link/Upload an appendix with the buttons below"
+    },
     "SEARCH": {
         "NO_RESULT": "No result for this search request",
         "TITLE": "Search results",

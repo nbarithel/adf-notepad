@@ -87,6 +87,10 @@
             "SECOND_TEXT": "Videz la corbeille pour supprimer définitivement les éléments."
         }
     },
+    "APPENDIX": {
+        "NO_APPENDIX": "Cette note ne contient pas d'annexes",
+        "NO_APPENDIX_HELP": "Liez/Télécharger une annexe grâce aux boutons ci-dessous"
+    },
     "SEARCH": {
         "NO_RESULT": "Aucun résultat correspondant à cette recherche",
         "TITLE": "Résultats de la recherche",
