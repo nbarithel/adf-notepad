@@ -84,5 +84,31 @@
             "FIRST_TEXT": "Items you delete are moved to the Trash.",
             "SECOND_TEXT": "Empty Trash to permanently delete items."
           }
-      }
-  }
+    },
+    "SEARCH": {
+        "NO_RESULT": "No result for this search request",
+        "TITLE": "Search results",
+        "RESULT_NUMBER": "{{number}} results found",
+        "SORT": {
+            "RELEVANCE": "Relevance",
+            "FILENAME": "Filename",
+            "TITLE": "Title",
+            "MODIFIED_DATE": "Modified Date",
+            "SIZE": "Size",
+            "TYPE": "Type",
+            "MODIFIER": "Modifier",
+            "CREATE_DATE": "Created date"
+        },
+        "FACET_FIELDS": {
+            "FILE_TYPE": "File Type",
+            "CREATOR": "Creator",
+            "MODIFIER": "Modifier",
+            "LOCATION": "Location"
+        },
+        "CATEGORIES": {
+            "MODIFIED_DATE": "Modified date",
+            "SIZE": "Size",
+            "CREATED_DATE": "Created Date"
+        }
+    }
+}

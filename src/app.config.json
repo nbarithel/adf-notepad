@@ -52,5 +52,115 @@
             "label": "Simplified Chinese"
         }
     ],
-    "logLevel" : "trace"
+    "logLevel" : "trace",
+    "search": {
+        "include": ["path", "allowableOperations", "properties"],
+        "sorting": {
+            "options": [
+                {
+                    "key": "name",
+                    "label": "SEARCH.SORT.FILENAME",
+                    "type": "FIELD",
+                    "field": "cm:name",
+                    "ascending": true
+                },
+                {
+                    "key": "modified",
+                    "label": "SEARCH.SORT.MODIFIED_DATE",
+                    "type": "FIELD",
+                    "field": "cm:modified",
+                    "ascending": true
+                },
+                {
+                    "key": "modified",
+                    "label": "SEARCH.SORT.MODIFIER",
+                    "type": "FIELD",
+                    "field": "cm:modifier",
+                    "ascending": true
+                },
+                {
+                    "key": "modified",
+                    "label": "SEARCH.SORT.CREATE_DATE",
+                    "type": "FIELD",
+                    "field": "cm:created",
+                    "ascending": true
+                },
+                {
+                    "key": "content.sizeInBytes",
+                    "label": "SEARCH.SORT.SIZE",
+                    "type": "FIELD",
+                    "field": "content.size",
+                    "ascending": true
+                },
+                {
+                    "key": "content.mimetype",
+                    "label": "SEARCH.SORT.TYPE",
+                    "type": "FIELD",
+                    "field": "content.mimetype",
+                    "ascending": true
+                }
+            ],
+            "defaults": [
+                {
+                    "key": "name",
+                    "type": "FIELD",
+                    "field": "cm:name",
+                    "ascending": true
+                }
+            ]
+        },
+        "filterQueries": [
+            { "query": "TYPE:'cm:content'" },
+            { "query": "NOT cm:creator:System" },
+            { "query": "NOT TYPE:'dl:dataList' AND NOT TYPE:'dl:todoList' AND NOT TYPE:'dl:issue' AND NOT TYPE:'fm:topic' AND NOT TYPE:'lnk:link' AND NOT TYPE:'fm:post'" }
+        ],
+        "facetFields": {
+            "fields": [
+                { "field": "content.mimetype", "mincount": 0, "label": "SEARCH.FACET_FIELDS.FILE_TYPE" },
+                { "field": "creator", "mincount": 0, "label": "SEARCH.FACET_FIELDS.CREATOR" },
+                { "field": "modifier", "mincount": 0, "label": "SEARCH.FACET_FIELDS.MODIFIER" },
+                { "field": "SITE", "mincount": 0, "label": "SEARCH.FACET_FIELDS.LOCATION" }
+            ]
+        },
+        "facetQueries": {
+            "label": "SEARCH.CATEGORIES.MODIFIED_DATE",
+            "queries": [
+                { "label": "Today", "query": "cm:modified:[TODAY to TODAY]" },
+                { "label": "This week", "query": "cm:modified:[NOW/DAY-7DAYS TO NOW/DAY+1DAY]" },
+                { "label": "This month", "query": "cm:modified:[NOW/DAY-1MONTH TO NOW/DAY+1DAY]"},
+                { "label": "In last 6 months", "query": "cm:modified:[NOW/DAY-6MONTHS TO NOW/DAY+1DAY]"},
+                { "label": "This year", "query": "cm:modified:[NOW/DAY-1YEAR TO NOW/DAY+1DAY]"}
+            ]
+        },
+        "categories": [
+            {
+                "id": "size",
+                "name": "SEARCH.CATEGORIES.SIZE",
+                "enabled": true,
+                "component": {
+                    "selector": "check-list",
+                    "settings": {
+                        "options": [
+                            { "name": "Small", "value": "content.size:[0 TO 1048576>" },
+                            { "name": "Medium", "value": "content.size:[1048576 TO 52428800]" },
+                            { "name": "Large", "value": "content.size:<52428800 TO 524288000]" },
+                            { "name": "Huge", "value": "content.size:<524288000 TO MAX]" }
+                        ]
+                    }
+                }
+            },
+            {
+                "id": "createdDateRange",
+                "name": "SEARCH.CATEGORIES.CREATED_DATE",
+                "enabled": true,
+                "component": {
+                    "selector": "date-range",
+                    "settings": {
+                        "field": "cm:created",
+                        "dateFormat": "DD-MMM-YY"
+                    }
+                }
+            }
+        ]
+    }
 }

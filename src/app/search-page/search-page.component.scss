@@ -1,0 +1,24 @@
+.adf-search-results {
+    display: flex;
+    flex-direction: row;
+
+   &__content {
+        flex-grow: 1;
+   }
+
+   &__content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 25px 0 25px;
+    font-size: 18px;
+    border-bottom: 1px solid #eee;
+   }
+
+}
+
+adf-search-filter {
+    min-width: 260px;
+    padding: 5px;
+    height: 100%;
+}

@@ -59,6 +59,10 @@ export class AppLayoutComponent implements DoCheck {
     }
   }
 
+  onItemClicked(event: any) {
+    this.router.navigate(['/documentlist', event.entry.parentId]);
+  }
+
   loadSearchPage(searchInput: any) {
     if (searchInput.target.value) {
       this.router.navigate(['/search', searchInput.target.value]);
