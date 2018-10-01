@@ -19,8 +19,6 @@
   "dependencies": {
     "@alfresco/adf-content-services": "2.5.0",
     "@alfresco/adf-core": "2.5.0",
-    "@alfresco/adf-insights": "2.5.0",
-    "@alfresco/adf-process-services": "2.5.0",
     "@angular-devkit/build-angular": "^0.7.5",
     "@angular/animations": "6.1.4",
     "@angular/cdk": "6.4.6",
