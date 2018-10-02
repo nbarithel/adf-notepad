@@ -148,18 +148,6 @@
                         ]
                     }
                 }
-            },
-            {
-                "id": "createdDateRange",
-                "name": "SEARCH.CATEGORIES.CREATED_DATE",
-                "enabled": true,
-                "component": {
-                    "selector": "date-range",
-                    "settings": {
-                        "field": "cm:created",
-                        "dateFormat": "DD-MMM-YY"
-                    }
-                }
             }
         ]
     }
