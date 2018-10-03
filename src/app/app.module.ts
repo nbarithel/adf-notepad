@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { appRoutes } from './app.routes';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialog } from '@angular/material';
-import { NoteService } from './app-layout/app-layout.component';
+import { NoteService } from './services/noteService.service';
 import { FullscreenService } from './services/fullscreen.service';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatChipsModule } from '@angular/material/chips';
@@ -86,7 +86,7 @@ import { SearchPageComponent } from './search-page/search-page.component';
   },
     FullscreenService,
     MatDialog,
-    NoteService,
+    NoteService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

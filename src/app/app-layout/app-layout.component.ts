@@ -1,32 +1,10 @@
-import { Component, Injectable, DoCheck, ViewChild } from '@angular/core';
+import { Component, DoCheck, ViewChild } from '@angular/core';
 import { SearchControlComponent } from '@alfresco/adf-content-services';
 import { FullscreenService } from '../services/fullscreen.service';
 import { environment } from 'environments/environment';
+import { NoteService } from '../services/noteService.service';
 import { Router } from '@angular/router';
 
-
-@Injectable()
-export class NoteService {
-
-  createNote = false;
-
-  nodeId;
-
-  uploadFolderId = '-my-';
-
-  successUpload = false;
-
-  constructor() { }
-
-  createNotes() {
-    this.createNote = true;
-    this.nodeId = null;
-  }
-
-  success() {
-    this.successUpload = true;
-  }
-}
 
 @Component({
   selector: 'app-root',

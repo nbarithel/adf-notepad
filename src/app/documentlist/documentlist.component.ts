@@ -2,7 +2,7 @@ import { Component, ViewChild, Input, DoCheck, OnInit, ChangeDetectorRef } from 
 import { NotificationService, NodesApiService, TranslationService, AlfrescoApiService } from '@alfresco/adf-core';
 import { DocumentListComponent, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
-import { NoteService } from '../app-layout/app-layout.component';
+import { NoteService } from '../services/noteService.service';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
 import { RenameComponent } from '../rename/rename.component';
