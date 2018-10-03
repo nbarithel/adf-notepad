@@ -32,11 +32,7 @@
         }
 
         .app-doc-list {
-            display: flex;
-            flex-grow: 1;
-            flex-shrink: 1;
-            height: 100%;
-            width: 100%;
+            width: 140%;
 
             adf-toolbar {
                 mat-toolbar {
@@ -98,7 +94,7 @@
                         height: 100%;
                         flex-grow: 1;
                         overflow-y: scroll;
-                        overflow-x: hidden;
+                        overflow-x: auto;
 
                         .full-width adf-data-table ng-star-inserted{
                             overflow-x: scroll;
@@ -118,7 +114,6 @@
         display: flex;
         flex-direction: column;
         flex-grow: 1;
-        overflow-x: auto;
 
         .createNote-button {
             background-color: mat-color($primary);
@@ -200,7 +195,6 @@
         box-shadow: none;
 
         .adf-info-drawer-layout-content {
-
             height: 100%;
 
             mat-tab-header {
