@@ -91,7 +91,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
     });
 
     this.createNote = this.noteService.createNote;
-    if (this.noteService.nodeId === 0) {
+    if (this.noteService.nodeId == null) {
       this.nodeId = null;
     } else if (this.noteService.successUpload) {
       this.documentList.reload();
@@ -107,7 +107,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
     this.notesNumber = this.documentList.data.getRows().length;
   }
 
-  success(event: any, action: string): any {
+  success(event: any, action: string): Promise<void> {
     if (action === 'Deleted') {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         data: {
@@ -150,7 +150,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
     this.linkAction = true;
   }
 
-  rename(event: any) {
+  rename(event: any): Promise<void> {
     const dialogRef = this.dialog.open(RenameComponent, {
       data: {
         fileName: event.value.entry.name
@@ -172,7 +172,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
     });
   }
 
-  openNode(node): void {
+  openNode(node: MinimalNodeEntryEntity): void {
     if (node && node.id) {
       this.setNode(node);
       this.documentList.reload();
@@ -208,7 +208,7 @@ export class DocumentlistComponent implements DoCheck , OnInit {
     }
   }
 
-  private setNode(node: MinimalNodeEntryEntity) {
+  private setNode(node: MinimalNodeEntryEntity): void {
     this.node = node;
     this.nodeId = node.id;
     this.noteService.createNote = false;

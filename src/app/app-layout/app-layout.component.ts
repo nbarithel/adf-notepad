@@ -20,7 +20,7 @@ export class NoteService {
 
   createNotes() {
     this.createNote = true;
-    this.nodeId = 0;
+    this.nodeId = null;
   }
 
   success() {
