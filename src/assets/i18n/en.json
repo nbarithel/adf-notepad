@@ -28,7 +28,7 @@
             "LINKDOC": "Appendix"
         },
         "EMPTY_CONTENT": {
-            "TITLE": "Please pick a note to show its informations",
+            "TITLE": "Please pick a note to show its information",
             "SUBTITLE": "You have {{ notesNumber }} saved notes"
         }
     },
