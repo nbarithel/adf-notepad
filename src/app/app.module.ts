@@ -34,6 +34,7 @@ import { AppendixComponent } from './appendix/appendix.component';
 import { ResizerDirective } from './resizer.directive';
 import { TrashcanComponent } from './trashcan/trashcan.component';
 import { SearchPageComponent } from './search-page/search-page.component';
+import { SiteFormComponent } from './site-form/site-form.component';
 
 
 
@@ -73,7 +74,8 @@ import { SearchPageComponent } from './search-page/search-page.component';
     AppendixComponent,
     ResizerDirective,
     TrashcanComponent,
-    SearchPageComponent
+    SearchPageComponent,
+    SiteFormComponent
   ],
   providers: [
     {
@@ -90,7 +92,8 @@ import { SearchPageComponent } from './search-page/search-page.component';
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    RenameComponent
+    RenameComponent,
+    SiteFormComponent
   ]
 })
 export class AppModule {

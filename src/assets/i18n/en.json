@@ -42,6 +42,8 @@
         "QUIT_NOTE_MESSAGE": "Do you really want to quit note editions ?",
         "NOTE_RETURN": "Returning to note edition",
         "RENAME_MESSAGE": "Rename the note below",
+        "NEW_SITE": "Site creation",
+        "NAMESITE_MESSAGE": "Site name :",
         "VALID": "Submit",
         "INVALID": "Cancel",
         "EMPTY_NOTE": "Empty note",

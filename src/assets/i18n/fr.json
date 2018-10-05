@@ -42,6 +42,8 @@
         "QUIT_NOTE_MESSAGE": "Voulez vous quitter la création de notes ?",
         "NOTE_RETURN": "Retour à la création de notes",
         "RENAME_MESSAGE": "Renommer la note ci-dessous",
+        "NEW_SITE": "Création du site",
+        "SITENAME_MESSAGE": "Nom du site:",
         "VALID": "Valider",
         "INVALID": "Annuler",
         "EMPTY_NOTE": "Note vide",
@@ -56,8 +58,6 @@
         "MODIFICATION": "Voulez vous sauvegarder les modifications ?",
         "COPIED": "Note copiée",
         "MOVED": "Note déplacée"
-
-
     },
     "TEXT_EDITOR": {
         "VERSION": "Version majeure",

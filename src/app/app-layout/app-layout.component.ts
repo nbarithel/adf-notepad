@@ -2,7 +2,7 @@ import { Component, DoCheck, ViewChild, OnInit } from '@angular/core';
 import { SearchControlComponent } from '@alfresco/adf-content-services';
 import { FullscreenService } from '../services/fullscreen.service';
 import { environment } from 'environments/environment';
-import { RenameComponent } from '../rename/rename.component';
+import { SiteFormComponent } from '../site-form/site-form.component';
 import { NoteService } from '../services/noteService.service';
 import { Router } from '@angular/router';
 import { AlfrescoApiService, NotificationService, TranslationService } from '@alfresco/adf-core';
@@ -94,16 +94,16 @@ export class AppLayoutComponent implements DoCheck, OnInit {
   }
 
   nameSite(): Promise<void> {
-    const dialogRef = this.dialog.open(RenameComponent, {
+    const dialogRef = this.dialog.open(SiteFormComponent, {
       data: {
-        fileName: ''
+        siteName: ''
       },
       minWidth: '250px'
     });
     return new Promise((resolve) => {
       dialogRef.beforeClose().subscribe(result => {
       if (result) {
-        const siteName = dialogRef.componentInstance.fileName;
+        const siteName = dialogRef.componentInstance.siteName;
         this.createSite(siteName);
         this.notificationService.openSnackMessage(this.translationService.instant('Created new Site : ' + siteName));
       } else {
