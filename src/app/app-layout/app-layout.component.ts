@@ -1,4 +1,4 @@
-import { Component, DoCheck, ViewChild, OnInit } from '@angular/core';
+import { Component, DoCheck, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { SearchControlComponent } from '@alfresco/adf-content-services';
 import { FullscreenService } from '../services/fullscreen.service';
 import { environment } from 'environments/environment';
@@ -8,13 +8,14 @@ import { Router } from '@angular/router';
 import { AlfrescoApiService, NotificationService, TranslationService } from '@alfresco/adf-core';
 import { SiteEntry, SiteBody } from 'alfresco-js-api';
 import { MatDialog } from '@angular/material';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.scss']
 })
-export class AppLayoutComponent implements DoCheck, OnInit {
+export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
 
   constructor(private noteService: NoteService,
               private dialog: MatDialog,
@@ -28,9 +29,9 @@ export class AppLayoutComponent implements DoCheck, OnInit {
   @ViewChild('searchBar')
   searchBar: SearchControlComponent;
 
-  fullscreen: boolean;
+  fullscreen = false;
 
-  uploadFolderId: string;
+  uploadFolderId = '-my-';
 
   searchPageOpened = false;
 
@@ -40,18 +41,31 @@ export class AppLayoutComponent implements DoCheck, OnInit {
 
   production = environment.production;
 
+  subscriptions: Subscription[] = [];
+
   ngOnInit() {
+    this.subscriptions = this.subscriptions.concat([
+      this.noteService.uploadFolderIdSubject$.subscribe((uploadFolderId) => {
+        this.uploadFolderId = uploadFolderId;
+      }),
+      this.fullscreenService.fullscreenSubject.subscribe((isFullScreen) => {
+        this.fullscreen = isFullScreen;
+      })
+    ]);
     this.alfrescoApi.sitesApi.getSites().then((sitesResult) => {
       this.sites = sitesResult.list.entries;
     });
   }
 
   ngDoCheck() {
-    this.fullscreen = this.fullscreenService.fullscreen;
-    this.uploadFolderId = this.noteService.uploadFolderId;
     if (this.searchBar) {
       this.manageSearchBar();
     }
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions = [];
   }
 
   navigateToSite(siteId: String): void {

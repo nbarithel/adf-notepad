@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, DoCheck, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, Input, OnInit, OnDestroy } from '@angular/core';
 import { NotificationService, NodesApiService, TranslationService, AlfrescoApiService } from '@alfresco/adf-core';
 import { DocumentListComponent, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
@@ -9,12 +9,13 @@ import { RenameComponent } from '../rename/rename.component';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AppendixComponent } from '../appendix/appendix.component';
 import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-documentlist',
   templateUrl: './documentlist.component.html'
 })
-export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
+export class DocumentlistComponent implements OnInit, OnDestroy {
 
   currentFolder: MinimalNodeEntryEntity;
 
@@ -29,7 +30,7 @@ export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
   @ViewChild('appendix')
   appendix: AppendixComponent;
 
-  createNote: boolean;
+  createNote = false;
 
   linkAction = false;
 
@@ -39,7 +40,7 @@ export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
 
   nodeFilter: RowFilter;
 
-  routeSubscription: any;
+  subscriptions: Subscription[] = [];
 
   constructor(private notificationService: NotificationService,
               private noteService: NoteService,
@@ -52,11 +53,21 @@ export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
 
   ngOnInit() {
     this.siteChange();
-    this.routeSubscription = this.router.events
+    this.subscriptions = this.subscriptions.concat([
+      this.noteService.successUpload$.subscribe((next) => {
+        this.documentList.reload();
+      }),
+      this.noteService.noteSubject$
+          .subscribe((value: boolean) => {
+            this.createNote = value;
+            this.nodeId = '';
+      }),
+      this.router.events
         .pipe(filter(event => event instanceof NavigationEnd))
         .subscribe(() => {
             this.siteChange();
-    });
+      })
+    ]);
 
     this.nodeFilter = (row: ShareDataRow) => {
       const node = row.node.entry;
@@ -69,7 +80,8 @@ export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.routeSubscription.unsubscribe();
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions = [];
   }
 
   private siteChange(): void {
@@ -84,35 +96,20 @@ export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
         .then((node) => {
           this.currentFolder = node;
           this.nodeId = '';
-          this.noteService.uploadFolderId = this.currentFolder.id;
+          this.noteService.uploadFolderIdSubject$.next(this.currentFolder.id);
       });
     }
   }
 
-  ngDoCheck() {
+  ready(): void {
     this.translationService.get(
       'DOCUMENT.EMPTY_CONTENT.SUBTITLE',
       {
-        notesNumber: this.notesNumber
+        notesNumber: this.documentList.data.getRows().length
       }
     ).subscribe(translation => {
       this.translatedText = translation;
     });
-    this.createNote = this.noteService.createNote;
-    if (this.noteService.nodeId == null) {
-      this.nodeId = null;
-    } else if (this.noteService.successUpload) {
-      this.documentList.reload();
-      this.noteService.successUpload = false;
-    }
-  }
-
-  createNotes(): void {
-    this.noteService.createNote = true;
-  }
-
-  ready(): void {
-    this.notesNumber = this.documentList.data.getRows().length;
   }
 
   success(event: any, action: string): Promise<void> {
@@ -190,7 +187,7 @@ export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
   getNodeId(event): any {
     const entry = event.value.entry;
     if (entry && entry.isFile) {
-      if (this.noteService.createNote) {
+      if (this.createNote) {
         const dialogRef = this.dialog.open(ConfirmDialogComponent, {
           data: {
               title: this.translationService.instant('NOTIFICATION.TITLE'),
@@ -203,6 +200,7 @@ export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
         return new Promise((resolve) => {
           dialogRef.beforeClose().subscribe(result => {
           if (result) {
+            this.noteService.createNotes();
             this.setNode(entry);
           } else {
             this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.NOTE_RETURN'));
@@ -219,8 +217,6 @@ export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
   private setNode(node: MinimalNodeEntryEntity): void {
     this.node = node;
     this.nodeId = node.id;
-    this.noteService.createNote = false;
-    this.noteService.nodeId = node.id;
   }
 
 }

@@ -105,7 +105,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
-    this.fullscreenService.fullscreen = this.tdEditor.isFullscreenActive();
+    this.fullscreenService.isFullScreen(this.tdEditor.isFullscreenActive());
   }
 
   private getUrlContent(url: string): Promise<any> {

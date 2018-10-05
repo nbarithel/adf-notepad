@@ -144,7 +144,7 @@
           title="{{'DOCUMENT.EMPTY_CONTENT.TITLE' | translate}}"
           [subtitle]="translatedText">
         </adf-empty-content>
-        <button class="createNote-button" mat-button matTooltip="{{ 'TOOLTIP.NEW_NOTE' | translate }}" (click)="createNotes()">
+        <button class="createNote-button" mat-button matTooltip="{{ 'TOOLTIP.NEW_NOTE' | translate }}" (click)="noteService.createNotes(true)">
           <mat-icon>create</mat-icon>
           {{'SIDENAV.MENU.NOTE' | translate}}
         </button>

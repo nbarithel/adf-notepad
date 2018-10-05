@@ -1,24 +1,22 @@
 import { Injectable } from '@angular/core';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable()
 export class NoteService {
 
-  createNote = false;
+  successUpload$ = new Subject<boolean>();
 
-  nodeId;
+  uploadFolderIdSubject$ = new Subject<string>();
 
-  uploadFolderId = '-my-';
+  noteSubject$ = new Subject<boolean>();
 
-  successUpload = false;
+  constructor() {}
 
-  constructor() { }
-
-  createNotes() {
-    this.createNote = true;
-    this.nodeId = null;
+  createNotes(bool?: boolean): void {
+    this.noteSubject$.next(bool);
   }
 
-  success() {
-    this.successUpload = true;
+  success(): void {
+    this.successUpload$.next();
   }
 }

@@ -57,7 +57,7 @@
                             <mat-icon>queue</mat-icon>
                         </div>
                         <div sidebar-menu-options>
-                            <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_NOTE' | translate }}" matTooltipPosition="after" (click)="noteService.createNotes()">
+                            <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_NOTE' | translate }}" matTooltipPosition="after" (click)="noteService.createNotes(true)">
                                 <mat-icon>create</mat-icon>
                                 <span>{{'SIDENAV.MENU.NOTE' | translate}}</span>
                             </button>
