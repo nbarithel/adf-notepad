@@ -1,19 +1,26 @@
-import { Component, DoCheck, ViewChild } from '@angular/core';
+import { Component, DoCheck, ViewChild, OnInit } from '@angular/core';
 import { SearchControlComponent } from '@alfresco/adf-content-services';
 import { FullscreenService } from '../services/fullscreen.service';
 import { environment } from 'environments/environment';
+import { RenameComponent } from '../rename/rename.component';
 import { NoteService } from '../services/noteService.service';
 import { Router } from '@angular/router';
-
+import { AlfrescoApiService, NotificationService, TranslationService } from '@alfresco/adf-core';
+import { SiteEntry, SiteBody } from 'alfresco-js-api';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.scss']
 })
-export class AppLayoutComponent implements DoCheck {
+export class AppLayoutComponent implements DoCheck, OnInit {
 
   constructor(private noteService: NoteService,
+              private dialog: MatDialog,
+              private translationService: TranslationService,
+              private notificationService: NotificationService,
+              private alfrescoApi: AlfrescoApiService,
               private router: Router,
               private fullscreenService: FullscreenService) {}
 
@@ -27,9 +34,17 @@ export class AppLayoutComponent implements DoCheck {
 
   searchPageOpened = false;
 
+  sites: SiteEntry[];
+
   searchedWord: string;
 
   production = environment.production;
+
+  ngOnInit() {
+    this.alfrescoApi.sitesApi.getSites().then((sitesResult) => {
+      this.sites = sitesResult.list.entries;
+    });
+  }
 
   ngDoCheck() {
     this.fullscreen = this.fullscreenService.fullscreen;
@@ -37,6 +52,10 @@ export class AppLayoutComponent implements DoCheck {
     if (this.searchBar) {
       this.manageSearchBar();
     }
+  }
+
+  navigateToSite(siteId: String) {
+    this.router.navigate(['/documentlist', siteId]);
   }
 
   onItemClicked(event: any) {
@@ -74,16 +93,41 @@ export class AppLayoutComponent implements DoCheck {
     }
   }
 
-/*   createSite() {
-    // créer le site avec l'api siteAPi
-    // ajouter le html correspondant et la route
-    const config = this.router.config;
-    config.push({
-      path: 'yaouen',
-      component: DocumentlistComponent,
-      data: { siteName: 'yaouen'
-      }});
-    this.router.resetConfig(config);
-  } */
+  nameSite(): Promise<void> {
+    const dialogRef = this.dialog.open(RenameComponent, {
+      data: {
+        fileName: ''
+      },
+      minWidth: '250px'
+    });
+    return new Promise((resolve) => {
+      dialogRef.beforeClose().subscribe(result => {
+      if (result) {
+        const siteName = dialogRef.componentInstance.fileName;
+        this.createSite(siteName);
+        this.notificationService.openSnackMessage(this.translationService.instant('Created new Site : ' + siteName));
+      } else {
+        this.notificationService.openSnackMessage(this.translationService.instant('Cancellation'));
+      }
+      resolve();
+      });
+    });
+  }
+
+  private createSite(siteName: string): void {
+    const body: SiteBody = {
+      title: siteName,
+      visibility: SiteBody.VisibilityEnum.PUBLIC
+    };
+
+    const opts = {
+      'skipConfiguration': false,
+      'skipAddToFavorites': false,
+    };
+
+    this.alfrescoApi.sitesApi.createSite(body, opts).then((result) => {
+        this.sites.push(result);
+    });
+  }
 
 }

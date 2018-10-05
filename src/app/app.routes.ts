@@ -31,29 +31,8 @@ export const appRoutes: Routes = [
     canActivate: [AuthGuardEcm],
     children: [
       {
-        path: 'yaouen',
-        component: DocumentlistComponent,
-        data: {
-          siteName: 'yaouen'
-        },
-        canActivate: [AuthGuardEcm]
-      },
-      {
-        path: 'nicolas',
-        component: DocumentlistComponent,
-        data: {
-          siteName: 'nicolas'
-        },
-        canActivate: [AuthGuardEcm]
-      },
-      {
         path: 'trashcan',
         component: TrashcanComponent,
-        canActivate: [AuthGuardEcm]
-      },
-      {
-        path: 'documentlist',
-        component: DocumentlistComponent,
         canActivate: [AuthGuardEcm]
       },
       {

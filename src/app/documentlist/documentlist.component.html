@@ -9,14 +9,14 @@
             <adf-toolbar-title>
               <adf-breadcrumb
                 [target]="documentList"
-                [folderNode]="documentList.folderNode">
+                [folderNode]="currentFolder">
               </adf-breadcrumb>
             </adf-toolbar-title>
         </adf-toolbar>
 
         <adf-document-list
           #documentList
-          [currentFolderId]="currentFolderId"
+          [currentFolderId]="currentFolder?.id"
           [contentActions]="true"
           [rowFilter]="nodeFilter"
           [allowDropFiles]="true"
@@ -101,7 +101,7 @@
 
       <app-info-drawer-tab icon="notes" label="Note">
           <div info-drawer-content id="info-drawer-content-editor">
-            <app-text-editor [parentId]="currentFolderId" [node]="node" (success)="success($event,'enregistrée')"></app-text-editor>
+            <app-text-editor [parentId]="currentFolder.id" [node]="node" (success)="success($event,'enregistrée')"></app-text-editor>
           </div>
       </app-info-drawer-tab>
 
@@ -155,7 +155,7 @@
     <adf-info-drawer-layout *ngIf="createNote && !nodeId">
       <div info-drawer-title>Edition de note</div>
       <div info-drawer-content id="info-drawer-content-editor">
-        <app-text-editor [parentId]="currentFolderId" (openNewNote)="openNode($event)"></app-text-editor>
+        <app-text-editor [parentId]="currentFolder.id" (openNewNote)="openNode($event)"></app-text-editor>
       </div>
     </adf-info-drawer-layout>
 

@@ -73,26 +73,21 @@
                                     (success)="noteService.success()">
                                 </adf-upload-button>
                             </div>
-              <!--               <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_SITE' | translate }}" matTooltipPosition="after" (click)="createSite()">
+                            <button mat-menu-item  matTooltip="{{ 'TOOLTIP.NEW_SITE' | translate }}" matTooltipPosition="after" (click)="nameSite()">
                                 <mat-icon>create_new_folder</mat-icon>
                                 <span>{{'SIDENAV.MENU.SITE' | translate}}</span>
-                            </button> -->
+                            </button>
                         </div>
                     </adf-sidebar-action-menu>
                 </div>
 
-                <a mat-list-item class="adf-sidenav-link" routerLink="/documentlist">
-                    <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
-                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Documents</div>
-                </a>
-                <a mat-list-item class="adf-sidenav-link" routerLink="/yaouen">
-                    <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
-                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Yaouen</div>
-                </a>
-                <a mat-list-item class="adf-sidenav-link" routerLink="/nicolas">
-                    <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
-                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Nicolas</div>
-                </a>
+                <div *ngFor="let site of sites">
+                    <a mat-list-item class="adf-sidenav-link" (click)="navigateToSite(site.entry.id)">
+                        <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
+                        <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">{{ site.entry.title }}</div>
+                    </a>
+                </div>
+
                 <a mat-list-item class="adf-sidenav-link" routerLink="/trashcan">
                     <mat-icon matListIcon class="sidenav-menu-icon">delete</mat-icon>
                     <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Trashcan</div>

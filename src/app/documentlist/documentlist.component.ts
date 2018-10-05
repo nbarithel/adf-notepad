@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, DoCheck, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, Input, DoCheck, OnInit, OnDestroy } from '@angular/core';
 import { NotificationService, NodesApiService, TranslationService, AlfrescoApiService } from '@alfresco/adf-core';
 import { DocumentListComponent, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
@@ -6,16 +6,17 @@ import { NoteService } from '../services/noteService.service';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
 import { RenameComponent } from '../rename/rename.component';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AppendixComponent } from '../appendix/appendix.component';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-documentlist',
   templateUrl: './documentlist.component.html'
 })
-export class DocumentlistComponent implements DoCheck , OnInit {
+export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
 
-  currentFolderId: string;
+  currentFolder: MinimalNodeEntryEntity;
 
   @Input()
   nodeId: string = null;
@@ -38,14 +39,24 @@ export class DocumentlistComponent implements DoCheck , OnInit {
 
   nodeFilter: RowFilter;
 
+  routeSubscription: any;
+
   constructor(private notificationService: NotificationService,
               private noteService: NoteService,
               private route: ActivatedRoute,
-              private apiService: AlfrescoApiService,
+              private router: Router,
               private dialog: MatDialog,
+              private alfrescoApi: AlfrescoApiService,
               private nodesApiService: NodesApiService,
-              private changeDetector: ChangeDetectorRef,
-              private translationService: TranslationService) {
+              private translationService: TranslationService) {}
+
+  ngOnInit() {
+    this.siteChange();
+    this.routeSubscription = this.router.events
+        .pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe(() => {
+            this.siteChange();
+    });
 
     this.nodeFilter = (row: ShareDataRow) => {
       const node = row.node.entry;
@@ -57,25 +68,23 @@ export class DocumentlistComponent implements DoCheck , OnInit {
     };
   }
 
-  ngOnInit() {
-    const { data } = this.route.snapshot;
-    if (!data.siteName) {
-      this.currentFolderId = this.route.snapshot.paramMap.get('siteId');
-      if (!this.currentFolderId) {
-        this.currentFolderId = '-my-';
-      }
-      this.noteService.uploadFolderId = this.currentFolderId;
-    } else {
-      const nodes: any = this.apiService.getInstance().nodes;
-      nodes.getNodeInfo('-root-', {
+  ngOnDestroy() {
+    this.routeSubscription.unsubscribe();
+  }
+
+  private siteChange() {
+    const siteTitle = this.route.snapshot.paramMap.get('siteId');
+    if (siteTitle) {
+      this.alfrescoApi.getInstance().nodes
+        .getNodeInfo('-root-', {
           includeSource: true,
           include: ['path', 'properties'],
-          relativePath: '/sites/' + data.siteName + '/blog'
+          relativePath: '/sites/' + siteTitle + '/blog'
       })
-      .then(node => {
-          this.currentFolderId = node.id;
-          this.noteService.uploadFolderId = this.currentFolderId;
-          this.changeDetector.detectChanges();
+        .then((node) => {
+          this.currentFolder = node;
+          this.nodeId = '';
+          this.noteService.uploadFolderId = this.currentFolder.id;
       });
     }
   }
@@ -89,7 +98,6 @@ export class DocumentlistComponent implements DoCheck , OnInit {
     ).subscribe(translation => {
       this.translatedText = translation;
     });
-
     this.createNote = this.noteService.createNote;
     if (this.noteService.nodeId == null) {
       this.nodeId = null;
