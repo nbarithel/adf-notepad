@@ -16,7 +16,7 @@ import { CommentsComponent } from '../comment/comments.component';
 import { TagComponent } from '../tag/tag.component';
 import { TdTextEditorComponent } from '@covalent/text-editor';
 import { MatChipsModule, MatBadgeModule, MatDialog } from '@angular/material';
-import { NoteService } from '../app-layout/app-layout.component';
+import { NoteService } from '../services/noteService.service';
 
 
 describe('DocumentlistComponent', () => {

@@ -5,7 +5,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AlfrescoApiService, AlfrescoApiServiceMock, CoreModule } from '@alfresco/adf-core';
 import { ContentModule } from '@alfresco/adf-content-services';
-import { AppLayoutComponent, NoteService } from './app-layout.component';
+import { AppLayoutComponent} from './app-layout.component';
+import { NoteService } from '../services/noteService.service';
 import { ThemePickerModule } from '../theme-picker/theme-picker';
 import { FullscreenService } from '../services/fullscreen.service';
 import { By } from '@angular/platform-browser';
