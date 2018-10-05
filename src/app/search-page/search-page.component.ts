@@ -93,12 +93,12 @@ export class SearchPageComponent implements OnInit {
     return ['name', 'asc'];
 }
 
-  onSearchResultLoaded(nodePaging: NodePaging) {
+  onSearchResultLoaded(nodePaging: NodePaging): void {
     this.searchPaging = nodePaging;
     this.totalResults = nodePaging.list.pagination.count;
   }
 
-  onPaginationChanged(pagination: Pagination) {
+  onPaginationChanged(pagination: Pagination): void {
     this.queryBuilder.paging = {
         maxItems: pagination.maxItems,
         skipCount: pagination.skipCount

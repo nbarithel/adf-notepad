@@ -96,7 +96,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
     }
   }
 
-  private getIdContent(node: MinimalNodeEntryEntity) {
+  private getIdContent(node: MinimalNodeEntryEntity): void {
     this.nodeId = node.id;
     this.name = node.name;
     this.newFileName = this.name;
@@ -167,7 +167,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
     }
   }
 
-  private saveTheFile() {
+  private saveTheFile(): void {
     if (this.nodeId && this.name !== this.newFileName ) {
       this.nodesApiService.updateNode(this.nodeId, { 'name': this.newFileName }).toPromise();
       this.uploadFiles(new File([this.value], this.newFileName));
@@ -197,7 +197,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
     this.uploadQueue(filteredFiles);
   }
 
-  private uploadQueue(file: FileModel) {
+  private uploadQueue(file: FileModel): void {
 
     this.ngZone.run(() => {
           const event = new UploadFilesEvent(

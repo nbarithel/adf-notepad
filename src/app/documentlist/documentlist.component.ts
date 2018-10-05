@@ -72,7 +72,7 @@ export class DocumentlistComponent implements DoCheck, OnInit, OnDestroy {
     this.routeSubscription.unsubscribe();
   }
 
-  private siteChange() {
+  private siteChange(): void {
     const siteTitle = this.route.snapshot.paramMap.get('siteId');
     if (siteTitle) {
       this.alfrescoApi.getInstance().nodes

@@ -54,22 +54,22 @@ export class AppLayoutComponent implements DoCheck, OnInit {
     }
   }
 
-  navigateToSite(siteId: String) {
+  navigateToSite(siteId: String): void {
     this.router.navigate(['/documentlist', siteId]);
   }
 
-  onItemClicked(event: any) {
+  onItemClicked(event: any): void {
     this.router.navigate(['/documentlist', event.entry.parentId]);
   }
 
-  loadSearchPage(searchInput: any) {
+  loadSearchPage(searchInput: any): void {
     if (searchInput && this.searchPageOpened) {
       this.router.navigate(['/search', searchInput]);
       this.searchedWord = searchInput;
     }
   }
 
-  searchPageOpen(searchInput: any) {
+  searchPageOpen(searchInput: any): void {
     if (searchInput.target.value) {
       this.router.navigate(['/search', searchInput.target.value]);
       this.searchedWord = searchInput.target.value;
@@ -78,7 +78,7 @@ export class AppLayoutComponent implements DoCheck, OnInit {
     }
   }
 
-  private manageSearchBar() {
+  private manageSearchBar(): void {
     if (((this.router.url === '/search/' + this.searchedWord) || (this.router.url === '/search/'))
      && (this.searchBar.subscriptAnimationState === 'inactive')) {
       this.searchBar.subscriptAnimationState = 'active';
