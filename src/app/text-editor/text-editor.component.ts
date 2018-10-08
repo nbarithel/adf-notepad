@@ -148,7 +148,9 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
       });
       return new Promise((resolve, reject) => {
           dialogRef.beforeClose().subscribe(result => {
-          if (result && this.modifiedNote) {
+          if (result && this.modifiedNote && this.name !== this.newFileName ) {
+            this.saveTheFile();
+          } else if (result && this.modifiedNote) {
             this.saveTheFile();
             this.getIdContent(this.node);
           } else if (result && !this.modifiedNote) {
@@ -168,10 +170,17 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
   }
 
   private saveTheFile(): void {
-    if (this.nodeId && this.name !== this.newFileName ) {
-      this.nodesApiService.updateNode(this.nodeId, { 'name': this.newFileName }).toPromise();
-      this.uploadFiles(new File([this.value], this.newFileName));
-      this.success.emit();
+    if (this.nodeId && this.name !== this.newFileName && this.modifiedNote) {
+      this.nodesApiService.updateNode(this.nodeId, { 'name': this.newFileName }).subscribe(() => {
+        this.uploadFiles(new File([this.value], this.newFileName));
+        this.getIdContent(this.node);
+        this.success.emit();
+      });
+    } else if (this.nodeId && this.name !== this.newFileName ) {
+      this.nodesApiService.updateNode(this.nodeId, { 'name': this.newFileName }).subscribe(() => {
+        this.uploadFiles(new File([this.value], this.newFileName));
+        this.success.emit();
+      });
     } else {
       const file = new File([this.value], this.newFileName);
       this.uploadFiles(file);
