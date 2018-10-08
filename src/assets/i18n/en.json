@@ -57,7 +57,8 @@
         "RENAMED_FILE": "Note renamed",
         "MODIFICATION": "Do you want to save changes ?",
         "COPIED": "Note copied",
-        "MOVED": "Note moved"
+        "MOVED": "Note moved",
+        "UPLOADED": "Note Uploaded"
     },
     "TEXT_EDITOR": {
         "VERSION": "Major version",

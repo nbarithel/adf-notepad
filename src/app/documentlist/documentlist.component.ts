@@ -55,6 +55,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
     this.siteChange();
     this.subscriptions = this.subscriptions.concat([
       this.noteService.successUpload$.subscribe((next) => {
+        this.success('Uploaded');
         this.documentList.reload();
       }),
       this.noteService.noteSubject$
@@ -112,7 +113,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
     });
   }
 
-  success(event: any, action: string): Promise<void> {
+  success(action: string, event?: any, ): Promise<void> {
     if (action === 'Deleted') {
       const dialogRef = this.dialog.open(ConfirmDialogComponent, {
         data: {
@@ -147,6 +148,8 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
       this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.COPIED'));
     } else if (action === 'Moved') {
       this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.MOVED'));
+    } else if (action === 'Uploaded') {
+      this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.UPLOADED'));
     }
     this.documentList.reload();
   }
@@ -179,6 +182,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
 
   openNode(node: MinimalNodeEntryEntity): void {
     if (node && node.id) {
+      this.noteService.createNotes();
       this.setNode(node);
       this.documentList.reload();
     }

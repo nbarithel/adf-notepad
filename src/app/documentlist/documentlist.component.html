@@ -3,7 +3,8 @@
     <div class="app-doc-list" id='leftEl'>
       <adf-upload-drag-area
         acceptedFilesType=",text,.rtf,.txt,.xml,.html"
-        (success)="success($event,'uploaded')">
+        rootFolderId="currentFolder"
+        (success)="success('Uploaded')">
 
         <adf-toolbar>
             <adf-toolbar-title>
@@ -65,7 +66,7 @@
               title="NODE_SELECTOR.COPY"
               permission="update"
               handler="copy"
-              (execute)="success($event,'Copied')">
+              (execute)="success('Copied',$event)">
             </content-action>
 
             <content-action
@@ -73,14 +74,14 @@
               title="NODE_SELECTOR.MOVE"
               permission="update"
               handler="move"
-              (execute)="success($event,'Moved')">
+              (execute)="success('Moved',$event)">
             </content-action>
 
             <content-action
               icon="delete"
               title="ADF_VERSION_LIST.ACTIONS.DELETE"
               permission="update"
-              (execute)="success($event,'Deleted')">
+              (execute)="success('Deleted',$event)">
             </content-action>
 
           </content-actions>
@@ -101,7 +102,7 @@
 
       <app-info-drawer-tab icon="notes" label="Note">
           <div info-drawer-content id="info-drawer-content-editor">
-            <app-text-editor [parentId]="currentFolder.id" [node]="node" (success)="success($event,'enregistrée')"></app-text-editor>
+            <app-text-editor [parentId]="currentFolder.id" [node]="node" (success)="success('enregistrée',$event)"></app-text-editor>
           </div>
       </app-info-drawer-tab>
 

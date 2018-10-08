@@ -57,7 +57,8 @@
         "RENAMED_FILE": "Note renommée",
         "MODIFICATION": "Voulez vous sauvegarder les modifications ?",
         "COPIED": "Note copiée",
-        "MOVED": "Note déplacée"
+        "MOVED": "Note déplacée",
+        "UPLOADED": "Note téléchargée"
     },
     "TEXT_EDITOR": {
         "VERSION": "Version majeure",
