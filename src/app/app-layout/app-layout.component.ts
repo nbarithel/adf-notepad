@@ -117,9 +117,12 @@ export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
     return new Promise((resolve) => {
       dialogRef.beforeClose().subscribe(result => {
       if (result) {
-        const siteName = dialogRef.componentInstance.siteName;
-        this.createSite(siteName);
-        this.notificationService.openSnackMessage(this.translationService.instant('Created new Site : ' + siteName));
+        const siteId = dialogRef.componentInstance.siteId;
+        const siteTitle = dialogRef.componentInstance.siteTitle;
+        const visibility = dialogRef.componentInstance.visibility;
+        const description = dialogRef.componentInstance.description;
+        this.createSite(siteId, siteTitle, visibility, description);
+        this.notificationService.openSnackMessage(this.translationService.instant('Created new Site : ' + siteTitle));
       } else {
         this.notificationService.openSnackMessage(this.translationService.instant('Cancellation'));
       }
@@ -128,10 +131,12 @@ export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
     });
   }
 
-  private createSite(siteName: string): void {
+  private createSite(siteId: string, siteName: string, visibility: SiteBody.VisibilityEnum, description?: string): void {
     const body: SiteBody = {
+      id: siteId,
       title: siteName,
-      visibility: SiteBody.VisibilityEnum.PUBLIC
+      visibility: visibility,
+      description: description
     };
 
     const opts = {
