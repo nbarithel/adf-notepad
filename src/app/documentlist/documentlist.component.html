@@ -3,7 +3,7 @@
     <div class="app-doc-list" id='leftEl'>
       <adf-upload-drag-area
         acceptedFilesType=",text,.rtf,.txt,.xml,.html"
-        rootFolderId="currentFolder"
+        [rootFolderId]="currentFolder?.id"
         (success)="success('Uploaded')">
 
         <adf-toolbar>
