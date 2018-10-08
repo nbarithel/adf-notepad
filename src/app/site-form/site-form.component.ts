@@ -9,29 +9,34 @@ import { FormControl, Validators } from '@angular/forms';
   <h1 mat-dialog-title>{{ title }}</h1>
   <mat-dialog-content>
       <p>{{ message }}</p>
-      <mat-form-field hintLabel="Max 15 characters">
-        <input matInput #input1 maxlength="15" placeholder="Nom du site" [(ngModel)]="siteTitle" [formControl]="siteControl" required>
+      <mat-form-field hintLabel="{{ 'SITE_CREATION.HINT_LABEL15' | translate }}">
+        <input matInput #input1 maxlength="15" placeholder="{{ 'SITE_CREATION.TITLE_PLACEHOLDER' | translate }}"
+        [(ngModel)]="siteTitle" [formControl]="siteControl" required>
         <mat-hint align="end">{{input1.value?.length || 0}}/15</mat-hint>
-        <mat-error *ngIf="siteControl.hasError('required')">Please give a title for your site</mat-error>
+        <mat-error *ngIf="siteControl.hasError('required')">{{ 'SITE_CREATION.TITLE_ERROR' | translate }}</mat-error>
       </mat-form-field>
       <br/>
       <br/>
-      <mat-form-field hintLabel="Max 15 characters">
-        <input matInput #input2 maxlength="15" placeholder="Id du site" [(ngModel)]="siteId" [formControl]="idControl" required>
+      <mat-form-field hintLabel="{{ 'SITE_CREATION.HINT_LABEL15' | translate }}">
+        <input matInput #input2 maxlength="15" placeholder="{{ 'SITE_CREATION.ID_PLACEHOLDER' | translate }}"
+        [(ngModel)]="siteId" [formControl]="idControl" required>
         <mat-hint align="end">{{input2.value?.length || 0}}/15</mat-hint>
-        <mat-error *ngIf="idControl.hasError('required')">Please give an id</mat-error>
+        <mat-error *ngIf="idControl.hasError('required')">{{ 'SITE_CREATION.ID_ERROR' | translate }}</mat-error>
       </mat-form-field>
+      <br/>
       <br/>
       <mat-form-field>
-        <mat-select placeholder="Visibility" [(value)]="visibility" [formControl]="visibilityControl" required>
-          <mat-option value="PUBLIC">Public</mat-option>
-          <mat-option value="PRIVATE">Private</mat-option>
-          <mat-option value="MODERATED">Moderated</mat-option>
+        <mat-select placeholder="{{ 'SITE_CREATION.VISIBILITY_PLACEHOLDER' | translate }}"
+         [(value)]="visibility" [formControl]="visibilityControl" required>
+          <mat-option value="PUBLIC">{{ 'SITE_CREATION.VISIBILITY_PUBLIC' | translate }}</mat-option>
+          <mat-option value="PRIVATE">{{ 'SITE_CREATION.VISIBILITY_PRIVATE' | translate }}</mat-option>
+          <mat-option value="MODERATED">{{ 'SITE_CREATION.VISIBILITY_MODERATED' | translate }}</mat-option>
         </mat-select>
-        <mat-error *ngIf="visibilityControl.hasError('required')">Please choose a visibility</mat-error>
+        <mat-error *ngIf="visibilityControl.hasError('required')">{{ 'SITE_CREATION.VISIBILITY_ERROR' | translate }}</mat-error>
       </mat-form-field>
-      <mat-form-field class="adf-full-width">
-        <input matInput #input3 maxlength="140" placeholder="Description" [(ngModel)]="description">
+      <mat-form-field  hintLabel="{{ 'SITE_CREATION.HINT_LABEL140' | translate }}" class="adf-full-width">
+        <input matInput #input3 maxlength="140" placeholder="{{ 'SITE_CREATION.DESC_PLACEHOLDER' | translate }}"
+         [(ngModel)]="description">
         <mat-hint align="end">{{input3.value?.length || 0}}/140</mat-hint>
       </mat-form-field>
   </mat-dialog-content>

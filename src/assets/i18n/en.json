@@ -43,7 +43,7 @@
         "NOTE_RETURN": "Returning to note edition",
         "RENAME_MESSAGE": "Rename the note below",
         "NEW_SITE": "Site creation",
-        "NAMESITE_MESSAGE": "Site name :",
+        "NAMESITE_MESSAGE": "Site properties",
         "VALID": "Submit",
         "INVALID": "Cancel",
         "EMPTY_NOTE": "Empty note",
@@ -58,7 +58,22 @@
         "MODIFICATION": "Do you want to save changes ?",
         "COPIED": "Note copied",
         "MOVED": "Note moved",
-        "UPLOADED": "Note Uploaded"
+        "UPLOADED": "Note Uploaded",
+        "SITE_CREATED": "Created new site : "
+    },
+    "SITE_CREATION": {
+        "HINT_LABEL15": "Max 15 characters",
+        "HINT_LABEL140": "Max 140 characters",
+        "TITLE_PLACEHOLDER": "Site Title",
+        "TITLE_ERROR": "Please give a title for your site",
+        "ID_PLACEHOLDER": "Site ID",
+        "ID_ERROR": "Please give an id",
+        "VISIBILITY_PLACEHOLDER": "Visibility",
+        "VISIBILITY_PUBLIC": "Public",
+        "VISIBILITY_PRIVATE": "Private",
+        "VISIBILITY_MODERATED": "Moderated",
+        "VISIBILITY_ERROR": "Pick a visibility",
+        "DESC_PLACEHOLDER": "Site description"
     },
     "TEXT_EDITOR": {
         "VERSION": "Major version",

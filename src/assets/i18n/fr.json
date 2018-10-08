@@ -43,7 +43,7 @@
         "NOTE_RETURN": "Retour à la création de notes",
         "RENAME_MESSAGE": "Renommer la note ci-dessous",
         "NEW_SITE": "Création du site",
-        "SITENAME_MESSAGE": "Nom du site:",
+        "SITENAME_MESSAGE": "Propriétés du site",
         "VALID": "Valider",
         "INVALID": "Annuler",
         "EMPTY_NOTE": "Note vide",
@@ -58,7 +58,22 @@
         "MODIFICATION": "Voulez vous sauvegarder les modifications ?",
         "COPIED": "Note copiée",
         "MOVED": "Note déplacée",
-        "UPLOADED": "Note téléchargée"
+        "UPLOADED": "Note téléchargée",
+        "SITE_CREATED": "Création du site : "
+    },
+    "SITE_CREATION": {
+        "HINT_LABEL15": "Max 15 caractères",
+        "HINT_LABEL140": "Max 140 caractères",
+        "TITLE_PLACEHOLDER": "Titre du site",
+        "TITLE_ERROR": "Veuillez donner un titre",
+        "ID_PLACEHOLDER": "ID du site",
+        "ID_ERROR": "Veuillez donner un ID",
+        "VISIBILITY_PLACEHOLDER": "Visibilité",
+        "VISIBILITY_PUBLIC": "Public",
+        "VISIBILITY_PRIVATE": "Privée",
+        "VISIBILITY_MODERATED": "Modéré",
+        "VISIBILITY_ERROR": "Choisir visibilité",
+        "DESC_PLACEHOLDER": "Description du site"
     },
     "TEXT_EDITOR": {
         "VERSION": "Version majeure",

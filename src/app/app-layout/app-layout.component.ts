@@ -122,9 +122,9 @@ export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
         const visibility = dialogRef.componentInstance.visibility;
         const description = dialogRef.componentInstance.description;
         this.createSite(siteId, siteTitle, visibility, description);
-        this.notificationService.openSnackMessage(this.translationService.instant('Created new Site : ' + siteTitle));
+        this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.SITE_CREATE') + siteTitle);
       } else {
-        this.notificationService.openSnackMessage(this.translationService.instant('Cancellation'));
+        this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.CANCEL'));
       }
       resolve();
       });
