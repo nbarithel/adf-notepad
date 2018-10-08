@@ -43,7 +43,7 @@
         "NOTE_RETURN": "Returning to note edition",
         "RENAME_MESSAGE": "Rename the note below",
         "NEW_SITE": "Site creation",
-        "NAMESITE_MESSAGE": "Site properties",
+        "SITENAME_MESSAGE": "Site properties",
         "VALID": "Submit",
         "INVALID": "Cancel",
         "EMPTY_NOTE": "Empty note",
