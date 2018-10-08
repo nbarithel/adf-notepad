@@ -6,7 +6,7 @@ import { SiteFormComponent } from '../site-form/site-form.component';
 import { NoteService } from '../services/noteService.service';
 import { Router } from '@angular/router';
 import { AlfrescoApiService, NotificationService, TranslationService } from '@alfresco/adf-core';
-import { SiteEntry, SiteBody } from 'alfresco-js-api';
+import { SiteEntry } from 'alfresco-js-api';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
 
@@ -131,19 +131,17 @@ export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
     });
   }
 
-  private createSite(siteId: string, siteName: string, visibility: SiteBody.VisibilityEnum, description?: string): void {
-    const body: SiteBody = {
+  private createSite(siteId: string, siteName: string, visibility: any, description?: string): void {
+    const body = {
       id: siteId,
       title: siteName,
       visibility: visibility,
       description: description
     };
-
     const opts = {
       'skipConfiguration': false,
       'skipAddToFavorites': false,
     };
-
     this.alfrescoApi.sitesApi.createSite(body, opts).then((result) => {
         this.sites.push(result);
     });

@@ -1,8 +1,7 @@
 import { Component, Inject, ViewEncapsulation } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { TranslationService } from '@alfresco/adf-core';
-import { SiteBody } from 'alfresco-js-api';
-import {FormControl, Validators} from '@angular/forms';
+import { FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-site-form',
@@ -25,9 +24,9 @@ import {FormControl, Validators} from '@angular/forms';
       <br/>
       <mat-form-field>
         <mat-select placeholder="Visibility" [(value)]="visibility" [formControl]="visibilityControl" required>
-          <mat-option value="SiteBody.VisibilityEnum.PUBLIC">Public</mat-option>
-          <mat-option value="SiteBody.VisibilityEnum.PRIVATE">Private</mat-option>
-          <mat-option value="SiteBody.VisibilityEnum.MODERATED">Moderated</mat-option>
+          <mat-option value="PUBLIC">Public</mat-option>
+          <mat-option value="PRIVATE">Private</mat-option>
+          <mat-option value="MODERATED">Moderated</mat-option>
         </mat-select>
         <mat-error *ngIf="visibilityControl.hasError('required')">Please choose a visibility</mat-error>
       </mat-form-field>
@@ -56,7 +55,7 @@ export class SiteFormComponent {
   siteTitle: string;
   description: string;
   siteId: string;
-  visibility: SiteBody.VisibilityEnum;
+  visibility: string;
 
   siteControl = new FormControl('', [Validators.required]);
   idControl = new FormControl('', [Validators.required]);
