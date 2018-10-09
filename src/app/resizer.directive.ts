@@ -9,35 +9,34 @@ export class ResizerDirective {
 
   leftElement: HTMLElement;
 
-  righElement: HTMLElement;
+  over;
 
   constructor(el: ElementRef, private renderer: Renderer) {
     this.el = el.nativeElement;
+    this.over = this.renderer.listen(this.el , 'mouseover', () => this.mouseOver() );
   }
 
-  @HostListener('mouseover') onmouseover() {
+  mouseOver() {
+    this.over();
     this.el.style.cursor = 'col-resize';
     this.leftElement = document.getElementById('leftEl');
-    this.righElement = document.getElementById('rightEl');
-    if (this.righElement) {
-      const click = this.renderer.listen(this.el , 'mousedown', (event) => {
-        if (event) {
-          this.mouseMove(event);
-          const move = this.renderer.listenGlobal('document', 'mousemove', (event2) => {
-            this.mouseMove(event2);
-          });
+    this.renderer.listen(this.el , 'mousedown', () => {
+      if (document.getElementById('rightEl')) {
+        const move = this.renderer.listenGlobal('document', 'mousemove', (event2) => {
+          this.mouseMove(event2);
           const up = this.renderer.listenGlobal('document', 'mouseup', () => {
             move();
-            click();
             up();
           });
-        }
-      });
-    }
+        });
+      }
+    });
   }
 
   mouseMove(event: MouseEvent) {
-    this.leftElement.style.width = event.clientX - 200 + 'px';
+    if (event) {
+      this.leftElement.style.width = event.clientX - 200 + 'px';
+    }
   }
 
 }
