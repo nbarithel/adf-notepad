@@ -107,7 +107,7 @@ export class SearchPageComponent implements OnInit {
   }
 
   goToFolder(event: any): void {
-    this.route.navigate(['/documentlist', event.value.entry.parentId]);
+    this.route.navigate(['/documentlist', 'search', event.value.entry.parentId]);
   }
 
 }

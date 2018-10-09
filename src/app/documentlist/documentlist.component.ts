@@ -86,19 +86,30 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
   }
 
   private siteChange(): void {
-    const siteTitle = this.route.snapshot.paramMap.get('siteId');
-    if (siteTitle) {
+    const siteId = this.route.snapshot.paramMap.get('siteId');
+    const search = this.route.snapshot.paramMap.get('search');
+    if (search && siteId) {
+      this.alfrescoApi.getInstance().nodes
+        .getNodeInfo(siteId, {
+          includeSource: true,
+          include: ['path', 'properties']})
+        .then((node) => {
+            this.currentFolder = node;
+            this.nodeId = '';
+            this.noteService.uploadFolderIdSubject$.next(this.currentFolder.id);
+        });
+    } else if (siteId) {
       this.alfrescoApi.getInstance().nodes
         .getNodeInfo('-root-', {
           includeSource: true,
           include: ['path', 'properties'],
-          relativePath: '/sites/' + siteTitle + '/blog'
-      })
+          relativePath: '/sites/' + siteId + '/blog'
+        })
         .then((node) => {
-          this.currentFolder = node;
-          this.nodeId = '';
-          this.noteService.uploadFolderIdSubject$.next(this.currentFolder.id);
-      });
+            this.currentFolder = node;
+            this.nodeId = '';
+            this.noteService.uploadFolderIdSubject$.next(this.currentFolder.id);
+        });
     }
   }
 
