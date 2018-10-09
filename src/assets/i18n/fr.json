@@ -42,7 +42,7 @@
         "QUIT_NOTE_MESSAGE": "Voulez vous quitter la création de notes ?",
         "NOTE_RETURN": "Retour à la création de notes",
         "RENAME_MESSAGE": "Renommer la note ci-dessous",
-        "NEW_SITE": "Création du site",
+        "NEW_SITE": "Nouveau site",
         "SITENAME_MESSAGE": "Propriétés du site",
         "VALID": "Valider",
         "INVALID": "Annuler",
@@ -63,7 +63,7 @@
     },
     "SITE_CREATION": {
         "HINT_LABEL15": "Max 15 caractères",
-        "HINT_LABEL140": "Max 140 caractères",
+        "HINT_LABEL120": "Max 120 caractères",
         "TITLE_PLACEHOLDER": "Titre du site",
         "TITLE_ERROR": "Veuillez donner un titre",
         "ID_PLACEHOLDER": "ID du site",

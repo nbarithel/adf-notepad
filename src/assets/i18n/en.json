@@ -42,7 +42,7 @@
         "QUIT_NOTE_MESSAGE": "Do you really want to quit note editions ?",
         "NOTE_RETURN": "Returning to note edition",
         "RENAME_MESSAGE": "Rename the note below",
-        "NEW_SITE": "Site creation",
+        "NEW_SITE": "New site",
         "SITENAME_MESSAGE": "Site properties",
         "VALID": "Submit",
         "INVALID": "Cancel",
@@ -63,7 +63,7 @@
     },
     "SITE_CREATION": {
         "HINT_LABEL15": "Max 15 characters",
-        "HINT_LABEL140": "Max 140 characters",
+        "HINT_LABEL120": "Max 120 characters",
         "TITLE_PLACEHOLDER": "Site Title",
         "TITLE_ERROR": "Please give a title for your site",
         "ID_PLACEHOLDER": "Site ID",
