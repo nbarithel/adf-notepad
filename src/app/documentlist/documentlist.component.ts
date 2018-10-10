@@ -85,6 +85,12 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
     this.subscriptions = [];
   }
 
+  private setCurrentFolder(node: MinimalNodeEntryEntity): void {
+    this.currentFolder = node;
+    this.nodeId = '';
+    this.noteService.uploadFolderIdSubject$.next(this.currentFolder.id);
+  }
+
   private siteChange(): void {
     const siteId = this.route.snapshot.paramMap.get('siteId');
     const search = this.route.snapshot.paramMap.get('search');
@@ -94,9 +100,15 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
           includeSource: true,
           include: ['path', 'properties']})
         .then((node) => {
-            this.currentFolder = node;
-            this.nodeId = '';
-            this.noteService.uploadFolderIdSubject$.next(this.currentFolder.id);
+            this.setCurrentFolder(node);
+        });
+    } else if (siteId === 'root') {
+      this.alfrescoApi.getInstance().nodes
+        .getNodeInfo('-root-', {
+          includeSource: true,
+          include: ['path', 'properties']})
+        .then((node) => {
+          this.setCurrentFolder(node);
         });
     } else if (siteId) {
       this.alfrescoApi.getInstance().nodes
@@ -106,9 +118,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
           relativePath: '/sites/' + siteId + '/blog'
         })
         .then((node) => {
-            this.currentFolder = node;
-            this.nodeId = '';
-            this.noteService.uploadFolderIdSubject$.next(this.currentFolder.id);
+          this.setCurrentFolder(node);
         });
     }
   }
