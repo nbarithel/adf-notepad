@@ -115,7 +115,7 @@
       <app-info-drawer-tab icon="ballot" label="Versions" badge="{{ versions.versions.length }}">
         <mat-card>
           <mat-card-content>
-            <adf-version-list [node]="node" #versions>
+            <adf-version-list [node]="node" (restored)="openNode($event)" #versions>
             </adf-version-list>
           </mat-card-content>
         </mat-card>
