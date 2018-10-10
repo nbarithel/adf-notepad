@@ -119,7 +119,8 @@
             "SIZE": "Size",
             "TYPE": "Type",
             "MODIFIER": "Modifier",
-            "CREATE_DATE": "Created date"
+            "CREATE_DATE": "Created date",
+            "CREATED_DATE_RANGE": "Created date range"
         },
         "FACET_FIELDS": {
             "FILE_TYPE": "File Type",

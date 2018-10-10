@@ -119,7 +119,8 @@
             "SIZE": "Taille",
             "TYPE": "Type",
             "MODIFIER": "Modificateur",
-            "CREATE_DATE": "Date de création"
+            "CREATE_DATE": "Date de création",
+            "CREATED_DATE_RANGE": "Date de création (période)"
         },
         "FACET_FIELDS": {
             "FILE_TYPE": "Type de fichier",

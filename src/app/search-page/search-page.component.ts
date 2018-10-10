@@ -1,7 +1,7 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { RowFilter, ShareDataRow, DocumentListComponent, SearchQueryBuilderService } from '@alfresco/adf-content-services';
+import { RowFilter, DocumentListComponent, SearchQueryBuilderService, SearchFilterComponent } from '@alfresco/adf-content-services';
 import { Pagination, NodePaging } from 'alfresco-js-api';
 import { Subscription } from 'rxjs';
 
@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponent implements OnInit, OnDestroy {
 
   @ViewChild('documentlist')
   documentlist: DocumentListComponent;
@@ -108,6 +108,11 @@ export class SearchPageComponent implements OnInit {
 
   goToFolder(event: any): void {
     this.route.navigate(['/documentlist', 'search', event.value.entry.parentId]);
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+    this.subscriptions = [];
   }
 
 }
