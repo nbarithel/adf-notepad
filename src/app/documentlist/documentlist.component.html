@@ -143,7 +143,7 @@
         <adf-empty-content
           icon="waves"
           title="{{'DOCUMENT.EMPTY_CONTENT.TITLE' | translate}}"
-          [subtitle]="translatedText">
+          [subtitle]="translation | async">
         </adf-empty-content>
         <button class="createNote-button" mat-button matTooltip="{{ 'TOOLTIP.NEW_NOTE' | translate }}" (click)="noteService.createNotes(true)">
           <mat-icon>create</mat-icon>

@@ -34,7 +34,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
 
   linkAction = false;
 
-  translatedText: string;
+  translation: any;
 
   notesNumber: number;
 
@@ -124,14 +124,12 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
   }
 
   ready(): void {
-    this.translationService.get(
+    this.translation = this.translationService.get(
       'DOCUMENT.EMPTY_CONTENT.SUBTITLE',
       {
         notesNumber: this.documentList.data.getRows().length
       }
-    ).subscribe(translation => {
-      this.translatedText = translation;
-    });
+    );
   }
 
   success(action: string, event?: any, ): Promise<void> {
