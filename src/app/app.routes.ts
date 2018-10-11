@@ -17,7 +17,7 @@
 
 import { ModuleWithProviders } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuardEcm } from '@alfresco/adf-core';
+import { AuthGuardEcm, ErrorContentComponent } from '@alfresco/adf-core';
 import { LoginComponent } from './login/login.component';
 import { DocumentlistComponent } from './documentlist/documentlist.component';
 import { AppLayoutComponent } from './app-layout/app-layout.component';
@@ -50,6 +50,10 @@ export const appRoutes: Routes = [
         component: SearchPageComponent,
         canActivate: [ AuthGuardEcm ]
       },
+      {
+          path: 'error/:errorCode',
+          component: ErrorContentComponent
+      }
     ]
   },
   {
