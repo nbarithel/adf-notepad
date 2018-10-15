@@ -4,13 +4,11 @@ import { FullscreenService } from '../services/fullscreen.service';
 import { environment } from 'environments/environment';
 import { SiteFormComponent } from '../site-form/site-form.component';
 import { NoteService } from '../services/noteService.service';
-import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
-import { AlfrescoApiService, NotificationService, TranslationService, PageTitleService } from '@alfresco/adf-core';
+import { Router } from '@angular/router';
+import { AlfrescoApiService, NotificationService, TranslationService } from '@alfresco/adf-core';
 import { SiteEntry } from 'alfresco-js-api';
 import { MatDialog } from '@angular/material';
 import { Subscription } from 'rxjs';
-import { filter } from 'rxjs/operators';
-import { last } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-root',
@@ -21,11 +19,9 @@ export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
 
   constructor(private noteService: NoteService,
               private dialog: MatDialog,
-              private titleService: PageTitleService,
               private translationService: TranslationService,
               private notificationService: NotificationService,
               private alfrescoApi: AlfrescoApiService,
-              private activatedRoute: ActivatedRoute,
               private router: Router,
               private fullscreenService: FullscreenService) {}
 
@@ -72,7 +68,7 @@ export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
     this.subscriptions = [];
   }
 
-  navigateToSite(siteId: string): void {
+  navigateToSite(siteId: String): void {
     this.router.navigate(['/documentlist', siteId]);
   }
 
