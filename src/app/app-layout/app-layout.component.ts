@@ -68,10 +68,6 @@ export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
     this.subscriptions = [];
   }
 
-  navigateToSite(siteId: String): void {
-    this.router.navigate(['/documentlist', siteId]);
-  }
-
   onItemClicked(event: any): void {
     this.router.navigate(['/documentlist', 'search', event.entry.parentId ]);
   }

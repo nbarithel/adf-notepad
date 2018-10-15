@@ -82,17 +82,60 @@
                     </adf-sidebar-action-menu>
                 </div>
 
-                <div *ngFor="let site of sites">
-                    <a mat-list-item class="adf-sidenav-link" (click)="navigateToSite(site.entry.id)">
-                        <mat-icon matListIcon class="sidenav-menu-icon">folder_open</mat-icon>
-                        <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">{{ site.entry.title }}</div>
-                    </a>
-                </div>
+                <ul class="sidenav-menu">
+                    <li *ngFor="let site of sites"
+                        class="sidenav-menu__item"
+                        routerLinkActive
+                        [routerLink]="['/documentlist/' + site.entry.id]"
+                        #rla="routerLinkActive"
+                        #rippleTrigger2>
 
-                <a mat-list-item class="adf-sidenav-link" routerLink="/trashcan">
-                    <mat-icon matListIcon class="sidenav-menu-icon">delete</mat-icon>
-                    <div class="sidenav-menu-label" *ngIf="!isMenuMinimized()">Trashcan</div>
-                </a>
+                        <button
+                            mat-icon-button
+                            mat-ripple
+                            [color]="rla.isActive ? 'primary': 'black'"
+                            matRippleColor="primary"
+                            [matRippleTrigger]="rippleTrigger && rippleTrigger2"
+                            [matRippleCentered]="true">
+
+                            <mat-icon>folder_open</mat-icon>
+                        </button>
+
+                        <span #rippleTrigger
+                            [routerLink]="['/documentlist/' + site.entry.id]"
+                            class="menu__item--label"
+                            [hidden]="isMenuMinimized()"
+                            [ngClass]="{
+                                'menu__item--active': rla.isActive,
+                                'menu__item--default': !rla.isActive
+                            }">{{ site.entry.title }}</span>
+                    </li>
+
+                    <li class="sidenav-menu__item"
+                        routerLinkActive
+                        routerLink="/trashcan"
+                        #rla="routerLinkActive"
+                        #rippleTrigger2>
+                        <button
+                            mat-icon-button
+                            mat-ripple
+                            [color]="rla.isActive ? 'primary': 'black'"
+                            matRippleColor="primary"
+                            [matRippleTrigger]="rippleTrigger && rippleTrigger2"
+                            [matRippleCentered]="true">
+
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                        <span #rippleTrigger
+                            routerLink="/trashcan"
+                            class="menu__item--label"
+                            [hidden]="isMenuMinimized()"
+                            [ngClass]="{
+                                'menu__item--active': rla.isActive,
+                                'menu__item--default': !rla.isActive
+                            }">{{ 'TRASHCAN.TITLE' | translate }}</span>
+                    </li>
+                </ul>
 
             </mat-nav-list>
         </ng-template>

@@ -4,6 +4,13 @@
     $accent: map-get($theme, accent);
     $icon-size: 48px;
 
+    :focus {
+        outline:none;
+    }
+    ::-moz-focus-inner {
+        border:0;
+    }
+
     adf-sidenav-layout {
         height: 100%;
 
@@ -26,6 +33,14 @@
     }
 
     .adf-sidebar-action-menu-icon {
+        color: black;
+    }
+
+    .menu__item--active {
+        color: mat-color($primary);
+    }
+
+    .menu__item--default {
         color: black;
     }
 
