@@ -17,7 +17,7 @@ import { FormControl, Validators } from '@angular/forms';
       </mat-form-field>
       <br/>
       <br/>
-      <mat-form-field hintLabel="{{ 'SITE_CREATION.HINT_LABEL120' | translate }}">
+      <mat-form-field class="adf-full-width" hintLabel="{{ 'SITE_CREATION.HINT_LABEL120' | translate }}">
         <input matInput #input1 maxlength="120" placeholder="{{ 'SITE_CREATION.TITLE_PLACEHOLDER' | translate }}"
         [(ngModel)]="siteTitle" [formControl]="siteControl" required>
         <mat-hint align="end">{{input1.value?.length || 0}}/120</mat-hint>
