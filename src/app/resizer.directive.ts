@@ -1,9 +1,9 @@
-import { Directive, ElementRef, HostListener, Renderer } from '@angular/core';
+import { Directive, ElementRef, Renderer, Input, OnChanges } from '@angular/core';
 
 @Directive({
   selector: '[appResizer]'
 })
-export class ResizerDirective {
+export class ResizerDirective implements OnChanges {
 
   private el: HTMLElement;
 
@@ -11,9 +11,22 @@ export class ResizerDirective {
 
   over;
 
-  constructor(el: ElementRef, private renderer: Renderer) {
+  @Input('appResizer')
+  rightElement: any;
+
+  constructor(el: ElementRef,
+              private renderer: Renderer) {
     this.el = el.nativeElement;
-    this.over = this.renderer.listen(this.el , 'mouseover', () => this.mouseOver() );
+  }
+
+  ngOnChanges() {
+    if (this.leftElement && !this.rightElement) {
+      this.leftElement.style.width = 140 + '%';
+      this.el.style.cursor = 'default';
+    }
+    if (this.rightElement) {
+      this.over = this.renderer.listen(this.el , 'mouseover', () => this.mouseOver() );
+    }
   }
 
   mouseOver() {
@@ -21,12 +34,12 @@ export class ResizerDirective {
     this.el.style.cursor = 'col-resize';
     this.leftElement = document.getElementById('leftEl');
     this.renderer.listen(this.el , 'mousedown', () => {
-      if (document.getElementById('rightEl')) {
+      if (this.rightElement) {
         const move = this.renderer.listenGlobal('document', 'mousemove', (event2) => {
           this.mouseMove(event2);
           const up = this.renderer.listenGlobal('document', 'mouseup', () => {
-            move();
             up();
+            move();
           });
         });
       }

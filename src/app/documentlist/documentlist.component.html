@@ -95,10 +95,10 @@
       </adf-upload-drag-area>
     </div>
 
-    <adf-toolbar-divider appResizer class="adf-toolbar-divider-doclist"></adf-toolbar-divider>
+    <adf-toolbar-divider [appResizer]="nodeId || createNote" class="adf-toolbar-divider-doclist"></adf-toolbar-divider>
 
 
-    <app-info-drawer *ngIf="nodeId && !createNote" id="rightEl">
+    <app-info-drawer *ngIf="nodeId && !createNote">
 
       <app-info-drawer-tab icon="notes" label="Note">
           <div info-drawer-content id="info-drawer-content-editor">
