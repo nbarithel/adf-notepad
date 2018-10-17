@@ -86,8 +86,12 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
     this.subscriptions = [];
   }
 
-  private setCurrentFolder(node: MinimalNodeEntryEntity): void {
-    this.setPageTitle(node.path.elements[node.path.elements.length - 1].name);
+  private setCurrentFolder(node: MinimalNodeEntryEntity, isRoot?: boolean): void {
+    if (!isRoot) {
+      this.setPageTitle(node.path.elements[node.path.elements.length - 1].name);
+    } else {
+      this.setPageTitle(node.name);
+    }
     this.currentFolder = node;
     this.nodeId = '';
     this.noteService.uploadFolderIdSubject$.next(this.currentFolder.id);
@@ -111,7 +115,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
           includeSource: true,
           include: ['path', 'properties']})
         .then((node) => {
-          this.setCurrentFolder(node);
+          this.setCurrentFolder(node, true);
         });
     } else if (siteId) {
       this.alfrescoApi.getInstance().nodes
