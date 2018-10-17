@@ -41,7 +41,7 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuardEcm]
       },
       {
-        path: 'documentlist/:search/:siteId',
+        path: 'documentlist/:search/:searchParentId',
         component: DocumentlistComponent,
         canActivate: [AuthGuardEcm]
       },

@@ -1,5 +1,5 @@
 import { Component, ViewChild, Input, OnInit, OnDestroy } from '@angular/core';
-import { NotificationService, NodesApiService, TranslationService, AlfrescoApiService } from '@alfresco/adf-core';
+import { NotificationService, NodesApiService, TranslationService, AlfrescoApiService, PageTitleService } from '@alfresco/adf-core';
 import { DocumentListComponent, RowFilter, ShareDataRow } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { NoteService } from '../services/noteService.service';
@@ -47,6 +47,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private dialog: MatDialog,
+              private titleService: PageTitleService,
               private alfrescoApi: AlfrescoApiService,
               private nodesApiService: NodesApiService,
               private translationService: TranslationService) {}
@@ -86,6 +87,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
   }
 
   private setCurrentFolder(node: MinimalNodeEntryEntity): void {
+    this.setPageTitle(node.path.elements[node.path.elements.length - 1].name);
     this.currentFolder = node;
     this.nodeId = '';
     this.noteService.uploadFolderIdSubject$.next(this.currentFolder.id);
@@ -94,9 +96,10 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
   private siteChange(): void {
     const siteId = this.route.snapshot.paramMap.get('siteId');
     const search = this.route.snapshot.paramMap.get('search');
-    if (search && siteId) {
+    const searchParentId = this.route.snapshot.paramMap.get('searchParentId');
+    if (search && searchParentId) {
       this.alfrescoApi.getInstance().nodes
-        .getNodeInfo(siteId, {
+        .getNodeInfo(searchParentId, {
           includeSource: true,
           include: ['path', 'properties']})
         .then((node) => {
@@ -121,6 +124,10 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
           this.setCurrentFolder(node);
         });
     }
+  }
+
+  setPageTitle(title: string): void {
+    this.titleService.setTitle(title + ' - AtolCD Notepad');
   }
 
   ready(): void {
