@@ -44,6 +44,7 @@
         "RENAME_MESSAGE": "Rename the note below",
         "NEW_SITE": "New site",
         "SITENAME_MESSAGE": "Site properties",
+        "SITE_CREATE": "New site created : ",
         "VALID": "Submit",
         "INVALID": "Cancel",
         "EMPTY_NOTE": "Empty note",
