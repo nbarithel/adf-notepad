@@ -4,6 +4,7 @@ import 'rxjs/add/operator/switchMap';
 import { RowFilter, DocumentListComponent, SearchQueryBuilderService, SearchFilterComponent } from '@alfresco/adf-content-services';
 import { Pagination, NodePaging } from 'alfresco-js-api';
 import { Subscription } from 'rxjs';
+import { PageTitleService, TranslationService } from '@alfresco/adf-core';
 
 @Component({
   selector: 'app-search-page',
@@ -32,7 +33,9 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   subscriptions: Subscription[] = [];
 
     constructor(private activatedRoute: ActivatedRoute,
+                private titleService: PageTitleService,
                 private queryBuilder: SearchQueryBuilderService,
+                private translationService: TranslationService,
                 private route: Router) {
 
     queryBuilder.paging = {
@@ -42,6 +45,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.titleService.setTitle(this.translationService.instant('SEARCH.TITLE') + ' - AtolCD Notepad');
     this.sorting = this.getSorting();
 
     this.subscriptions.push(

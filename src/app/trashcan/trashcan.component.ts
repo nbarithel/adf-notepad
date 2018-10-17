@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent, DocumentListComponent} from '@alfresco/adf-content-services';
-import { TranslationService, NodesApiService, NotificationService } from '@alfresco/adf-core';
+import { TranslationService, NodesApiService, NotificationService, PageTitleService } from '@alfresco/adf-core';
 
 
 @Component({
@@ -15,8 +15,11 @@ export class TrashcanComponent {
 
   constructor(private nodesApiService: NodesApiService,
               private translationService: TranslationService,
+              private titleService: PageTitleService,
               private notificationService: NotificationService,
-              private dialog: MatDialog) {}
+              private dialog: MatDialog) {
+                this.titleService.setTitle(this.translationService.instant('TRASHCAN.TITLE') + ' - AtolCD Notepad');
+              }
 
   restore(event: any): Promise<any> {
     const dialogRef = this.dialog.open(ConfirmDialogComponent, {
