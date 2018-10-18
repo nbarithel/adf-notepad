@@ -1,21 +1,22 @@
 import { Component, DoCheck, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { SearchControlComponent } from '@alfresco/adf-content-services';
+import { SearchControlComponent, SearchQueryBuilderService } from '@alfresco/adf-content-services';
 import { FullscreenService } from '../services/fullscreen.service';
 import { environment } from 'environments/environment';
 import { SiteFormComponent } from '../site-form/site-form.component';
 import { NoteService } from '../services/noteService.service';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { AlfrescoApiService, NotificationService, TranslationService } from '@alfresco/adf-core';
 import { SiteEntry } from 'alfresco-js-api';
 import { MatDialog } from '@angular/material';
-import { Subscription } from 'rxjs';
+import { Subscription} from 'rxjs/';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app-layout.component.html',
   styleUrls: ['./app-layout.component.scss']
 })
-export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
+export class AppLayoutComponent implements OnInit, OnDestroy {
 
   constructor(private noteService: NoteService,
               private dialog: MatDialog,
@@ -48,6 +49,14 @@ export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
       this.noteService.uploadFolderIdSubject$.subscribe((uploadFolderId) => {
         this.uploadFolderId = uploadFolderId;
       }),
+      this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        if (!((this.router.url === '/search/' + this.searchedWord)
+        || (this.router.url === '/search/')) ) {
+          this.manageSearchBar();
+        }
+      }),
       this.fullscreenService.fullscreenSubject.subscribe((isFullScreen) => {
         this.fullscreen = isFullScreen;
       })
@@ -57,19 +66,13 @@ export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
     });
   }
 
-  ngDoCheck() {
-    if (this.searchBar) {
-      this.manageSearchBar();
-    }
-  }
-
   ngOnDestroy() {
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
     this.subscriptions = [];
   }
 
   onItemClicked(event: any): void {
-    this.router.navigate(['/documentlist', 'search', event.entry.parentId ]);
+    this.router.navigate(['/documentlist', 'search', event.entry.parentId]);
   }
 
   loadSearchPage(searchInput: any): void {
@@ -82,25 +85,18 @@ export class AppLayoutComponent implements DoCheck, OnInit, OnDestroy {
   searchPageOpen(searchInput: any): void {
     if (searchInput.target.value) {
       this.router.navigate(['/search', searchInput.target.value]);
+      this.searchBar.expandable = false;
       this.searchedWord = searchInput.target.value;
       this.searchPageOpened = true;
-      this.searchBar.liveSearchMaxResults = 0;
     }
   }
 
-  private manageSearchBar(): void {
-    if (((this.router.url === '/search/' + this.searchedWord) || (this.router.url === '/search/'))
-     && (this.searchBar.subscriptAnimationState === 'inactive')) {
-      this.searchBar.subscriptAnimationState = 'active';
-      this.searchBar.searchTerm = this.searchedWord;
-    } else if (this.searchedWord && !((this.router.url === '/search/' + this.searchedWord)
-      || (this.router.url === '/search/'))) {
-      this.searchBar.subscriptAnimationState = 'inactive';
-      this.searchPageOpened = false;
-      this.searchBar.liveSearchMaxResults = 10;
-      this.searchedWord = '';
-      this.searchBar.searchTerm = this.searchedWord;
-    }
+  manageSearchBar(): void {
+    this.searchPageOpened = false;
+    this.searchedWord = '';
+    this.searchBar.searchTerm = '';
+    this.searchBar.expandable = true;
+    this.searchBar.subscriptAnimationState = 'inactive';
   }
 
   nameSite(): Promise<void> {

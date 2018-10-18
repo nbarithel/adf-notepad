@@ -16,8 +16,6 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   @ViewChild('documentlist')
   documentlist: DocumentListComponent;
 
-  nodeFilter: RowFilter;
-
   sorting;
 
   searchTerm: string;
@@ -46,6 +44,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.titleService.setTitle(this.translationService.instant('SEARCH.TITLE') + ' - AtolCD Notepad');
+
     this.sorting = this.getSorting();
 
     this.subscriptions.push(

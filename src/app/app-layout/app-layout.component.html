@@ -12,7 +12,13 @@
 
                 <div class="adf-toolbar--spacer"></div>
 
-                <adf-search-control [highlight]="true" (optionClicked)="onItemClicked($event)" (submit)="searchPageOpen($event)" (searchChange)="loadSearchPage($event)" #searchBar></adf-search-control>
+                <adf-search-control  #searchBar
+                    [liveSearchEnabled]="searchBar.expandable"
+                    [highlight]="true"
+                    (optionClicked)="onItemClicked($event)"
+                    (submit)="searchPageOpen($event)"
+                    (searchChange)="loadSearchPage($event)">
+                </adf-search-control>
 
                 <div class="adf-header-delimiter"></div>
 
