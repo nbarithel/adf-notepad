@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import 'rxjs/add/operator/switchMap';
-import { RowFilter, DocumentListComponent, SearchQueryBuilderService, SearchFilterComponent } from '@alfresco/adf-content-services';
+import { DocumentListComponent, SearchQueryBuilderService } from '@alfresco/adf-content-services';
 import { Pagination, NodePaging } from 'alfresco-js-api';
 import { Subscription } from 'rxjs';
 import { PageTitleService, TranslationService } from '@alfresco/adf-core';
@@ -114,9 +114,9 @@ export class SearchPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
+    this.queryBuilder.resetToDefaults();
     this.subscriptions.forEach(subscription => subscription.unsubscribe());
     this.subscriptions = [];
   }
 
 }
-
