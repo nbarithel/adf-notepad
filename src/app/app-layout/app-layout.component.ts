@@ -52,8 +52,7 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
       this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
-        if (!((this.router.url === '/search/' + this.searchedWord)
-        || (this.router.url === '/search/')) && this.searchPageOpened) {
+        if (!this.router.url.includes('search') && this.searchPageOpened) {
             this.manageSearchBar();
         }
       }),
