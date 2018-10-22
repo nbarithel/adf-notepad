@@ -6,7 +6,8 @@ import { TranslationService, NodesApiService, NotificationService, PageTitleServ
 
 @Component({
   selector: 'app-trashcan',
-  templateUrl: './trashcan.component.html'
+  templateUrl: './trashcan.component.html',
+  styleUrls: ['trashcan.component.scss'],
 })
 export class TrashcanComponent {
 
