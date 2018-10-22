@@ -199,9 +199,10 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
       dialogRef.beforeClose().subscribe(result => {
       if (result) {
         const newName = dialogRef.componentInstance.fileName;
-        this.nodesApiService.updateNode(event.value.entry.id, { 'name': newName }).toPromise();
-        this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.RENAMED_FILE'));
-        this.documentList.reload();
+        this.nodesApiService.updateNode(event.value.entry.id, { 'name': newName }).subscribe(() => {
+          this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.RENAMED_FILE'));
+          this.documentList.reload();
+        });
       } else {
         this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.CANCEL'));
       }
