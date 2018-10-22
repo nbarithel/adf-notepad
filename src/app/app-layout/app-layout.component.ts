@@ -53,8 +53,8 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
         if (!((this.router.url === '/search/' + this.searchedWord)
-        || (this.router.url === '/search/')) ) {
-          this.manageSearchBar();
+        || (this.router.url === '/search/')) && this.searchPageOpened) {
+            this.manageSearchBar();
         }
       }),
       this.fullscreenService.fullscreenSubject.subscribe((isFullScreen) => {
@@ -91,11 +91,12 @@ export class AppLayoutComponent implements OnInit, OnDestroy {
     }
   }
 
-  manageSearchBar(): void {
+  private manageSearchBar(): void {
     this.searchPageOpened = false;
+    this.searchBar.expandable = true;
     this.searchedWord = '';
     this.searchBar.searchTerm = '';
-    this.searchBar.expandable = true;
+    this.searchBar.searchAutocomplete.resetResults();
     this.searchBar.subscriptAnimationState = 'inactive';
   }
 
