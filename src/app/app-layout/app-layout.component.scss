@@ -43,13 +43,14 @@
         height: 24px;
     }
 
+    &-menu__item:hover {
+        color: lightgreen;
+    }
+
     .menu__item--label {
         width: 240px;
         padding-left: 10px;
         flex-grow: 1;
     }
 
-    .menu__item--label:focus {
-        outline: none;
-    }
 }
