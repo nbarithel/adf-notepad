@@ -93,11 +93,10 @@
                     adf-document-list {
                         height: 100%;
                         flex-grow: 1;
-                        overflow-y: scroll;
-                        overflow-x: auto;
+                        overflow: scroll;
 
-                        .full-width adf-data-table ng-star-inserted{
-                            overflow-x: scroll;
+                        .adf-data-table {
+                            width: auto;
                         }
                     }
                 }
