@@ -1,6 +1,7 @@
 .adf-search-results {
     display: flex;
     flex-direction: row;
+    overflow: hidden;
 
    &__content {
         flex-grow: 1;
