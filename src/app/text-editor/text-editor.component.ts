@@ -211,7 +211,8 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
     this.ngZone.run(() => {
           const event = new UploadFilesEvent(
               [file],
-              this.uploadService
+              this.uploadService,
+              new EventEmitter()
           );
 
           if (!event.defaultPrevented) {
