@@ -27,10 +27,13 @@ export class ResizerDirective implements OnChanges {
       this.el.style.cursor = 'default';
     }
     if (this.rightElement) {
-      this.over = this.renderer.listen(this.el , 'mouseover', () => this.mouseOver() );
       if (this.down) {
         this.down();
       }
+      if (this.over) {
+        this.over();
+      }
+      this.over = this.renderer.listen(this.el , 'mouseover', () => this.mouseOver() );
     }
   }
 
