@@ -40,6 +40,7 @@ export class ResizerDirective implements OnChanges {
           const up = this.renderer.listenGlobal('document', 'mouseup', () => {
             up();
             move();
+            this.over();
           });
         });
       }
