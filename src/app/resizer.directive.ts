@@ -22,17 +22,17 @@ export class ResizerDirective implements OnChanges {
   }
 
   ngOnChanges() {
+    if (this.down) {
+      this.down();
+    }
+    if (this.over) {
+      this.over();
+    }
     if (this.leftElement && !this.rightElement) {
       this.leftElement.style.width = 140 + '%';
       this.el.style.cursor = 'default';
     }
     if (this.rightElement) {
-      if (this.down) {
-        this.down();
-      }
-      if (this.over) {
-        this.over();
-      }
       this.over = this.renderer.listen(this.el , 'mouseover', () => this.mouseOver() );
     }
   }
