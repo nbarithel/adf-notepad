@@ -11,6 +11,8 @@ export class ResizerDirective implements OnChanges {
 
   over;
 
+  down;
+
   @Input('appResizer')
   rightElement: any;
 
@@ -26,6 +28,9 @@ export class ResizerDirective implements OnChanges {
     }
     if (this.rightElement) {
       this.over = this.renderer.listen(this.el , 'mouseover', () => this.mouseOver() );
+      if (this.down) {
+        this.down();
+      }
     }
   }
 
@@ -33,15 +38,15 @@ export class ResizerDirective implements OnChanges {
     this.over();
     this.el.style.cursor = 'col-resize';
     this.leftElement = document.getElementById('leftEl');
-    this.renderer.listen(this.el , 'mousedown', () => {
+    this.down = this.renderer.listen(this.el , 'mousedown', () => {
       if (this.rightElement) {
         const move = this.renderer.listenGlobal('document', 'mousemove', (event2) => {
           this.mouseMove(event2);
-          const up = this.renderer.listenGlobal('document', 'mouseup', () => {
-            up();
-            move();
-            this.over();
           });
+        const up = this.renderer.listenGlobal('document', 'mouseup', () => {
+          up();
+          move();
+          this.over();
         });
       }
     });
