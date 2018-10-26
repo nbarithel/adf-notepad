@@ -24,7 +24,8 @@ import { Observer } from 'rxjs';
 
 @Component({
     selector: 'app-comments',
-    templateUrl: './comments.component.html'
+    templateUrl: './comments.component.html',
+    styleUrls: ['comments.component.scss']
 })
 export class CommentsComponent implements OnChanges {
 
@@ -43,6 +44,8 @@ export class CommentsComponent implements OnChanges {
     /** Emitted when an error occurs while displaying/adding a comment. */
     @Output()
     error: EventEmitter<any> = new EventEmitter<any>();
+
+    isLoading: boolean;
 
     commentsNumber: number;
 
@@ -65,6 +68,7 @@ export class CommentsComponent implements OnChanges {
     }
 
     ngOnChanges(changes: SimpleChanges) {
+        this.isLoading = true;
         this.taskId = null;
         this.nodeId = null;
 
@@ -92,7 +96,7 @@ export class CommentsComponent implements OnChanges {
                         res.forEach((comment) => {
                             this.commentObserver.next(comment);
                         });
-                    }
+                    } this.isLoading = false;
 
                 },
                 (err) => {
@@ -115,6 +119,7 @@ export class CommentsComponent implements OnChanges {
                             this.commentObserver.next(comment);
                         });
                     } this.commentsNumber = this.comments.length;
+                      this.isLoading = false;
                 },
                 (err) => {
                     this.error.emit(err);
