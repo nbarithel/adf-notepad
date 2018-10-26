@@ -13,6 +13,7 @@ import { FullscreenService } from '../services/fullscreen.service';
 @Component({
   selector: 'app-text-editor',
   templateUrl: './text-editor.component.html',
+  styleUrls: ['text-editor.component.scss'],
   providers: [ UploadService ]
 })
 
@@ -40,6 +41,8 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
   newFileName: string;
 
   erreur: boolean;
+
+  isLoading = false;
 
   value: string;
 
@@ -87,6 +90,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
 
   ngOnChanges() {
     if (this.node && this.node.id) {
+      this.isLoading = true;
       if (this.nodeId) {
         const url = this.contentService.getContentUrl(this.nodeId);
         this.checkContent(url, this.node);
@@ -101,11 +105,15 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
     this.name = node.name;
     this.newFileName = this.name;
     const url = this.contentService.getContentUrl(this.nodeId);
-    this.getUrlContent(url);
+    this.getUrlContent(url).then(() => {
+      this.isLoading = false;
+    });
   }
 
   ngAfterViewChecked() {
-    this.fullscreenService.isFullScreen(this.tdEditor.isFullscreenActive());
+    if (this.tdEditor) {
+      this.fullscreenService.isFullScreen(this.tdEditor.isFullscreenActive());
+    }
   }
 
   private getUrlContent(url: string): Promise<any> {
