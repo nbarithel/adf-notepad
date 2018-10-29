@@ -9,6 +9,7 @@ import { RenameComponent } from '../rename/rename.component';
 import { ActivatedRoute, Router, NavigationEnd } from '@angular/router';
 import { AppendixComponent } from '../appendix/appendix.component';
 import { filter } from 'rxjs/operators';
+import { TabManagementService } from '../services/tab-management.service';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -38,12 +39,15 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
 
   notesNumber: number;
 
+  tabReady = false;
+
   nodeFilter: RowFilter;
 
   subscriptions: Subscription[] = [];
 
   constructor(private notificationService: NotificationService,
               private noteService: NoteService,
+              private tabManager: TabManagementService,
               private route: ActivatedRoute,
               private router: Router,
               private dialog: MatDialog,
@@ -55,6 +59,9 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.siteChange();
     this.subscriptions = this.subscriptions.concat([
+      this.tabManager.$tabReady.subscribe((ready) => {
+        this.tabReady = true;
+      }),
       this.noteService.successUpload$.subscribe((next) => {
         this.success('Uploaded');
         this.documentList.reload();
@@ -220,6 +227,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
   }
 
   getNodeId(event): any {
+    this.tabReady = false;
     const entry = event.value.entry;
     if (entry && entry.isFile) {
       if (this.createNote) {

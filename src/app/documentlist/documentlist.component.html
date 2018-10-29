@@ -98,40 +98,42 @@
     <adf-toolbar-divider [appResizer]="nodeId || createNote" class="adf-toolbar-divider-doclist"></adf-toolbar-divider>
 
 
-    <app-info-drawer *ngIf="nodeId && !createNote">
+    <app-info-drawer *ngIf="nodeId && !createNote" #infoDrawer>
 
       <app-info-drawer-tab icon="notes" label="Note">
-          <div info-drawer-content id="info-drawer-content-editor">
-            <app-text-editor [parentId]="currentFolder.id" [node]="node" (success)="success('enregistrée',$event)"></app-text-editor>
-          </div>
+        <div info-drawer-content id="info-drawer-content-editor" *ngIf="tabReady || infoDrawer.selectedIndex == 0">
+          <app-text-editor [parentId]="currentFolder.id" [node]="node" (success)="success('enregistrée',$event)" #textEditor></app-text-editor>
+        </div>
       </app-info-drawer-tab>
 
       <app-info-drawer-tab icon="description" label="{{'METADATA.BASIC.HEADER' | translate}}">
-        <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
-        <app-notepad-social [nodeId]="nodeId">
-        </app-notepad-social>
-      </app-info-drawer-tab>
-
-      <app-info-drawer-tab icon="ballot" label="Versions" badge="{{ versions.versions.length }}">
-        <mat-card>
-          <mat-card-content>
-            <adf-version-list [node]="node" (restored)="openNode($event)" #versions>
-            </adf-version-list>
-          </mat-card-content>
+        <mat-card  *ngIf="tabReady || infoDrawer.selectedIndex == 1">
+          <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
+          <app-notepad-social [nodeId]="nodeId">
+          </app-notepad-social>
         </mat-card>
       </app-info-drawer-tab>
 
-      <app-info-drawer-tab icon="link" label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}" badge="{{ appendix.appendixNodesNumber }}">
-        <mat-card>
-          <mat-card-content>
-            <app-appendix [node]="node" (success)="documentList.reload()" #appendix></app-appendix>
-          </mat-card-content>
-        </mat-card>
+      <app-info-drawer-tab icon="ballot" label="Versions" badge="{{ tabManager.$versionsNumber | async }}">
+          <mat-card *ngIf="tabReady || infoDrawer.selectedIndex == 2">
+            <mat-card-content>
+              <app-version [node]="node" (restored)="openNode($event)">
+              </app-version>
+            </mat-card-content>
+          </mat-card>
       </app-info-drawer-tab>
 
-      <app-info-drawer-tab icon="comment" label="{{'DOCUMENT.CONTENT_VIEW.COMMENTS' | translate}}" badge="{{ comment.commentsNumber }}">
-          <mat-card>
-            <app-comments [nodeId]="nodeId" #comment></app-comments>
+      <app-info-drawer-tab icon="link" label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}" badge="{{ tabManager.$appendixNumber | async }}">
+          <mat-card *ngIf="tabReady || infoDrawer.selectedIndex == 3">
+            <mat-card-content>
+              <app-appendix [node]="node" (success)="documentList.reload()"></app-appendix>
+            </mat-card-content>
+          </mat-card>
+      </app-info-drawer-tab>
+
+      <app-info-drawer-tab icon="comment" label="{{'DOCUMENT.CONTENT_VIEW.COMMENTS' | translate}}" badge="{{ tabManager.$commentsNumber | async }}">
+          <mat-card *ngIf="tabReady || infoDrawer.selectedIndex == 4">
+            <app-comments [nodeId]="nodeId"></app-comments>
           </mat-card>
       </app-info-drawer-tab>
 
