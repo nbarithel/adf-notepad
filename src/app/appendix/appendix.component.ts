@@ -2,6 +2,7 @@ import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core
 import { ContentNodeDialogService } from '@alfresco/adf-content-services';
 import { AlfrescoApiService, NotificationService, UploadService } from '@alfresco/adf-core';
 import { NodeAssocMinimalEntry, MinimalNodeEntryEntity } from 'alfresco-js-api';
+import { TabManagementService } from '../services/tab-management.service';
 
 @Component({
   selector: 'app-appendix',
@@ -29,6 +30,7 @@ export class AppendixComponent implements OnChanges {
   appendixNodes: NodeAssocMinimalEntry;
 
   constructor(private alfrescoApi: AlfrescoApiService,
+              private tabManager: TabManagementService,
               private uploadService: UploadService,
               private dialogService: ContentNodeDialogService,
               private notificationService: NotificationService) { }
@@ -43,8 +45,9 @@ export class AppendixComponent implements OnChanges {
     this.isLoading = true;
     this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId).then((data) => {
       this.appendixNodes = data.list.entries;
-      this.appendixNodesNumber = data.list.pagination.count;
       this.isLoading = false;
+      this.tabManager.$appendixNumber.next(data.list.pagination.count);
+      this.tabManager.$tabReady.next(true);
     });
   }
 

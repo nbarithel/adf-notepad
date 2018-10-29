@@ -21,6 +21,7 @@ import { CommentModel } from '@alfresco/adf-core';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Observer } from 'rxjs';
+import { TabManagementService } from 'app/services/tab-management.service';
 
 @Component({
     selector: 'app-comments',
@@ -60,6 +61,7 @@ export class CommentsComponent implements OnChanges {
 
     constructor(private commentProcessService: CommentProcessService,
                 private notificationService: NotificationService,
+                private tabManager: TabManagementService,
                 private commentContentService: CommentContentService) {
         this.comment$ = new Observable<CommentModel>(observer => this.commentObserver = observer);
         this.comment$.subscribe((comment: CommentModel) => {
@@ -97,6 +99,8 @@ export class CommentsComponent implements OnChanges {
                             this.commentObserver.next(comment);
                         });
                     } this.isLoading = false;
+                      this.tabManager.$tabReady.next(true);
+                      this.tabManager.$commentsNumber.next(this.comments.length);
 
                 },
                 (err) => {
@@ -118,8 +122,10 @@ export class CommentsComponent implements OnChanges {
                         res.forEach((comment) => {
                             this.commentObserver.next(comment);
                         });
-                    } this.commentsNumber = this.comments.length;
+                    }
                       this.isLoading = false;
+                      this.tabManager.$tabReady.next(true);
+                      this.tabManager.$commentsNumber.next(this.comments.length);
                 },
                 (err) => {
                     this.error.emit(err);

@@ -3,6 +3,7 @@ import { Component, Input, OnChanges, ViewEncapsulation, EventEmitter, Output } 
 import { VersionsApi, MinimalNodeEntryEntity, VersionEntry } from 'alfresco-js-api';
 import { MatDialog } from '@angular/material';
 import { ConfirmDialogComponent } from '@alfresco/adf-content-services';
+import { TabManagementService } from 'app/services/tab-management.service';
 
 @Component({
   selector: 'app-version',
@@ -49,6 +50,7 @@ export class VersionComponent implements OnChanges {
 
   constructor(private alfrescoApi: AlfrescoApiService,
               private contentService: ContentService,
+              private tabManager: TabManagementService,
               private dialog: MatDialog) {
       this.versionsApi = this.alfrescoApi.versionsApi;
   }
@@ -78,6 +80,8 @@ export class VersionComponent implements OnChanges {
       this.versionsApi.listVersionHistory(this.node.id).then((data) => {
           this.versions = data.list.entries;
           this.isLoading = false;
+          this.tabManager.$tabReady.next(true);
+          this.tabManager.$versionsNumber.next(data.list.pagination.count);
       });
   }
 
