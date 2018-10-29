@@ -11,6 +11,7 @@ import { AppendixComponent } from '../appendix/appendix.component';
 import { filter } from 'rxjs/operators';
 import { TabManagementService } from '../services/tab-management.service';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-documentlist',
@@ -43,6 +44,8 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
 
   nodeFilter: RowFilter;
 
+  urlTitle: string;
+
   subscriptions: Subscription[] = [];
 
   constructor(private notificationService: NotificationService,
@@ -50,6 +53,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
               private tabManager: TabManagementService,
               private route: ActivatedRoute,
               private router: Router,
+              private location: Location,
               private dialog: MatDialog,
               private titleService: PageTitleService,
               private alfrescoApi: AlfrescoApiService,
@@ -139,6 +143,8 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
 
   setPageTitle(title: string): void {
     this.titleService.setTitle(title + ' - AtolCD Notepad');
+    this.location.replaceState(title);
+    this.urlTitle = title;
   }
 
   ready(): void {
@@ -260,6 +266,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
   private setNode(node: MinimalNodeEntryEntity): void {
     this.node = node;
     this.nodeId = node.id;
+    this.location.replaceState(this.urlTitle + '/' + this.node.name);
   }
 
 }
