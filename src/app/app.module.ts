@@ -35,6 +35,7 @@ import { ResizerDirective } from './resizer.directive';
 import { TrashcanComponent } from './trashcan/trashcan.component';
 import { SearchPageComponent } from './search-page/search-page.component';
 import { SiteFormComponent } from './site-form/site-form.component';
+import { VersionComponent } from './version/version.component';
 
 
 
@@ -75,7 +76,8 @@ import { SiteFormComponent } from './site-form/site-form.component';
     ResizerDirective,
     TrashcanComponent,
     SearchPageComponent,
-    SiteFormComponent
+    SiteFormComponent,
+    VersionComponent
   ],
   providers: [
     {
