@@ -1,4 +1,4 @@
-import { Component, EventEmitter, ViewChild, Output , NgZone, Input , OnChanges, AfterViewChecked } from '@angular/core';
+import { Component, EventEmitter, ViewChild, Output , NgZone, Input , OnChanges, AfterViewChecked, OnDestroy } from '@angular/core';
 import { UploadService, NotificationService, FileModel, ContentService, NodesApiService, TranslationService } from '@alfresco/adf-core';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog } from '@angular/material';
@@ -7,6 +7,7 @@ import { UploadFilesEvent } from '@alfresco/adf-content-services';
 import { MinimalNodeEntryEntity } from 'alfresco-js-api';
 import { TdTextEditorComponent } from '@covalent/text-editor';
 import { FullscreenService } from '../services/fullscreen.service';
+import { TabManagementService } from 'app/services/tab-management.service';
 /* import { EditorModule } from '@tinymce/tinymce-angular'; */
 
 
@@ -17,7 +18,7 @@ import { FullscreenService } from '../services/fullscreen.service';
   providers: [ UploadService ]
 })
 
-export class TextEditorComponent implements OnChanges, AfterViewChecked {
+export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestroy {
 
   @ViewChild('textEditor')
   tdEditor: TdTextEditorComponent;
@@ -82,6 +83,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
               protected ngZone: NgZone,
               private http: HttpClient,
               protected contentService: ContentService,
+              private tabManager: TabManagementService,
               protected notificationService: NotificationService,
               protected dialog: MatDialog,
               private trans: TranslationService,
@@ -94,10 +96,24 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
       if (this.nodeId) {
         const url = this.contentService.getContentUrl(this.nodeId);
         this.checkContent(url, this.node);
+      } else if (this.tabManager.lastNodeId) {
+        this.value = this.tabManager.lastNodeValue;
+        this.nodeId = this.tabManager.lastNodeId;
+        this.newFileName = this.tabManager.lastNewNameValue;
+        this.name = this.tabManager.lastNameValue;
+        const url = this.contentService.getContentUrl(this.tabManager.lastNodeId);
+        this.checkContent(url, this.node);
       } else {
         this.getIdContent(this.node);
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.tabManager.lastNodeId = this.nodeId;
+    this.tabManager.lastNodeValue = this.value;
+    this.tabManager.lastNewNameValue = this.newFileName;
+    this.tabManager.lastNameValue = this.name;
   }
 
   private getIdContent(node: MinimalNodeEntryEntity): void {
@@ -105,9 +121,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
     this.name = node.name;
     this.newFileName = this.name;
     const url = this.contentService.getContentUrl(this.nodeId);
-    this.getUrlContent(url).then(() => {
-      this.isLoading = false;
-    });
+    this.getUrlContent(url);
   }
 
   ngAfterViewChecked() {
@@ -120,6 +134,8 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked {
     return new Promise((resolve, reject) => {
         this.http.get(url, { responseType: 'text' }).subscribe(res => {
             this.value = res;
+            this.isLoading = false;
+            this.tabManager.$tabReady.next(true);
             resolve();
         }, (event) => {
             reject(event);
