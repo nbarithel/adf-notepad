@@ -110,7 +110,6 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
   }
 
   ngOnDestroy() {
-    this.tabManager.lastNodeId = this.nodeId;
     this.tabManager.lastNodeValue = this.value;
     this.tabManager.lastNewNameValue = this.newFileName;
     this.tabManager.lastNameValue = this.name;
@@ -120,6 +119,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
     this.nodeId = node.id;
     this.name = node.name;
     this.newFileName = this.name;
+    this.tabManager.lastNodeId = this.nodeId;
     const url = this.contentService.getContentUrl(this.nodeId);
     this.getUrlContent(url);
   }

@@ -176,9 +176,10 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
               this.appendix.loadAssociations();
             }
             this.documentList.reload();
-          if (id === this.nodeId ) {
-            this.nodeId = null;
-          }
+            if (id === this.nodeId ) {
+              this.nodeId = null;
+              this.tabManager.lastNodeId = null;
+            }
           });
           this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.FILE_DELETED'));
         } else {
