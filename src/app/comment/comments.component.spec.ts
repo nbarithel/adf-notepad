@@ -1,43 +1,24 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { CommentListComponent, TimeAgoPipe } from '@alfresco/adf-core';
 import { CommentsComponent } from './comments.component';
-import { TranslatePipe, TranslateService } from '@ngx-translate/core';
-import { FormsModule } from '@angular/forms';
-import { CommentProcessService, NotificationService, CommentContentService } from '@alfresco/adf-core';
-import { MatButtonModule, MatListModule, MatFormFieldModule, MatInputModule, MatRippleModule } from '@angular/material';
-import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA, SimpleChanges } from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { AppTestingModule } from 'app/testing/app-testing.module';
+import { CommentModel } from '@alfresco/adf-core';
 
-describe('CommentsComponent', () => {
+fdescribe('CommentsComponent', () => {
   let component: CommentsComponent;
   let fixture: ComponentFixture<CommentsComponent>;
-  const commentProcessService = jasmine.createSpy('CommentProcessService');
-  const notificationService  = jasmine.createSpy('NotificationService');
-  const commentContentService  = jasmine.createSpy('CommentContentService');
-  const translateService  = jasmine.createSpy('TranslateService');
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
        imports: [
-        FormsModule,
-        MatButtonModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatRippleModule,
-        MatListModule
+        AppTestingModule,
+        TranslateModule,
         ],
-      declarations:
-      [
-        CommentsComponent,
-        CommentListComponent,
-        TranslatePipe,
-        TimeAgoPipe
+      declarations: [
+        CommentsComponent
       ],
-      providers: [
-        { provide: CommentProcessService, useValue: commentProcessService },
-        { provide: NotificationService , useValue: notificationService },
-        { provide: CommentContentService , useValue: commentContentService },
-        { provide: TranslateService, useValue: translateService }
-      ]
+      schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));
