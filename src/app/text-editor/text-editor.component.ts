@@ -24,7 +24,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
   tdEditor: TdTextEditorComponent;
 
   @Input()
-  node: MinimalNodeEntryEntity;
+  node: any;
 
   @Input()
   parentId: string;
@@ -97,11 +97,11 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
         const url = this.contentService.getContentUrl(this.nodeId);
         this.checkContent(url, this.node);
       } else if (this.tabManager.lastNodeId) {
-        this.value = this.tabManager.lastNodeValue;
         this.nodeId = this.tabManager.lastNodeId;
+        this.value = this.tabManager.lastNodeValue;
         this.newFileName = this.tabManager.lastNewNameValue;
         this.name = this.tabManager.lastNameValue;
-        const url = this.contentService.getContentUrl(this.tabManager.lastNodeId);
+        const url = this.contentService.getContentUrl(this.nodeId);
         this.checkContent(url, this.node);
       } else {
         this.getIdContent(this.node);
@@ -115,13 +115,17 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
     this.tabManager.lastNameValue = this.name;
   }
 
-  private getIdContent(node: MinimalNodeEntryEntity): void {
+  getIdContent(node: any): void {
     this.nodeId = node.id;
     this.name = node.name;
     this.newFileName = this.name;
     this.tabManager.lastNodeId = this.nodeId;
     const url = this.contentService.getContentUrl(this.nodeId);
-    this.getUrlContent(url);
+    this.getUrlContent(url).then((res) => {
+      this.value = res;
+      this.tabManager.$tabReady.next(true);
+      this.isLoading = false;
+    });
   }
 
   ngAfterViewChecked() {
@@ -130,20 +134,17 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
     }
   }
 
-  private getUrlContent(url: string): Promise<any> {
+  private getUrlContent(url: string): Promise<string> {
     return new Promise((resolve, reject) => {
         this.http.get(url, { responseType: 'text' }).subscribe(res => {
-            this.value = res;
-            this.isLoading = false;
-            this.tabManager.$tabReady.next(true);
-            resolve();
+            resolve(res);
         }, (event) => {
             reject(event);
         });
     });
   }
 
-  private checkContent(url: string, node: MinimalNodeEntryEntity) {
+   private checkContent(url: string, node: MinimalNodeEntryEntity) {
     return new Promise((resolve, reject) => {
       this.http.get(url, { responseType: 'text' }).subscribe(res => {
           if (this.value !== res) {
