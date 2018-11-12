@@ -50,12 +50,14 @@
 
             <content-action
               icon="get_app"
+              target="document"
               title="DOCUMENT.CONTENT_ACTION.DOWNLOAD"
               handler="download">
             </content-action>
 
             <content-action
               icon="gesture"
+              target="document"
               title="DOCUMENT.CONTENT_ACTION.RENAME"
               permission="update"
               (execute)="rename($event)">
@@ -63,6 +65,7 @@
 
             <content-action
               icon="content_copy"
+              target="document"
               title="NODE_SELECTOR.COPY"
               permission="update"
               handler="copy"
@@ -71,6 +74,7 @@
 
             <content-action
               icon="subdirectory_arrow_left"
+              target="document"
               title="NODE_SELECTOR.MOVE"
               permission="update"
               handler="move"
@@ -79,6 +83,7 @@
 
             <content-action
               icon="delete"
+              target="document"
               title="ADF_VERSION_LIST.ACTIONS.DELETE"
               permission="update"
               (execute)="success('Deleted',$event)">
