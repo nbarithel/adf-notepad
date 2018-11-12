@@ -84,8 +84,9 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
 
     this.nodeFilter = (row: ShareDataRow) => {
       const node = row.node.entry;
-
-      if (node && !node.isFolder) {
+      if (node && !node.isFolder ||
+        node.nodeType === 'st:site' ||
+        (node.isFolder && (node.name === 'blog' || node.name === 'documentLibrary'))) {
           return true;
       }
       return false;
