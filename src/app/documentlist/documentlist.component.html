@@ -8,9 +8,9 @@
 
         <adf-toolbar>
             <adf-toolbar-title>
-              <adf-breadcrumb
+              <adf-breadcrumb *ngIf="currentFolder"
                 [target]="documentList"
-                [folderNode]="currentFolder">
+                [folderNode]="documentList?.folderNode">
               </adf-breadcrumb>
             </adf-toolbar-title>
         </adf-toolbar>
