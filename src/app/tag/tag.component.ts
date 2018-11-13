@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { TagService } from '@alfresco/adf-content-services';
 import { TranslationService, NotificationService } from '@alfresco/adf-core';
 

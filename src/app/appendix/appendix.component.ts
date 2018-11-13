@@ -1,9 +1,8 @@
-import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ContentNodeDialogService, NodePaging } from '@alfresco/adf-content-services';
-import { AlfrescoApiService, NotificationService, UploadService, MinDateTimeFieldValidator } from '@alfresco/adf-core';
+import { AlfrescoApiService, NotificationService, UploadService } from '@alfresco/adf-core';
 import { NodeAssocMinimalEntry, MinimalNodeEntryEntity, NodeAssocPaging } from 'alfresco-js-api';
 import { TabManagementService } from '../services/tab-management.service';
-import { findSafariExecutable } from 'selenium-webdriver/safari';
 
 @Component({
   selector: 'app-appendix',

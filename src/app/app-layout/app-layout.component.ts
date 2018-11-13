@@ -1,5 +1,5 @@
-import { Component, DoCheck, ViewChild, OnInit, OnDestroy } from '@angular/core';
-import { SearchControlComponent, SearchQueryBuilderService } from '@alfresco/adf-content-services';
+import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { SearchControlComponent } from '@alfresco/adf-content-services';
 import { FullscreenService } from '../services/fullscreen.service';
 import { environment } from 'environments/environment';
 import { SiteFormComponent } from '../site-form/site-form.component';
