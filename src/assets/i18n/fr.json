@@ -92,8 +92,9 @@
             "LINK": "Lier une annexe",
             "MANAGE": "Gérer l'annexe",
             "REMOVE_LINK": "Enlever le lien",
+            "REMOVED_LINK": "Lien supprimé",
             "NEW_APPENDIX": "Nouvelle annexe créée",
-            "ERROR_APPENDIX": "Vous ne pouvez pas mettre la source en annexe"
+            "SOURCE": "Vous ne pouvez pas mettre la source en annexe"
         }
     },
     "TRASHCAN": {

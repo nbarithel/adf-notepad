@@ -92,8 +92,9 @@
             "LINK": "Bound a note",
             "MANAGE": "Manage this annex",
             "REMOVE_LINK": "Delete the bound",
+            "REMOVED_LINK": "Deleted bound",
             "NEW_APPENDIX": "New appendix created",
-            "ERROR_APPENDIX": "You can't link the source to itself"
+            "SOURCE": "You can't link the source to itself"
         }
     },
     "TRASHCAN": {

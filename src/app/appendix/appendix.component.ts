@@ -63,13 +63,14 @@ export class AppendixComponent implements OnChanges {
     this.alfrescoApi.getInstance().core.associationsApi.removeAssoc(this.nodeId, appendixId)
     .then(() => {
       this.loadAssociations();
+      this.notificationService.openSnackMessage('TOOLTIP.APPENDIX.REMOVED_LINK');
     });
   }
 
   nodeAssociation(): void {
-    this.dialogService.openFileBrowseDialogByFolderId(this.folderId).subscribe((pick) => {
+    this.dialogService.openFileBrowseDialogByFolderId(this._node.parentId).subscribe((pick: MinimalNodeEntryEntity[]) => {
       if (pick[0].id === this.nodeId) {
-        this.notificationService.openSnackMessage('Vous ne pouvez pas mettre la source en annexe');
+        this.notificationService.openSnackMessage('TOOLTIP.APPENDIX.SOURCE');
       } else if (pick) {
         this.addAssociation(pick[0].id);
       }
