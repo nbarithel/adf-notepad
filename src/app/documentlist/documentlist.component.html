@@ -10,7 +10,8 @@
             <adf-toolbar-title>
               <adf-breadcrumb *ngIf="currentFolder"
                 [target]="documentList"
-                [folderNode]="documentList?.folderNode">
+                [folderNode]="documentList?.folderNode"
+                (navigate)="this.nodeId = null">
               </adf-breadcrumb>
             </adf-toolbar-title>
         </adf-toolbar>

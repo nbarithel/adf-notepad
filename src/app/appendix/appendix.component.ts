@@ -1,27 +1,33 @@
 import { Component, OnChanges, Input, Output, EventEmitter } from '@angular/core';
-import { ContentNodeDialogService } from '@alfresco/adf-content-services';
-import { AlfrescoApiService, NotificationService, UploadService } from '@alfresco/adf-core';
-import { NodeAssocMinimalEntry, MinimalNodeEntryEntity } from 'alfresco-js-api';
+import { ContentNodeDialogService, NodePaging } from '@alfresco/adf-content-services';
+import { AlfrescoApiService, NotificationService, UploadService, MinDateTimeFieldValidator } from '@alfresco/adf-core';
+import { NodeAssocMinimalEntry, MinimalNodeEntryEntity, NodeAssocPaging } from 'alfresco-js-api';
 import { TabManagementService } from '../services/tab-management.service';
+import { findSafariExecutable } from 'selenium-webdriver/safari';
 
 @Component({
   selector: 'app-appendix',
   templateUrl: './appendix.component.html',
   styleUrls: ['./appendix.component.scss']
 })
-export class AppendixComponent implements OnChanges {
+export class AppendixComponent {
+
 
   @Input()
-  node: MinimalNodeEntryEntity;
+  set node(node: MinimalNodeEntryEntity) {
+    this._node = node;
+    this.setAppendixUploadFolder();
+    this.loadAssociations();
+  }
 
   @Output()
   success: EventEmitter<any> = new EventEmitter();
 
-  nodeId: string;
-
-  folderId: string;
+  private _node: MinimalNodeEntryEntity;
 
   appendixNodesNumber: number;
+
+  appendixUploadFolder: string;
 
   nodeSelector: false;
 
@@ -35,15 +41,28 @@ export class AppendixComponent implements OnChanges {
               private dialogService: ContentNodeDialogService,
               private notificationService: NotificationService) { }
 
-  ngOnChanges() {
-    this.nodeId = this.node.id;
-    this.folderId = this.node.parentId;
-    this.loadAssociations();
-   }
+  private get nodeId(): string {
+    return this._node.id;
+  }
+
+  private setAppendixUploadFolder() {
+    this.alfrescoApi.getInstance().nodes
+    .getNodeInfo(this._node.parentId)
+    .then((node) => {
+      this.alfrescoApi.nodesApi.getNodeChildren(node.parentId)
+      .then((nodePaging: NodePaging) => {
+        const uploadFolderResult = nodePaging.list.entries
+        .find( entry => entry.entry.name === 'documentLibrary');
+        if (uploadFolderResult) {
+          this.appendixUploadFolder = uploadFolderResult.entry.id;
+        }
+      });
+    });
+  }
 
   loadAssociations(): void {
     this.isLoading = true;
-    this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId).then((data) => {
+    this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId).then((data: NodeAssocPaging) => {
       this.appendixNodes = data.list.entries;
       this.isLoading = false;
       this.tabManager.$appendixNumber.next(data.list.pagination.count);
