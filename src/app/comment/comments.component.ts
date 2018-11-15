@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-import { CommentProcessService, NotificationService } from '@alfresco/adf-core';
+import { CommentProcessService, NotificationService, TranslationService } from '@alfresco/adf-core';
 import { CommentContentService } from '@alfresco/adf-core';
 import { CommentModel } from '@alfresco/adf-core';
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
@@ -62,6 +62,7 @@ export class CommentsComponent implements OnChanges {
     constructor(private commentProcessService: CommentProcessService,
                 private notificationService: NotificationService,
                 private tabManager: TabManagementService,
+                private translationService: TranslationService,
                 private commentContentService: CommentContentService) {
         this.comment$ = new Observable<CommentModel>(observer => this.commentObserver = observer);
         this.comment$.subscribe((comment: CommentModel) => {
@@ -148,7 +149,7 @@ export class CommentsComponent implements OnChanges {
                             this.comments.unshift(res);
                             this.message = '';
                             this.beingAdded = false;
-
+                            this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.COMMENT_ADDED'));
                         },
                         (err) => {
                             this.error.emit(err);
@@ -164,7 +165,7 @@ export class CommentsComponent implements OnChanges {
                             this.comments.unshift(res);
                             this.message = '';
                             this.beingAdded = false;
-
+                            this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.COMMENT_ADDED'));
                         },
                         (err) => {
                             this.error.emit(err);
@@ -172,7 +173,7 @@ export class CommentsComponent implements OnChanges {
                         }
                     );
             }
-        } this.notificationService.openSnackMessage('Commentaire ajouté !');
+        }
     }
 
     clear(): void {

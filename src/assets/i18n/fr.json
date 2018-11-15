@@ -60,7 +60,8 @@
         "COPIED": "Note copiée",
         "MOVED": "Note déplacée",
         "UPLOADED": "Note téléchargée",
-        "SITE_CREATED": "Création du site : "
+        "SITE_CREATED": "Création du site : ",
+        "COMMENT_ADDED": "Commentaire ajouté !"
     },
     "SITE_CREATION": {
         "HINT_LABEL15": "Max 15 caractères",
