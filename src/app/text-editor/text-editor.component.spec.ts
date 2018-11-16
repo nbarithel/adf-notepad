@@ -63,10 +63,10 @@ describe('TextEditorComponent', () => {
     component.ngOnChanges();
     expect(component.getIdContent).toHaveBeenCalled();
 
-    tabManagementService.lastNodeId = 'node-id';
-    tabManagementService.lastNodeValue = 'lastNodeValue';
-    tabManagementService.lastNewNameValue = 'lastNewNameValue';
-    tabManagementService.lastNameValue = 'name';
+    tabManagementService.previousNote.nodeId = 'node-id';
+    tabManagementService.previousNote.contentValue = 'lastNodeValue';
+    tabManagementService.previousNote.modifiedName = 'lastNewNameValue';
+    tabManagementService.previousNote.name = 'name';
     component.ngOnChanges();
     expect(component.value).toBe('lastNodeValue');
     expect(component.name).toBe('name');
@@ -116,9 +116,9 @@ describe('TextEditorComponent', () => {
 
     component.ngOnDestroy();
 
-    expect(tabManagementService.lastNodeValue).toBe('value');
-    expect(tabManagementService.lastNewNameValue).toBe('newFileName');
-    expect(tabManagementService.lastNameValue).toBe('name');
+    expect(tabManagementService.previousNote.contentValue).toBe('value');
+    expect(tabManagementService.previousNote.modifiedName).toBe('newFileName');
+    expect(tabManagementService.previousNote.name).toBe('name');
   });
 
   it('openSaveConfirmationDialog test', () => {

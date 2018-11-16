@@ -96,11 +96,11 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
       if (this.nodeId) {
         const url = this.contentService.getContentUrl(this.nodeId);
         this.checkContent(url, this.node);
-      } else if (this.tabManagementService.lastNodeId) {
-        this.nodeId = this.tabManagementService.lastNodeId;
-        this.value = this.tabManagementService.lastNodeValue;
-        this.newFileName = this.tabManagementService.lastNewNameValue;
-        this.name = this.tabManagementService.lastNameValue;
+      } else if (this.tabManagementService.previousNote.nodeId) {
+        this.nodeId = this.tabManagementService.previousNote.nodeId;
+        this.value = this.tabManagementService.previousNote.contentValue;
+        this.newFileName = this.tabManagementService.previousNote.modifiedName;
+        this.name = this.tabManagementService.previousNote.name;
         const url = this.contentService.getContentUrl(this.nodeId);
         this.checkContent(url, this.node);
       } else {
@@ -110,20 +110,20 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
   }
 
   ngOnDestroy() {
-    this.tabManagementService.lastNodeValue = this.value;
-    this.tabManagementService.lastNewNameValue = this.newFileName;
-    this.tabManagementService.lastNameValue = this.name;
+    this.tabManagementService.previousNote.contentValue = this.value;
+    this.tabManagementService.previousNote.modifiedName = this.newFileName;
+    this.tabManagementService.previousNote.name = this.name;
   }
 
   getIdContent(node: any): void {
     this.nodeId = node.id;
     this.name = node.name;
     this.newFileName = this.name;
-    this.tabManagementService.lastNodeId = this.nodeId;
+    this.tabManagementService.previousNote.nodeId = this.nodeId;
     const url = this.contentService.getContentUrl(this.nodeId);
     this.getUrlContent(url).then((res) => {
       this.value = res;
-      this.tabManagementService.$tabReady.next(true);
+      this.tabManagementService.tabReady$.next(true);
       this.isLoading = false;
     });
   }

@@ -64,8 +64,8 @@ export class AppendixComponent {
     this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId).then((data: NodeAssocPaging) => {
       this.appendixNodes = data.list.entries;
       this.isLoading = false;
-      this.tabManagementService.$appendixNumber.next(data.list.pagination.count);
-      this.tabManagementService.$tabReady.next(true);
+      this.tabManagementService.appendixCount$.next(data.list.pagination.count);
+      this.tabManagementService.tabReady$.next(true);
     });
   }
 

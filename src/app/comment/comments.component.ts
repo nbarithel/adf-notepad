@@ -100,8 +100,8 @@ export class CommentsComponent implements OnChanges {
                             this.commentObserver.next(comment);
                         });
                     } this.isLoading = false;
-                      this.tabManagementService.$tabReady.next(true);
-                      this.tabManagementService.$commentsNumber.next(this.comments.length);
+                      this.tabManagementService.tabReady$.next(true);
+                      this.tabManagementService.commentsCount$.next(this.comments.length);
 
                 },
                 (err) => {
@@ -125,8 +125,8 @@ export class CommentsComponent implements OnChanges {
                         });
                     }
                       this.isLoading = false;
-                      this.tabManagementService.$tabReady.next(true);
-                      this.tabManagementService.$commentsNumber.next(this.comments.length);
+                      this.tabManagementService.tabReady$.next(true);
+                      this.tabManagementService.commentsCount$.next(this.comments.length);
                 },
                 (err) => {
                     this.error.emit(err);

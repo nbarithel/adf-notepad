@@ -9,20 +9,19 @@ export class TabManagementService {
 
   constructor() { }
 
-  lastNodeId: string;
+  previousNote = {
+    nodeId: '',
+    contentValue: '',
+    modifiedName: '',
+    name: ''
+  };
 
-  lastNodeValue;
+  tabReady$ = new Subject<boolean>();
 
-  lastNewNameValue;
+  appendixCount$ = new Subject<number>();
 
-  lastNameValue;
+  versionsCount$ = new Subject<number>();
 
-  $tabReady = new Subject<boolean>();
-
-  $appendixNumber = new Subject<number>();
-
-  $versionsNumber = new Subject<number>();
-
-  $commentsNumber = new Subject<number>();
+  commentsCount$ = new Subject<number>();
 
 }

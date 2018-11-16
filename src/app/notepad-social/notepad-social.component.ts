@@ -14,7 +14,7 @@ export class NotepadSocialComponent implements OnChanges {
   constructor(private tabManagementService: TabManagementService) {}
 
   ngOnChanges() {
-    this.tabManagementService.$tabReady.next(true);
+    this.tabManagementService.tabReady$.next(true);
   }
 
 }

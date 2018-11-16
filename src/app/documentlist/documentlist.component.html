@@ -120,7 +120,7 @@
         </mat-card>
       </app-info-drawer-tab>
 
-      <app-info-drawer-tab icon="ballot" label="Versions" badge="{{ tabManagementService.$versionsNumber | async }}">
+      <app-info-drawer-tab icon="ballot" label="Versions" badge="{{ tabManagementService.versionsCount$ | async }}">
           <mat-card *ngIf="tabReady || infoDrawer.selectedIndex == 2">
             <mat-card-content>
               <app-version [node]="node" (restored)="openNode($event)">
@@ -129,7 +129,7 @@
           </mat-card>
       </app-info-drawer-tab>
 
-      <app-info-drawer-tab icon="link" label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}" badge="{{ tabManagementService.$appendixNumber | async }}">
+      <app-info-drawer-tab icon="link" label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}" badge="{{ tabManagementService.appendixCount$ | async }}">
           <mat-card *ngIf="tabReady || infoDrawer.selectedIndex == 3">
             <mat-card-content>
               <app-appendix [node]="node" (success)="documentList.reload()"></app-appendix>
@@ -137,7 +137,7 @@
           </mat-card>
       </app-info-drawer-tab>
 
-      <app-info-drawer-tab icon="comment" label="{{'DOCUMENT.CONTENT_VIEW.COMMENTS' | translate}}" badge="{{ tabManagementService.$commentsNumber | async }}">
+      <app-info-drawer-tab icon="comment" label="{{'DOCUMENT.CONTENT_VIEW.COMMENTS' | translate}}" badge="{{ tabManagementService.commentsCount$ | async }}">
           <mat-card *ngIf="tabReady || infoDrawer.selectedIndex == 4">
             <app-comments [nodeId]="nodeId"></app-comments>
           </mat-card>

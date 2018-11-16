@@ -80,8 +80,8 @@ export class VersionComponent implements OnChanges {
       this.versionsApi.listVersionHistory(this.node.id).then((data) => {
           this.versions = data.list.entries;
           this.isLoading = false;
-          this.tabManagementService.$tabReady.next(true);
-          this.tabManagementService.$versionsNumber.next(data.list.pagination.count);
+          this.tabManagementService.tabReady$.next(true);
+          this.tabManagementService.versionsCount$.next(data.list.pagination.count);
       });
   }
 
