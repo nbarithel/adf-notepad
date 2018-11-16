@@ -83,7 +83,7 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
               protected ngZone: NgZone,
               private http: HttpClient,
               protected contentService: ContentService,
-              private tabManager: TabManagementService,
+              private tabManagementService: TabManagementService,
               protected notificationService: NotificationService,
               protected dialog: MatDialog,
               private trans: TranslationService,
@@ -96,11 +96,11 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
       if (this.nodeId) {
         const url = this.contentService.getContentUrl(this.nodeId);
         this.checkContent(url, this.node);
-      } else if (this.tabManager.lastNodeId) {
-        this.nodeId = this.tabManager.lastNodeId;
-        this.value = this.tabManager.lastNodeValue;
-        this.newFileName = this.tabManager.lastNewNameValue;
-        this.name = this.tabManager.lastNameValue;
+      } else if (this.tabManagementService.lastNodeId) {
+        this.nodeId = this.tabManagementService.lastNodeId;
+        this.value = this.tabManagementService.lastNodeValue;
+        this.newFileName = this.tabManagementService.lastNewNameValue;
+        this.name = this.tabManagementService.lastNameValue;
         const url = this.contentService.getContentUrl(this.nodeId);
         this.checkContent(url, this.node);
       } else {
@@ -110,20 +110,20 @@ export class TextEditorComponent implements OnChanges, AfterViewChecked, OnDestr
   }
 
   ngOnDestroy() {
-    this.tabManager.lastNodeValue = this.value;
-    this.tabManager.lastNewNameValue = this.newFileName;
-    this.tabManager.lastNameValue = this.name;
+    this.tabManagementService.lastNodeValue = this.value;
+    this.tabManagementService.lastNewNameValue = this.newFileName;
+    this.tabManagementService.lastNameValue = this.name;
   }
 
   getIdContent(node: any): void {
     this.nodeId = node.id;
     this.name = node.name;
     this.newFileName = this.name;
-    this.tabManager.lastNodeId = this.nodeId;
+    this.tabManagementService.lastNodeId = this.nodeId;
     const url = this.contentService.getContentUrl(this.nodeId);
     this.getUrlContent(url).then((res) => {
       this.value = res;
-      this.tabManager.$tabReady.next(true);
+      this.tabManagementService.$tabReady.next(true);
       this.isLoading = false;
     });
   }

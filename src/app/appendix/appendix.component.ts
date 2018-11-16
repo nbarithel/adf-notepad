@@ -35,7 +35,7 @@ export class AppendixComponent {
   appendixNodes: NodeAssocMinimalEntry;
 
   constructor(private alfrescoApi: AlfrescoApiService,
-              private tabManager: TabManagementService,
+              private tabManagementService: TabManagementService,
               private uploadService: UploadService,
               private dialogService: ContentNodeDialogService,
               private notificationService: NotificationService) { }
@@ -64,8 +64,8 @@ export class AppendixComponent {
     this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId).then((data: NodeAssocPaging) => {
       this.appendixNodes = data.list.entries;
       this.isLoading = false;
-      this.tabManager.$appendixNumber.next(data.list.pagination.count);
-      this.tabManager.$tabReady.next(true);
+      this.tabManagementService.$appendixNumber.next(data.list.pagination.count);
+      this.tabManagementService.$tabReady.next(true);
     });
   }
 

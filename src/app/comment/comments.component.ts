@@ -61,7 +61,7 @@ export class CommentsComponent implements OnChanges {
 
     constructor(private commentProcessService: CommentProcessService,
                 private notificationService: NotificationService,
-                private tabManager: TabManagementService,
+                private tabManagementService: TabManagementService,
                 private translationService: TranslationService,
                 private commentContentService: CommentContentService) {
         this.comment$ = new Observable<CommentModel>(observer => this.commentObserver = observer);
@@ -100,8 +100,8 @@ export class CommentsComponent implements OnChanges {
                             this.commentObserver.next(comment);
                         });
                     } this.isLoading = false;
-                      this.tabManager.$tabReady.next(true);
-                      this.tabManager.$commentsNumber.next(this.comments.length);
+                      this.tabManagementService.$tabReady.next(true);
+                      this.tabManagementService.$commentsNumber.next(this.comments.length);
 
                 },
                 (err) => {
@@ -125,8 +125,8 @@ export class CommentsComponent implements OnChanges {
                         });
                     }
                       this.isLoading = false;
-                      this.tabManager.$tabReady.next(true);
-                      this.tabManager.$commentsNumber.next(this.comments.length);
+                      this.tabManagementService.$tabReady.next(true);
+                      this.tabManagementService.$commentsNumber.next(this.comments.length);
                 },
                 (err) => {
                     this.error.emit(err);

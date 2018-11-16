@@ -11,10 +11,10 @@ export class NotepadSocialComponent implements OnChanges {
   @Input()
   nodeId;
 
-  constructor(private tabManager: TabManagementService) {}
+  constructor(private tabManagementService: TabManagementService) {}
 
   ngOnChanges() {
-    this.tabManager.$tabReady.next(true);
+    this.tabManagementService.$tabReady.next(true);
   }
 
 }

@@ -50,7 +50,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
 
   constructor(private notificationService: NotificationService,
               private noteService: NoteService,
-              private tabManager: TabManagementService,
+              private tabManagementService: TabManagementService,
               private route: ActivatedRoute,
               private router: Router,
               private location: Location,
@@ -63,7 +63,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.siteChange();
     this.subscriptions = this.subscriptions.concat([
-      this.tabManager.$tabReady.subscribe((ready) => {
+      this.tabManagementService.$tabReady.subscribe((ready) => {
         this.tabReady = true;
       }),
       this.noteService.successUpload$.subscribe((next) => {
@@ -179,7 +179,7 @@ export class DocumentlistComponent implements OnInit, OnDestroy {
             this.documentList.reload();
             if (id === this.nodeId ) {
               this.nodeId = null;
-              this.tabManager.lastNodeId = null;
+              this.tabManagementService.lastNodeId = null;
             }
           });
           this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.FILE_DELETED'));

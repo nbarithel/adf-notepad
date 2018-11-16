@@ -50,7 +50,7 @@ export class VersionComponent implements OnChanges {
 
   constructor(private alfrescoApi: AlfrescoApiService,
               private contentService: ContentService,
-              private tabManager: TabManagementService,
+              private tabManagementService: TabManagementService,
               private dialog: MatDialog) {
       this.versionsApi = this.alfrescoApi.versionsApi;
   }
@@ -80,8 +80,8 @@ export class VersionComponent implements OnChanges {
       this.versionsApi.listVersionHistory(this.node.id).then((data) => {
           this.versions = data.list.entries;
           this.isLoading = false;
-          this.tabManager.$tabReady.next(true);
-          this.tabManager.$versionsNumber.next(data.list.pagination.count);
+          this.tabManagementService.$tabReady.next(true);
+          this.tabManagementService.$versionsNumber.next(data.list.pagination.count);
       });
   }
 
