@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/core';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { SimpleChange } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { of, throwError } from 'rxjs';
@@ -7,9 +7,8 @@ import { CommentsComponent } from './comments.component';
 import { CommentContentService } from '@alfresco/adf-core';
 import { AppTestingModule } from '../testing/app-testing.module';
 import { TranslateModule } from '@ngx-translate/core';
-import { not } from '@angular/compiler/src/output/output_ast';
 
-fdescribe('CommentsComponent', () => {
+describe('CommentsComponent', () => {
 
     let component: CommentsComponent;
     let fixture: ComponentFixture<CommentsComponent>;
