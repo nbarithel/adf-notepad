@@ -38,7 +38,7 @@ npm install
 npm start
 ```
 
-L'application s'exécute sur le port `8080` par défaut et s'ouvre automatiquement dans le navigateur défini par défaut une fois la compilation du projet finie.
+L'application s'exécute sur le port `4200` par défaut et s'ouvre automatiquement dans le navigateur défini par défaut une fois la compilation du projet finie.
 
 ### Exécution des tests unitaires
 
