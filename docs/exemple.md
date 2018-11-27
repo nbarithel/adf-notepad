@@ -1,4 +1,4 @@
-# Changelog
+# Exemple
 
 Nouvelle page
 
@@ -24,6 +24,6 @@ exemple de highlight
 
 - [Home](/)
 
-- [Installation](/Homepage?id=installation)
+- [Installation](/Homepage#installation)
 
-- [Installation deuxième paragraphe](/Homepage?id=deuxième-paragraphe)
+- [Installation deuxième paragraphe](/Homepage#deuxième-paragraphe)
