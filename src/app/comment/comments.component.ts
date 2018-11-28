@@ -166,6 +166,7 @@ export class CommentsComponent implements OnChanges {
                             this.message = '';
                             this.beingAdded = false;
                             this.notificationService.openSnackMessage(this.translationService.instant('NOTIFICATION.COMMENT_ADDED'));
+                            this.tabManagementService.commentsCount$.next(this.comments.length);
                         },
                         (err) => {
                             this.error.emit(err);
