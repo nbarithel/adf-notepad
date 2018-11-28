@@ -1,4 +1,4 @@
-# Notepad ADF
+# ADF-Notepad
 
 ADF-Notepad est une application de gestion de notes (bloc-notes) et un exemple d'application construit grâce au framework Alfresco ADF [(Application Development Framework)](https://github.com/Alfresco/alfresco-ng2-components).
 
