@@ -1,7 +1,3 @@
----
-title: Exemple
----
-
 # Exemple de développement ADF
 
 ## ADF document List
@@ -200,7 +196,7 @@ this.nodeFilter = (row: ShareDataRow) => {
 
 Dans ADF-Notepad, lorsqu'une note est sélectionnée, on affiche son contenu, ses propriétés, versions, annexes et commentaires dans le composant `info-drawer` qui se sépare en plusieurs onglets comme ceci :
 
-![infoDrawer](image/infoDrawer.png)
+![infoDrawer](image/info-drawer.png)
 
 Les trois derniers onglets sont équipés d'un badge permettant d'afficher le nombre de versions, d'annexes ou de commentaires liés à la note sélectionnée.
 Ce nombre vient des composants version, appendix et comment fils du composants qui créé les onglets. Pour les avoir, il faut que les données remontent dans le composant parent.

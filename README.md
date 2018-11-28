@@ -1,10 +1,10 @@
-# ADF-Notepad
+# ADF-Notepad
 
 ADF-Notepad est une application de gestion de notes (bloc-notes) et un exemple d'application construit grâce au framework Alfresco ADF [(Application Development Framework)](https://github.com/Alfresco/alfresco-ng2-components).
 
-Ce projet a été généré grâce à [Yeoman ng2-generator-alfresco](https://github.com/Alfresco/generator-ng2-alfresco-app).
+Plus d'infos : [Documentation ADF-Notepad](https://nbarithel.github.io/adf-notepad/)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.5.0
+Ce projet a été généré grâce à [ng2-generator-alfresco (avec Yeoman)](https://github.com/Alfresco/generator-ng2-alfresco-app).
 
 ## Quick start
 
