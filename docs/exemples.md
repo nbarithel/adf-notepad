@@ -1,8 +1,8 @@
-# Exemple de développement ADF
+# Exemples de développement ADF
 
-## ADF document List
+## Personnalisation d'une datatable
 
-Le composant document List est le composant dataTable de base ADF. Il permet l'affichage des documents à partir d'un dépôt Alfresco.
+Le composant document list est le composant datatable de base ADF. Il permet l'affichage des documents à partir d'un dépôt Alfresco.
 
 Pour l'instancier dans un projet, il y a juste besoin d'écrire les balises du composant dans le template de son composant parent.
 
@@ -12,9 +12,9 @@ Pour l'instancier dans un projet, il y a juste besoin d'écrire les balises du c
 </adf-document-list>
 ```
 
-L'input `currentFolderId` est l'id du dossier à afficher dans la datatable.
+L'input `currentFolderId` sert à transmettre au composant l'ID du dossier à afficher dans la datatable.
 
-Par défaut avec deux dossiers dans le répertoire, il ressemble à cela :
+Par défaut, il ressemble à cela :
 
 ![doc-liste-basique](image/defaut.png)
 
@@ -74,7 +74,7 @@ Voici à quoi ressemble le template :
 
 La première action `delete` est une action possible par défaut. Il en existe quatre : download, delete, copy et move. Elles sont définies par l'input `handler`.
 
-La dernière est une action personnalisée `rename` qui sert à modifier le titre du document. Pour créer une action personnalisée, il faut appeler une fonction sur l'événement (execute) du content action. Ici, c'est l'action `rename` du composant parent.
+La dernière est une action personnalisée `rename` qui sert à modifier le titre du document. Pour créer une action personnalisée, il faut appeler une fonction sur l'event emitter `execute ` du content action. Ici, c'est l'action `rename` du composant parent.
 
 On peut mélanger les deux et faire deux actions en même temps lors d'un clic sur un bouton d'action.
 C'est le cas du deuxième content-action de l'exemple.
@@ -145,15 +145,16 @@ Voici à quoi ressemble le template :
 
 </adf-document-list>
 ```
+
 La deuxième colonne est personnalisée avec un composant affichant les tags associés au document.
-Les modifications possibles sont nombreuses : [voir documentation data-column](https://alfresco.github.io/adf-component-catalog/components/DataColumnComponent.html#basic-usage).
+Les modifications possibles sont nombreuses : [documentation du composant data-column](https://alfresco.github.io/adf-component-catalog/components/DataColumnComponent.html#basic-usage).
 
 Le résultat des colonnes personnalisées dans ADF-Notepad est ceci :
 
 ![custom-columns](image/custom-columns.png)
 
 
-#### Filtrer les documents
+#### Filtrage des documents
 
 Pour l'application ADF-Notepad, une fois dans le blog du site, j'ai du filtrer les documents afin qu'il ne reste que les fichiers textes ou notes d'affichées.
 Pour cela, on peut mettre en place un filtre dans le composant document list.
@@ -192,7 +193,7 @@ this.nodeFilter = (row: ShareDataRow) => {
     Attention ! Les éléments "filtrés" ne seront pas affichés mais seront tout de même présents et apparaîtront dans la pagination.
 </p>
 
-## Afficher le nombre d'annexes
+## Affichage du nombre d'annexes
 
 Dans ADF-Notepad, lorsqu'une note est sélectionnée, on affiche son contenu, ses propriétés, versions, annexes et commentaires dans le composant `info-drawer` qui se sépare en plusieurs onglets comme ceci :
 
@@ -201,13 +202,13 @@ Dans ADF-Notepad, lorsqu'une note est sélectionnée, on affiche son contenu, se
 Les trois derniers onglets sont équipés d'un badge permettant d'afficher le nombre de versions, d'annexes ou de commentaires liés à la note sélectionnée.
 Ce nombre vient des composants version, appendix et comment fils du composants qui créé les onglets. Pour les avoir, il faut que les données remontent dans le composant parent.
 
-### Obtenir l'information
+### Les onglets ADF-Notepad
 
-Dans le cas d'ADF-notepad, les onglets se chargent à la volée.
-Lorsque l'on clique sur une note, le premier onglet `Note` charge,s'affiche et montre le contenu de la note que l'on peut modifier.
-C'est une fois chargé que les autres composants contenus dans les autres onglets sont chargés à leur tour.
+Dans le cas d'ADF-notepad, les onglets se chargent à la volée pour un gain de réactivité de l'application.
+Lorsque l'on clique sur une note, le premier onglet `Note` charge, s'affiche et montre le contenu de la note que l'on peut modifier.
+C'est une fois chargé que les autres composants contenus dans les onglets sont chargés à leur tour.
 
-Il en est de même lorsque l'on change de sélection de note et que l'on se trouve sur un onglet, l'onglet sélectionné charge avant les autres.
+Il en est de même lorsque l'on change de sélection de note et que l'on se trouve sur un onglet particulier, l'onglet sélectionné charge avant les autres.
 
 <p class="warning">
     Problème : Si les composants ne sont pas chargés, on ne peut pas obtenir le nombre à afficher dans les badges des onglets. Cela empêche l'application de fonctionner correctement et d'afficher l'info-drawer.
@@ -264,6 +265,6 @@ Pour récupérer ce nombre, je peux faire une simple [subscriptions](/guide-deve
 </app-info-drawer-tab>
 ```
 
-Ce pipe va récupérer la dernière valeur envoyée par l'observable, si cette valeur change, le pipe async déclenche un cycle OnChange du composant. Il unsubscribe automatiquement lors de la destruction du composant pour éviter les potentielles fuites de mémoires.
+Ce pipe va récupérer la dernière valeur envoyée par l'observable. Si cette valeur change, le pipe async déclenche un cycle OnChange du composant. Il unsubscribe automatiquement lors de la destruction du composant pour éviter les potentielles fuites de mémoires des observables.
 
-Grâce à ce procédé, on peut charger les onglets tour à tour sans bug. Les valeurs attendues dans les badges changent automatiquement lorsque les subjects créées dans le tabManagementService émettent.
+Grâce à ce procédé, on peut charger les onglets tour à tour sans bug. Les valeurs attendues dans les badges changent automatiquement lorsque les subjects créées dans le tabManagementService émettent une nouvelle valeur.
