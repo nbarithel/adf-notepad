@@ -1,7 +1,3 @@
----
-title: Exemple
----
-
 # Exemple de développement ADF
 
 ## ADF document List

@@ -1,7 +1,3 @@
----
-title: Documentation
----
-
 # Développer avec ADF
 
 ## Prérequis
