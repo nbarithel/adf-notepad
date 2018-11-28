@@ -24,11 +24,7 @@ export class AppendixComponent {
 
   private _node: MinimalNodeEntryEntity;
 
-  appendixNodesNumber: number;
-
   appendixUploadFolder: string;
-
-  nodeSelector: false;
 
   isLoading: boolean;
 
@@ -40,13 +36,21 @@ export class AppendixComponent {
               private dialogService: ContentNodeDialogService,
               private notificationService: NotificationService) { }
 
+  private get nodeParentId(): string {
+    if (this._node) {
+      return this._node.parentId;
+    }
+  }
+
   private get nodeId(): string {
-    return this._node.id;
+    if (this._node) {
+      return this._node.id;
+    }
   }
 
   private setAppendixUploadFolder() {
     this.alfrescoApi.getInstance().nodes
-    .getNodeInfo(this._node.parentId)
+    .getNodeInfo(this.nodeParentId)
     .then((node) => {
       this.alfrescoApi.nodesApi.getNodeChildren(node.parentId)
       .then((nodePaging: NodePaging) => {
@@ -86,7 +90,7 @@ export class AppendixComponent {
   }
 
   nodeAssociation(): void {
-    this.dialogService.openFileBrowseDialogByFolderId(this._node.parentId).subscribe((pick: MinimalNodeEntryEntity[]) => {
+    this.dialogService.openFileBrowseDialogByFolderId(this.nodeParentId).subscribe((pick: MinimalNodeEntryEntity[]) => {
       if (pick[0].id === this.nodeId) {
         this.notificationService.openSnackMessage('TOOLTIP.APPENDIX.SOURCE');
       } else if (pick) {

@@ -19,7 +19,7 @@
         </div>
     </mat-list-item>
 
-    <ng-container *ngIf="appendixNodes.length == 0">
+    <ng-container *ngIf="!nodeId || appendixNodes.length == 0">
         <adf-empty-content
                 icon="link_off"
                 title="APPENDIX.NO_APPENDIX"
