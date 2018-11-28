@@ -188,5 +188,3 @@ C’est le cas des ‘Subjects’ qui agissent à la fois en tant qu’Observer 
 Par exemple une variable dans un service, qui peut être modifiée depuis plusieurs components ET qui fera réagir tous les composants qui y sont liés en même temps.
 
 Cas ADF-Notepad : Variables subjects du service NoteService modifiées et lues par les composants DocumentList et app-layout (routeur).
-
-
