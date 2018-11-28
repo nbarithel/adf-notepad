@@ -1,0 +1,79 @@
+<div class="inner-layout">
+
+  <adf-toolbar>
+      <adf-toolbar-title>
+        <adf-breadcrumb root="SEARCH.TITLE">
+        </adf-breadcrumb>
+      </adf-toolbar-title>
+  </adf-toolbar>
+
+  <div class="inner-layout__content">
+      <div class="inner-layout__panel">
+        <div class="adf-search-results">
+            <adf-search-filter></adf-search-filter>
+
+            <div class="adf-search-results__content">
+                <mat-progress-bar
+                    *ngIf="isLoading"
+                    color="primary"
+                    mode="indeterminate">
+                </mat-progress-bar>
+                <div class="adf-search-results__content-header content" *ngIf="searchPaging?.list.entries.length">
+                    <div class="content__side--left">
+                        <div class="adf-search-results--info-text">{{ 'SEARCH.RESULT_NUMBER' | translate: { number: totalResults } }}</div>
+
+                    </div>
+
+                    <adf-search-sorting-picker class="content__side--right"></adf-search-sorting-picker>
+                </div>
+
+                <adf-document-list
+                    #documentlist
+                    [node]="searchPaging"
+                    [sorting]="sorting"
+                    (nodeDblClick)= "goToFolder($event)">
+
+                    <data-columns>
+                        <data-column key="icon" type="image" [sortable]="false"></data-column>
+
+                        <data-column
+                            title="ADF-DOCUMENT-LIST.LAYOUT.NAME"
+                            key="name"
+                            class="adf-data-table-cell--ellipsis__name">
+                            <ng-template let-entry="$implicit">
+                                <span>{{ entry.row.getValue('name') }}</span>
+                            </ng-template>
+                        </data-column>
+
+                        <data-column key="path" type="location" title="ADF-DOCUMENT-LIST.LAYOUT.LOCATION" [sortable]="false"></data-column>
+
+                        <data-column key="content.sizeInBytes" type="fileSize" title="ADF-DOCUMENT-LIST.LAYOUT.SIZE" [sortable]="false"></data-column>
+
+                        <data-column key="modifiedAt" type="date" format="short" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON" [sortable]="false">
+                        </data-column>
+
+                        <data-column key="modifiedByUser.displayName" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_BY" [sortable]="false"></data-column>
+                    </data-columns>
+
+                    <empty-folder-content>
+                        <ng-template>
+                            <ng-container *ngIf="searchPaging">
+                               <adf-empty-content
+                                    icon="sentiment_dissatisfied"
+                                    title="SEARCH.NO_RESULT">
+                               </adf-empty-content>
+                            </ng-container>
+                        </ng-template>
+                    </empty-folder-content>
+
+                </adf-document-list>
+
+                <adf-pagination
+                    [target]="documentlist"
+                    (change)="onPaginationChanged($event)">
+                </adf-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

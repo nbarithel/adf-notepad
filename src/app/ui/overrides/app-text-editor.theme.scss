@@ -1,0 +1,28 @@
+@mixin app-text-editor($theme) {
+    $foreground: map-get($theme, foreground);
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+
+    textarea {
+        height: 100%;
+        width: 100%;
+        flex-grow: 1;
+    }
+
+    .savingButton {
+        background-color: mat-color($primary);
+    }
+
+    .save {
+        display:flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 25px;
+
+        .savingButton {
+            background-color: mat-color($primary);
+            flex-grow:0;
+            height: 40px;
+        }
+    }
+}

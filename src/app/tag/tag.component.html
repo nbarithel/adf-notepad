@@ -1,0 +1,25 @@
+<div for="nodeId" id="comment-header" class="adf-comments-header">
+        Tag
+</div>
+
+<div fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="stretch">
+
+    <table class="adf-full-width" cellspacing="0">
+        <tr>
+            <td>
+                <mat-form-field class="adf-full-width">
+                    <input matInput placeholder="{{'TAG.LABEL.NEWTAG' | translate }}"
+                        type="text"
+                        (keyup.enter)="addTag()"
+                        [(ngModel)]="tagName"
+                        (ngModelChange)="clearError()"/>
+                    <mat-hint *ngIf="errorMsg" [ngStyle]="{'color': 'red'}" align="start">{{errorMsg}}</mat-hint>
+                </mat-form-field>
+            </td>
+        </tr>
+    </table>
+
+    <div fxFlex.gt-md="1 1 auto" style="margin-left: 10px;">
+        <adf-tag-node-list [nodeId]="nodeId" ></adf-tag-node-list>
+    </div>
+</div>

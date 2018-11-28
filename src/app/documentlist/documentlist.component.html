@@ -1,0 +1,172 @@
+<div class="app-docsAndViewer" >
+
+    <div class="app-doc-list" id='leftEl'>
+      <adf-upload-drag-area
+        acceptedFilesType=",text,.rtf,.txt,.xml,.html"
+        [rootFolderId]="currentFolder?.id"
+        (success)="success('Uploaded')">
+
+        <adf-toolbar>
+            <adf-toolbar-title>
+              <adf-breadcrumb *ngIf="currentFolder"
+                [target]="documentList"
+                [folderNode]="documentList?.folderNode"
+                (navigate)="this.nodeId = null">
+              </adf-breadcrumb>
+            </adf-toolbar-title>
+        </adf-toolbar>
+
+        <adf-document-list
+          #documentList
+          [currentFolderId]="currentFolder?.id"
+          [contentActions]="true"
+          [rowFilter]="nodeFilter"
+          [allowDropFiles]="true"
+          (nodeClick)= "getNodeId($event)"
+          (ready)="ready()">
+
+          <data-columns>
+              <data-column key="$thumbnail" type="image" [sortable]="false"></data-column>
+
+              <data-column
+                title="ADF-DOCUMENT-LIST.LAYOUT.NAME"
+                key="name"
+                class="adf-data-table-cell--ellipsis__name">
+                <ng-template let-entry="$implicit">
+                    <span>{{ entry.row.getValue('name') }}</span>
+                    <adf-tag-node-list  [nodeId]="entry.row.getValue('id')"></adf-tag-node-list>
+                </ng-template>
+              </data-column>
+
+              <data-column key="content.sizeInBytes" type="fileSize" title="ADF-DOCUMENT-LIST.LAYOUT.SIZE"></data-column>
+
+              <data-column key="modifiedAt" type="date" format="short" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_ON" >
+              </data-column>
+
+              <data-column key="modifiedByUser.displayName" title="ADF-DOCUMENT-LIST.LAYOUT.MODIFIED_BY"></data-column>
+
+          </data-columns>
+
+          <content-actions>
+
+            <content-action
+              icon="get_app"
+              target="document"
+              title="DOCUMENT.CONTENT_ACTION.DOWNLOAD"
+              handler="download">
+            </content-action>
+
+            <content-action
+              icon="gesture"
+              target="document"
+              title="DOCUMENT.CONTENT_ACTION.RENAME"
+              permission="update"
+              (execute)="rename($event)">
+            </content-action>
+
+            <content-action
+              icon="content_copy"
+              target="document"
+              title="NODE_SELECTOR.COPY"
+              permission="update"
+              handler="copy"
+              (execute)="success('Copied',$event)">
+            </content-action>
+
+            <content-action
+              icon="subdirectory_arrow_left"
+              target="document"
+              title="NODE_SELECTOR.MOVE"
+              permission="update"
+              handler="move"
+              (execute)="success('Moved',$event)">
+            </content-action>
+
+            <content-action
+              icon="delete"
+              target="document"
+              title="ADF_VERSION_LIST.ACTIONS.DELETE"
+              permission="update"
+              (execute)="success('Deleted',$event)">
+            </content-action>
+
+          </content-actions>
+
+        </adf-document-list>
+
+        <adf-pagination
+          [target]="documentList"
+          *ngIf="notesNumber != 0">
+        </adf-pagination>
+      </adf-upload-drag-area>
+    </div>
+
+    <adf-toolbar-divider [appResizer]="nodeId || createNote" class="adf-toolbar-divider-doclist"></adf-toolbar-divider>
+
+
+    <app-info-drawer *ngIf="nodeId && !createNote" #infoDrawer>
+
+      <app-info-drawer-tab icon="notes" label="Note">
+        <div info-drawer-content id="info-drawer-content-editor" *ngIf="tabReady || infoDrawer.selectedIndex == 0">
+          <app-text-editor [parentId]="currentFolder.id" [node]="node" (success)="success('enregistrée',$event)" #textEditor></app-text-editor>
+        </div>
+      </app-info-drawer-tab>
+
+      <app-info-drawer-tab icon="description" label="{{'METADATA.BASIC.HEADER' | translate}}">
+        <mat-card  *ngIf="tabReady || infoDrawer.selectedIndex == 1">
+          <adf-content-metadata-card [node]="node"></adf-content-metadata-card>
+          <app-notepad-social [nodeId]="nodeId">
+          </app-notepad-social>
+        </mat-card>
+      </app-info-drawer-tab>
+
+      <app-info-drawer-tab icon="ballot" label="Versions" badge="{{ tabManagementService.versionsCount$ | async }}">
+          <mat-card *ngIf="tabReady || infoDrawer.selectedIndex == 2">
+            <mat-card-content>
+              <app-version [node]="node" (restored)="openNode($event)">
+              </app-version>
+            </mat-card-content>
+          </mat-card>
+      </app-info-drawer-tab>
+
+      <app-info-drawer-tab icon="link" label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}" badge="{{ tabManagementService.appendixCount$ | async }}">
+          <mat-card *ngIf="tabReady || infoDrawer.selectedIndex == 3">
+            <mat-card-content>
+              <app-appendix [node]="node" (success)="documentList.reload()"></app-appendix>
+            </mat-card-content>
+          </mat-card>
+      </app-info-drawer-tab>
+
+      <app-info-drawer-tab icon="comment" label="{{'DOCUMENT.CONTENT_VIEW.COMMENTS' | translate}}" badge="{{ tabManagementService.commentsCount$ | async }}">
+          <mat-card *ngIf="tabReady || infoDrawer.selectedIndex == 4">
+            <app-comments [nodeId]="nodeId"></app-comments>
+          </mat-card>
+      </app-info-drawer-tab>
+
+    </app-info-drawer>
+
+    <adf-info-drawer-layout *ngIf="!nodeId && !createNote">
+      <div info-drawer-content  class="empty-align">
+        <adf-empty-content
+          icon="waves"
+          title="{{'DOCUMENT.EMPTY_CONTENT.TITLE' | translate}}"
+          [subtitle]="translation | async">
+        </adf-empty-content>
+        <button class="createNote-button" mat-button matTooltip="{{ 'TOOLTIP.NEW_NOTE' | translate }}" (click)="noteService.createNotes(true)">
+          <mat-icon>create</mat-icon>
+          {{'SIDENAV.MENU.NOTE' | translate}}
+        </button>
+      </div>
+    </adf-info-drawer-layout>
+
+
+    <adf-info-drawer-layout *ngIf="createNote && !nodeId">
+      <div info-drawer-title>Edition de note</div>
+      <div info-drawer-content id="info-drawer-content-editor">
+        <app-text-editor [parentId]="currentFolder.id" (openNewNote)="openNode($event)"></app-text-editor>
+      </div>
+    </adf-info-drawer-layout>
+
+  </div>
+
+  <adf-file-uploading-dialog></adf-file-uploading-dialog>

@@ -1,0 +1,140 @@
+{
+    "SOCIAL": {
+        "LIKE": "J'aime",
+        "RATING": "Note générale"
+      },
+    "SIDENAV": {
+        "MENU": {
+            "TITLE": "Notes",
+            "NOTE": "Nouvelle note",
+            "SITE": "Nouveau site"
+        }
+    },
+    "HEADER": {
+        "BUTTON":{
+            "LANGUAGE": "Changer de langue",
+            "LOGOUT": "Déconnexion",
+            "MENU": "Afficher le Menu"
+        }
+    },
+    "DOCUMENT": {
+        "CONTENT_ACTION": {
+            "DOWNLOAD": "Télécharger",
+            "RENAME": "Renommer",
+            "LINK": "Annexes"
+        },
+        "CONTENT_VIEW": {
+            "COMMENTS": "Commentaires",
+            "LINKDOC": "Annexes"
+        },
+        "EMPTY_CONTENT": {
+            "TITLE": "Veuillez sélectionner une note pour afficher ses informations",
+            "SUBTITLE": "Vous avez actuellement {{ notesNumber }} notes enregistrées"
+        }
+    },
+    "NOTIFICATION": {
+        "YES": "Oui",
+        "NO": "Non",
+        "TITLE": "Confirmation",
+        "DELETE_MESSAGE": "Voulez vous vraiment effacer ce fichier ?",
+        "FILE": "Fichier",
+        "CANCEL": "Annulation",
+        "QUIT_NOTE_MESSAGE": "Voulez vous quitter la création de notes ?",
+        "NOTE_RETURN": "Retour à la création de notes",
+        "RENAME_MESSAGE": "Renommer la note ci-dessous",
+        "NEW_SITE": "Nouveau site",
+        "SITENAME_MESSAGE": "Propriétés du site",
+        "SITE_CREATE": "Nouveau site crée : ",
+        "VALID": "Valider",
+        "INVALID": "Annuler",
+        "EMPTY_NOTE": "Note vide",
+        "EMPTY_NOTENAME": "Note sans nom",
+        "NOTENAME": "Nom de la note",
+        "ERROR": "Ce champ est obligatoire",
+        "FILE_DELETED": "Note supprimée",
+        "FILE_PERM_DELETED": "Note supprimée définitivement",
+        "RESTORE_MESSAGE": "Restaurer cette note ?",
+        "FILE_RESTORED": "Note restaurée",
+        "RENAMED_FILE": "Note renommée",
+        "MODIFICATION": "Voulez vous sauvegarder les modifications ?",
+        "COPIED": "Note copiée",
+        "MOVED": "Note déplacée",
+        "UPLOADED": "Note téléchargée",
+        "SITE_CREATED": "Création du site : ",
+        "COMMENT_ADDED": "Commentaire ajouté !"
+    },
+    "SITE_CREATION": {
+        "HINT_LABEL15": "Max 15 caractères",
+        "HINT_LABEL120": "Max 120 caractères",
+        "TITLE_PLACEHOLDER": "Titre du site",
+        "TITLE_ERROR": "Veuillez donner un titre",
+        "ID_PLACEHOLDER": "ID du site",
+        "ID_ERROR": "Veuillez donner un ID",
+        "VISIBILITY_PLACEHOLDER": "Visibilité",
+        "VISIBILITY_PUBLIC": "Public",
+        "VISIBILITY_PRIVATE": "Privée",
+        "VISIBILITY_MODERATED": "Modéré",
+        "VISIBILITY_ERROR": "Choisir visibilité",
+        "DESC_PLACEHOLDER": "Description du site"
+    },
+    "TEXT_EDITOR": {
+        "VERSION": "Version majeure",
+        "SAVE": "Enregistrer",
+        "TYPE": "Ecrivez ici",
+        "EDIT": "Sauvegarder les modifications ?",
+        "CREATE": "Créer une nouvelle note ?"
+    },
+    "TOOLTIP": {
+        "NEW_NOTE": "Ecrire une nouvelle note",
+        "NEW_SITE": "Créer un nouveau site",
+        "APPENDIX": {
+            "UPLOAD_BUTTON": "Ajouter une annexe",
+            "UPLOAD": "Import d'une annexe",
+            "LINK": "Lier une annexe",
+            "MANAGE": "Gérer l'annexe",
+            "REMOVE_LINK": "Enlever le lien",
+            "REMOVED_LINK": "Lien supprimé",
+            "NEW_APPENDIX": "Nouvelle annexe créée",
+            "SOURCE": "Vous ne pouvez pas mettre la source en annexe"
+        }
+    },
+    "TRASHCAN": {
+        "TITLE": "Corbeille",
+        "EMPTY_STATE": {
+            "TITLE": "La corbeille est vide",
+            "FIRST_TEXT": "Les éléments supprimés sont placés dans la corbeille.",
+            "SECOND_TEXT": "Videz la corbeille pour supprimer définitivement les éléments."
+        }
+    },
+    "APPENDIX": {
+        "NO_APPENDIX": "Cette note ne contient pas d'annexes",
+        "NO_APPENDIX_HELP": "Liez/Télécharger une annexe grâce aux boutons ci-dessous"
+    },
+    "SEARCH": {
+        "NO_RESULT": "Aucun résultat correspondant à cette recherche",
+        "TITLE": "Résultats de la recherche",
+        "RESULT_NUMBER": "{{number}} résultats trouvés",
+        "SORT": {
+            "RELEVANCE": "Pertinence",
+            "FILENAME": "Nom de fichier",
+            "TITLE": "Titre",
+            "MODIFIED_DATE": "Date de Modification",
+            "SIZE": "Taille",
+            "TYPE": "Type",
+            "MODIFIER": "Modificateur",
+            "CREATE_DATE": "Date de création",
+            "CREATED_DATE_RANGE": "Date de création (période)"
+        },
+        "FACET_FIELDS": {
+            "FILE_TYPE": "Type de fichier",
+            "CREATOR": "Créateur",
+            "MODIFIER": "Modificateur",
+            "FILE_LIBRARY": "Bibliothèque de fichiers"
+        },
+        "CATEGORIES": {
+            "MODIFIED_DATE": "Date de Modification",
+            "SIZE": "Taille",
+            "CREATED_DATE": "Date de création"
+        }
+    }
+}

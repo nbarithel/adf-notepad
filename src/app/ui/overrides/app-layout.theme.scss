@@ -1,0 +1,64 @@
+@mixin app-layout($theme) {
+    $foreground: map-get($theme, foreground);
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    $icon-size: 48px;
+
+    :focus {
+        outline:none;
+    }
+    ::-moz-focus-inner {
+        border:0;
+    }
+
+    adf-sidenav-layout {
+        height: 100%;
+
+        adf-layout-header .mat-toolbar-single-row .adf-app-logo {
+            position: relative;
+            height: 35px;
+            width: 35px;
+            margin-right: 12px;
+            margin-top: 10px;
+        }
+    }
+
+    .sidenav-menu-label {
+        padding-left: 6%;
+        padding-top: 3%;
+    }
+
+    .adf-sidebar-action-menu {
+        width: 92%;
+    }
+
+    .adf-sidebar-action-menu-icon {
+        color: black;
+    }
+
+    .menu__item--active {
+        color: mat-color($primary);
+    }
+
+    .menu__item--default {
+        color: black;
+    }
+
+    .mat-menu-content {
+        .adf-upload-button-file-container {
+            height: 100%;
+
+            .mat-raised-button:not([class*="mat-elevation-z"]) {
+                box-shadow: none !important;
+                background: none;
+            }
+
+            .mat-raised-button {
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                text-align: left;
+            }
+        }
+    }
+}

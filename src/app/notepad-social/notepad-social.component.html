@@ -1,0 +1,18 @@
+<div fxLayout="row" fxLayout.lt-lg="column" fxLayoutAlign="stretch">
+    <div class="adf-social-example-area" fxFlex.gt-md="1 1 auto">
+        <mat-card>
+            <div class="adf-social-title">
+                {{ 'SOCIAL.LIKE' | translate }}
+            </div>
+            <adf-like [nodeId]="nodeId"></adf-like>
+        </mat-card>
+    </div>
+    <div class="adf-social-example-area" fxFlex.gt-md="1 1 auto">
+        <mat-card>
+            <div class="adf-social-title">
+                {{'SOCIAL.RATING' | translate }}
+            </div>
+            <adf-rating [nodeId]="nodeId"></adf-rating>
+        </mat-card>
+    </div>
+</div>

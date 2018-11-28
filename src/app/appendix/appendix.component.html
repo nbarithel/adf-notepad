@@ -1,0 +1,58 @@
+<mat-list class="adf-association-list" *ngIf="!isLoading; else loading_template">
+
+    <mat-list-item *ngFor="let appendixNode of appendixNodes; let idx = index">
+        <mat-icon mat-list-icon>insert_drive_file</mat-icon>
+        <h4 mat-line class="adf-association-list-item-name" [id]="'adf-association-list-item-name-' + appendixNode.entry.id" >{{appendixNode.entry.name}}</h4>
+        <p mat-line>
+            <span class="adf-association-list-item-association"  [id]="'adf-association-list-item-association-' + appendixNode.entry.id" >{{idx}}</span> -
+            <span class="adf-association-list-item-date"     [id]="'adf-association-list-item-date-' + appendixNode.entry.id" >{{appendixNode.entry.modifiedAt | date}}</span>
+        </p>
+
+        <div>
+            <mat-menu #associationMenu="matMenu">
+                <button mat-menu-item (click)="deleteAssociation(appendixNode.entry.id)">{{'TOOLTIP.APPENDIX.REMOVE_LINK' | translate}}</button>
+            </mat-menu>
+
+            <button mat-icon-button matTooltip="{{ 'TOOLTIP.APPENDIX.MANAGE' | translate }}" [matMenuTriggerFor]="associationMenu">
+                    <mat-icon>more_vert</mat-icon>
+            </button>
+        </div>
+    </mat-list-item>
+
+    <ng-container *ngIf="!nodeId || appendixNodes.length == 0">
+        <adf-empty-content
+                icon="link_off"
+                title="APPENDIX.NO_APPENDIX"
+                subtitle="APPENDIX.NO_APPENDIX_HELP">
+        </adf-empty-content>
+    </ng-container>
+
+</mat-list>
+
+<div class="mat-assoc-button">
+    <button mat-mini-fab matTooltip="{{ 'TOOLTIP.APPENDIX.LINK' | translate }}"  color="primary" (click)="nodeAssociation()">
+        <mat-icon>link</mat-icon>
+    </button>
+
+    <adf-upload-button
+        matTooltip= "{{ 'TOOLTIP.APPENDIX.UPLOAD' | translate }}"
+        staticTitle= "{{ 'TOOLTIP.APPENDIX.UPLOAD_BUTTON' | translate }}"
+        [tooltip]="''"
+        [rootFolderId]="appendixUploadFolder"
+        [nodeType]="'cm:content'"
+        [adf-node-permission]="'create'"
+        [multipleFiles]="true"
+        acceptedFilesType=",text,.rtf,.txt,.xml,.html"
+        [uploadFolders]="false"
+        (beginUpload)="uploadAssociation()">
+    </adf-upload-button>
+
+    <adf-file-uploading-dialog></adf-file-uploading-dialog>
+
+</div>
+
+<ng-template #loading_template>
+    <mat-progress-bar data-automation-id="association-history-loading-bar" mode="indeterminate"
+                      color="accent">
+    </mat-progress-bar>
+</ng-template>
