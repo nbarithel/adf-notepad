@@ -199,8 +199,10 @@ Dans ADF-Notepad, lorsqu'une note est sélectionnée, on affiche son contenu, se
 
 ![infoDrawer](image/info-drawer.png)
 
-Les trois derniers onglets sont équipés d'un badge permettant d'afficher le nombre de versions, d'annexes ou de commentaires liés à la note sélectionnée.
-Ce nombre vient des composants version, appendix et comment fils du composants qui créé les onglets. Pour les avoir, il faut que les données remontent dans le composant parent.
+Les trois derniers onglets sont équipés d'un badge permettant d'indiquer à l'utilisateur le nombre de versions, d'annexes ou de commentaires liés à la note sélectionnée.
+Ce système de badge a été mis en place en surchargeant le composant ADF `tab-info-drawer` qui gère les onglets.
+Ces valeurs viennent des composants version, appendix et comments qui sont des fils du composants qui créé les onglets. Pour les avoir, il faut que les données remontent dans le composant parent.
+
 
 ### Les onglets ADF-Notepad
 
@@ -245,23 +247,30 @@ Il faut bien sûr importer le service dans les composants qui l'utilise et le d�
 ```ts
 loadAssociations(): void {
     this.isLoading = true;
-    this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId).then((data: NodeAssocPaging) => {
+    this.alfrescoApi.getInstance().core.associationsApi.listTargetAssociations(this.nodeId)
+    .then((data: NodeAssocPaging) => {
         this.appendixNodes = data.list.entries;
         this.isLoading = false;
         this.tabManagementService.appendixCount$.next(data.list.pagination.count);
     });
 }
 ```
+On peut voir ci-dessus la fonction loadAssociations du composant annexe de mon projet. Celle-ci est appelé au chargement du composant, fait un appel Alfresco sur l'API Associations pour récupérer la liste d'annexes de la note et suite à ça indique au subject du tab management service d'émettre le nombre d'annexes.
 
 Pour récupérer ce nombre, je peux faire une simple [subscriptions](/guide-developpement#subscription) que je gère dans le composant parent ou plus simple, j'utilise le pipe async Angular directement dans son template :
 
 ```html
-<app-info-drawer-tab icon="link" label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}" badge="{{ tabManagementService.appendixCount$ | async }}">
+<app-info-drawer-tab
+    icon="link"
+    label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}"
+    badge="{{ tabManagementService.appendixCount$ | async }}">
+
     <mat-card *ngIf="tabReady || infoDrawer.selectedIndex == 3">
         <mat-card-content>
             <app-appendix [node]="node" (success)="documentList.reload()"></app-appendix>
         </mat-card-content>
     </mat-card>
+
 </app-info-drawer-tab>
 ```
 

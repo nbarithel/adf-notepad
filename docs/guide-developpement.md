@@ -94,12 +94,17 @@ On peut ensuite utiliser cette variable n’importe où dans le template.
 Exemple : Affichage du nombre d’annexes dans l’onglet ‘annexes’ de l’info-drawer :
 
 ```html
-<app-info-drawer-tab icon="link" label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}" badge="{{ appendix.appendixNodesCount }}">
+<app-info-drawer-tab
+    icon="link"
+    label="{{'DOCUMENT.CONTENT_VIEW.LINKDOC' | translate}}"
+    badge="{{ appendix.appendixNodesCount }}">
+
     <mat-card></mat-card>
         <mat-card-content>
             <app-appendix [node]="node" (success)="documentList.reload()" #appendix></app-appendix>
         </mat-card-content>
     </mat-card>
+
 </app-info-drawer-tab>
 ```
 
